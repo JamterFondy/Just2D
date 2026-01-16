@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] GameObject prefab1;     // 上下に生成するオブジェクト（1つずつ）
     [SerializeField] GameObject prefab2;     // 線上に間隔で生成するオブジェクト
+    [SerializeField] GameObject normalBullet; // 通常弾
+
     [SerializeField] float verticalOffset = 0.8f;　// prefab1 の上下オフセット
     [SerializeField] float spacing = 0.8f;     // prefab2 の間隔
     [SerializeField] float spawnInterval = 0.1f; // prefab2 を生成する時間間隔（秒）
@@ -19,11 +21,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 10f; // prefab2 の移動速度
     [SerializeField] float leftCrickCoolTime = 5f; // 左クリックのクールタイム
 
+    // 追加: prefab2 の向きがスプライトのデフォルト向きと合わない場合に調整するオフセット（度）
+    [SerializeField] float prefab2RotationOffset = 0f;
+
     Coroutine topCoroutine;
     Coroutine bottomCoroutine;
     Coroutine moveCoroutine;
 
+    bool PlayerMoving = false; // プレイヤーが移動中かどうかのフラグ
     bool LeftCrickCoolTime = false;
+
+    Vector3 pos;
+   
 
     class MovingInstance
     {
@@ -39,10 +48,15 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
         if (cam == null)
             Debug.LogWarning("Main Camera not found. Movement bounds will not be applied.");
+
+        StartCoroutine(SpawnNormalBullet());
     }
 
     void Update()
     {
+
+        pos = transform.position;
+
         // 入力（W/A/S/D）
         Vector2 input = Vector2.zero;
         if (Input.GetKey(KeyCode.W)) input.y += 1f;
@@ -50,6 +64,15 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) input.x += 1f;
         if (Input.GetKey(KeyCode.A)) input.x -= 1f;
         if (input.sqrMagnitude > 1f) input.Normalize();
+
+        if(input.x != 0 && input.y != 0)
+        {
+            PlayerMoving = true;
+        }
+        else
+        {
+            PlayerMoving = false;
+        }
 
         // 移動
         Vector3 delta = new Vector3(input.x, input.y, 0f) * speed * Time.deltaTime;
@@ -79,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        // スペースキーで指定処理を実行
+        // 左クリックで指定処理を実行
         if (!LeftCrickCoolTime && Input.GetMouseButtonDown(0))
         {
             LeftCrickCoolTime = true;
@@ -163,7 +186,12 @@ public class PlayerMovement : MonoBehaviour
         if (distance <= 0.0001f)
         {
             // ほとんど同じ位置なら end に1つ生成して終了
-            var go = Instantiate(prefab, end, Quaternion.identity);
+            // 回転をマウスポインタ方向に合わせる
+            Vector3 toTarget = end - start;
+            float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
+            Quaternion rot = Quaternion.Euler(0f, 0f, angle + prefab2RotationOffset);
+
+            var go = Instantiate(prefab, end, rot);
             spawnedPrefab2.Add(new MovingInstance { obj = go, dir = (end - start).normalized });
             onComplete?.Invoke();
             yield break;
@@ -181,7 +209,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 Vector3 pos = start + dir * nextDist;
                 pos.z = start.z;
-                var go = Instantiate(prefab, pos, Quaternion.identity);
+
+                // ここで生成位置からマウスポインタ方向の角度を計算して回転を与える
+                Vector3 toTarget = end - pos;
+                float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
+                Quaternion rot = Quaternion.Euler(0f, 0f, angle + prefab2RotationOffset);
+
+
+                var go = Instantiate(prefab, pos, rot);
                 // 生成した prefab2 を追跡リストに登録（進行方向は start->end の方向）
                 spawnedPrefab2.Add(new MovingInstance { obj = go, dir = dir });
                 step++;
@@ -191,7 +226,13 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 // 最終位置（マウスポインタ）に到達させる
-                var go = Instantiate(prefab, end, Quaternion.identity);
+                // 回転はマウスポインタ方向（ここでは向きは不要だが統一して回転を指定）
+                Vector3 posFinal = end;
+                Vector3 toTargetFinal = end - posFinal; // zero だが angle は 0 になる
+                float angleFinal = Mathf.Atan2(toTargetFinal.y, toTargetFinal.x) * Mathf.Rad2Deg;
+                Quaternion rotFinal = Quaternion.Euler(0f, 0f, angleFinal + prefab2RotationOffset);
+
+                var go = Instantiate(prefab, end, rotFinal);
                 spawnedPrefab2.Add(new MovingInstance { obj = go, dir = dir });
                 break;
             }
@@ -237,6 +278,23 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(cooltime);
 
         LeftCrickCoolTime = false;
+    }
+
+
+    IEnumerator SpawnNormalBullet()
+    {
+        Quaternion angler = Quaternion.Euler(0f, 0f, 90f);
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.05f);
+
+            Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y, pos.z), angler);
+            Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y + 0.2f, pos.z), angler);
+            Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y - 0.2f, pos.z), angler);
+
+        }
+           
     }
 
     

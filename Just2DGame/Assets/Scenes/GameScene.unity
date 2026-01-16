@@ -318,7 +318,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,12 +710,14 @@ MonoBehaviour:
   speed: 6
   prefab1: {fileID: 8750526668469978218, guid: d1cc04ae0c48a43429628d823e3f717b, type: 3}
   prefab2: {fileID: 4623724480720325466, guid: 10975e4651869074188c4a1971f50f17, type: 3}
+  normalBullet: {fileID: 6572698622739657254, guid: cfae4962130634147ae8df0719322125, type: 3}
   verticalOffset: 0.8
   spacing: 0.8
   spawnInterval: 0.02
   moveDelayAfterSpawn: 1
-  moveSpeed: 25
+  moveSpeed: 30
   leftCrickCoolTime: 5
+  prefab2RotationOffset: 0
 --- !u!212 &2008753826
 SpriteRenderer:
   m_ObjectHideFlags: 0
