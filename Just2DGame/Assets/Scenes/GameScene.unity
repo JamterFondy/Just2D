@@ -1226,7 +1226,7 @@ MonoBehaviour:
   spawnInterval: 0.02
   moveDelayAfterSpawn: 1
   moveSpeed: 30
-  leftCrickCoolTime: 5
+  leftCrickCoolTime: 4
   prefab2RotationOffset: 0
 --- !u!114 &2008753831
 MonoBehaviour:

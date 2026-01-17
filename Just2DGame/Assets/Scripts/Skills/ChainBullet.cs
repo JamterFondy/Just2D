@@ -15,7 +15,7 @@ public class ChainBullet : MonoBehaviour
 
     [SerializeField] float moveDelayAfterSpawn = 1f; // 最後の生成から何秒後に移動開始するか
     [SerializeField] float moveSpeed = 30f; // prefab2 の移動速度
-    [SerializeField] float leftCrickCoolTime = 5f; // 左クリックのクールタイム
+    [SerializeField] float leftCrickCoolTime = 3f; // 左クリックのクールタイム
 
     // 追加: prefab2 の向きがスプライトのデフォルト向きと合わない場合に調整するオフセット（度）
     [SerializeField] float prefab2RotationOffset = 0f;
