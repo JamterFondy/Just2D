@@ -1060,9 +1060,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2008753827}
   - component: {fileID: 2008753826}
-  - component: {fileID: 2008753825}
   - component: {fileID: 2008753828}
   - component: {fileID: 2008753829}
+  - component: {fileID: 2008753831}
+  - component: {fileID: 2008753830}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1070,29 +1071,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2008753825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008753824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f59e3bddd6c55e4b88424de887d36ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 6
-  prefab1: {fileID: 8750526668469978218, guid: d1cc04ae0c48a43429628d823e3f717b, type: 3}
-  prefab2: {fileID: 4623724480720325466, guid: 10975e4651869074188c4a1971f50f17, type: 3}
-  normalBullet: {fileID: 6572698622739657254, guid: cfae4962130634147ae8df0719322125, type: 3}
-  verticalOffset: 0.8
-  spacing: 0.8
-  spawnInterval: 0.02
-  moveDelayAfterSpawn: 1
-  moveSpeed: 30
-  leftCrickCoolTime: 5
-  prefab2RotationOffset: 0
 --- !u!212 &2008753826
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1229,6 +1207,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2008753830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008753824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b9d94cdce26f74f996fa99d1657dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChainBullet
+  prefab1: {fileID: 8750526668469978218, guid: d1cc04ae0c48a43429628d823e3f717b, type: 3}
+  prefab2: {fileID: 4623724480720325466, guid: 10975e4651869074188c4a1971f50f17, type: 3}
+  verticalOffset: 0.8
+  spacing: 0.8
+  spawnInterval: 0.02
+  moveDelayAfterSpawn: 1
+  moveSpeed: 30
+  leftCrickCoolTime: 5
+  prefab2RotationOffset: 0
+--- !u!114 &2008753831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008753824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f59e3bddd6c55e4b88424de887d36ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  speed: 6
+  normalBullet: {fileID: 6572698622739657254, guid: cfae4962130634147ae8df0719322125, type: 3}
 --- !u!1 &2030158889
 GameObject:
   m_ObjectHideFlags: 0
