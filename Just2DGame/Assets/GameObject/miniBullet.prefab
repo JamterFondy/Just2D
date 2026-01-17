@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8128037706440671879}
   - component: {fileID: 5075574523870864619}
   - component: {fileID: 4530962584839572286}
+  - component: {fileID: 6747183764024637790}
   m_Layer: 0
   m_Name: miniBullet
   m_TagString: Bullet
@@ -142,3 +143,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalBullet
   speedPerFrame: 0.5
+--- !u!114 &6747183764024637790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6572698622739657254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e316a9266f9d414593305355f47029e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageManager

@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Circle
-  - Square
   - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
