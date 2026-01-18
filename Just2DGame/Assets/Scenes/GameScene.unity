@@ -1020,6 +1020,7 @@ GameObject:
   - component: {fileID: 1723781326}
   - component: {fileID: 1723781327}
   - component: {fileID: 1723781328}
+  - component: {fileID: 1723781329}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -1223,9 +1224,26 @@ MonoBehaviour:
   radius: 1.5
   directions: 12
   interval: 0.05
-  spawnOnStart: 0
+  spawnOnStart: 1
   repeat: 1
   repeatInterval: 5
+--- !u!114 &1723781329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723781321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52034f9670eb5d5429a7f060e6260b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnELineBullet
+  prefab: {fileID: 5807243428497114261, guid: f1fa0835d441d3e4eaeb2b838c18e781, type: 3}
+  startDelay: 2
+  perDirectionCount: 8
+  perSpawnInterval: 0.1
+  spawnDistance: -1
 --- !u!1 &1762564277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,6 +1348,7 @@ GameObject:
   - component: {fileID: 2008753828}
   - component: {fileID: 2008753829}
   - component: {fileID: 2008753831}
+  - component: {fileID: 2008753832}
   - component: {fileID: 2008753830}
   m_Layer: 0
   m_Name: Player
@@ -1514,6 +1533,21 @@ MonoBehaviour:
   normalBullet: {fileID: 6572698622739657254, guid: cfae4962130634147ae8df0719322125, type: 3}
   IsPlayerMoving: 0
   SpaceToggle: 0
+--- !u!114 &2008753832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008753824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb60f01fb5b3ba84081738433fe2ff93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  invincibilityDuration: 1
+  hp: 100
+  Invincible: 0
 --- !u!1 &2030158889
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 260902607937094751}
   - component: {fileID: 261029665302150595}
   - component: {fileID: -4675951006520426789}
+  - component: {fileID: -3927581135618310294}
   m_Layer: 0
   m_Name: ETrackingBullet
   m_TagString: EBullet
@@ -144,3 +145,15 @@ MonoBehaviour:
   homingDuration: 2
   speed: 4
   rotationSpeed: 720
+--- !u!114 &-3927581135618310294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7110482811650517925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5075a23798bb27145b82e1849bd05207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ETrackingBulletDamage
