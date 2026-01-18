@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1280514766177102760}
   - component: {fileID: 2430664114003488084}
   - component: {fileID: -9121615768045454322}
-  - component: {fileID: -3587661502237864052}
+  - component: {fileID: 6979457681257550958}
   m_Layer: 3
   m_Name: ChainBullet
   m_TagString: Bullet
@@ -142,7 +142,7 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &-3587661502237864052
+--- !u!114 &6979457681257550958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,6 +151,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4623724480720325466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e316a9266f9d414593305355f47029e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3193658d08ca49f4a9835c34fa94ea2e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageManager
+  m_EditorClassIdentifier: Assembly-CSharp::ChainDamage

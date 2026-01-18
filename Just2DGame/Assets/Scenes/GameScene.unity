@@ -1201,9 +1201,9 @@ MonoBehaviour:
   detectionRadius: 2
   avoidanceStrength: 1
   bulletTag: Bullet
-  bobAmplitude: 1
-  bobFrequency: 0.3
-  horizontalSpeed: 0.5
+  bobAmplitude: 2
+  bobFrequency: 0.2
+  horizontalSpeed: 0.8
   directionSwitchInterval: 3
   cam: {fileID: 0}
 --- !u!1 &1762564277
