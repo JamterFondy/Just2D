@@ -1166,7 +1166,7 @@ Transform:
   m_GameObject: {fileID: 1723781321}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.89, y: -0.01312, z: 0}
+  m_LocalPosition: {x: 7.89, y: -0.01312, z: 0.5}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37daa8cc61378f4184e1704b233f6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
-  hp: 500
+  hp: 5000
 --- !u!114 &1723781327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,6 +1468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChainBullet
   prefab1: {fileID: 8750526668469978218, guid: d1cc04ae0c48a43429628d823e3f717b, type: 3}
   prefab2: {fileID: 4623724480720325466, guid: 10975e4651869074188c4a1971f50f17, type: 3}
+  prefab2Final: {fileID: 9140641675531097969, guid: 4df1482d788f3f247847661e5486cdda, type: 3}
   verticalOffset: 0.8
   spacing: 0.8
   spawnInterval: 0.02
@@ -1475,8 +1476,8 @@ MonoBehaviour:
   moveSpeed: 30
   leftCrickCoolTime: 4
   prefab2RotationOffset: 0
-  restraintDuration: 2
-  restraintDestroyBulletOnTrigger: 1
+  restraintDuration: 1.5
+  restraintDestroyBulletOnTrigger: 0
 --- !u!114 &2008753831
 MonoBehaviour:
   m_ObjectHideFlags: 0

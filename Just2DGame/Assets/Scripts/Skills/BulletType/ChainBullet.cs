@@ -7,9 +7,10 @@ public class ChainBullet : MonoBehaviour
     Camera cam;
 
     [SerializeField] GameObject prefab1;     // 上下に生成するオブジェクト（1つずつ）
-    [SerializeField] GameObject prefab2;     // 線上に間隔で生成するオブジェクト
+    [SerializeField] GameObject prefab2;     // 線上に間隔で生成するオブジェクト（途中用）
+    [SerializeField] GameObject prefab2Final; // 線上の最後に生成する別プレハブ（最終弾、拘束を付与）
 
-    [SerializeField] float verticalOffset = 0.8f;　// prefab1 の上下オフセット
+    [SerializeField] float verticalOffset = 0.8f; // prefab1 の上下オフセット
     [SerializeField] float spacing = 0.8f;     // prefab2 の間隔
     [SerializeField] float spawnInterval = 0.02f; // prefab2 を生成する時間間隔（秒）
 
@@ -22,8 +23,8 @@ public class ChainBullet : MonoBehaviour
 
     // 追加: 最後に生成される prefab2 に付与する拘束の継続時間（秒）
     [Header("Restraint (最後の prefab2 に付与)")]
-    [SerializeField] float restraintDuration = 2f;
-    [SerializeField] bool restraintDestroyBulletOnTrigger = true;
+    [SerializeField] float restraintDuration = 1.5f;
+    [SerializeField] bool restraintDestroyBulletOnTrigger = false;
 
     Coroutine topCoroutine;
     Coroutine bottomCoroutine;
@@ -112,6 +113,8 @@ public class ChainBullet : MonoBehaviour
         }
     }
 
+    // start -> end 間に spacing 間隔で prefab を生成するが、生成は spawnInterval 秒ごとに行う。
+    // 途中は prefab（prefab2）を使い、最終位置には prefab2Final を使う（未設定なら prefab2 を使う）
     IEnumerator CreateLineInstancesCoroutine(Vector3 start, Vector3 end, GameObject prefab, float spacing, float spawnInterval, System.Action onComplete)
     {
         Vector3 delta = end - start;
@@ -122,11 +125,13 @@ public class ChainBullet : MonoBehaviour
             float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
             Quaternion rot = Quaternion.Euler(0f, 0f, angle + prefab2RotationOffset);
 
-            var go = Instantiate(prefab, end, rot);
+            // 最終は prefab2Final があればそちらを使う
+            GameObject lastPrefab = prefab2Final != null ? prefab2Final : prefab;
+            var go = Instantiate(lastPrefab, end, rot);
             spawnedPrefab2.Add(new MovingInstance { obj = go, dir = (end - start).normalized });
 
-            // 最後の生成なので拘束属性を追加
-            TryAddRestraint(go);
+            // 最後の生成なので拘束属性を追加（最後専用）
+            TryAddRestraintToFinal(go);
 
             onComplete?.Invoke();
             yield break;
@@ -155,16 +160,18 @@ public class ChainBullet : MonoBehaviour
             }
             else
             {
+                // 最終位置には別プレハブ（prefab2Final）を生成する
                 Vector3 posFinal = end;
-                Vector3 toTargetFinal = end - posFinal;
-                float angleFinal = Mathf.Atan2(toTargetFinal.y, toTargetFinal.x) * Mathf.Rad2Deg;
+                // 最終の向きは start->end の方向（dir）を使う：これでマウス方向を向かせられます
+                float angleFinal = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 Quaternion rotFinal = Quaternion.Euler(0f, 0f, angleFinal + prefab2RotationOffset);
 
-                var go = Instantiate(prefab, end, rotFinal);
+                GameObject lastPrefab = prefab2Final != null ? prefab2Final : prefab;
+                var go = Instantiate(lastPrefab, end, rotFinal);
                 spawnedPrefab2.Add(new MovingInstance { obj = go, dir = dir });
 
-                // 最終位置に生成した prefab2 に拘束属性を追加
-                TryAddRestraint(go);
+                // 最終位置に生成した prefab2Final（または fallback の prefab）に拘束属性を追加（最後専用）
+                TryAddRestraintToFinal(go);
 
                 break;
             }
@@ -173,11 +180,11 @@ public class ChainBullet : MonoBehaviour
         onComplete?.Invoke();
     }
 
-    void TryAddRestraint(GameObject go)
+    // 最終弾専用に拘束コンポーネントを付与する（既に付いていればパラメータをセット）
+    void TryAddRestraintToFinal(GameObject go)
     {
         if (go == null) return;
 
-        // 既にコンポーネントが付いていなければ追加してパラメータをセット
         var rb = go.GetComponent<RestraintBullet>();
         if (rb == null)
             rb = go.AddComponent<RestraintBullet>();
