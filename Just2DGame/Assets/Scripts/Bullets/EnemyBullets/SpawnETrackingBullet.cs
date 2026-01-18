@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnemyTrackingBullet : MonoBehaviour
+public class SpawnETrackingBullet : MonoBehaviour
 {
     [Header("¶¬İ’è")]
     [SerializeField] GameObject prefab;        // ¶¬‚·‚éƒvƒŒƒnƒu
