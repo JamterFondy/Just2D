@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] ESC esc;
 
     [SerializeField] float speed = 6f;
     Camera cam;
@@ -17,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        if(esc == null)
+        {
+            esc = FindObjectOfType<ESC>();
+        }
+
         cam = Camera.main;
         if (cam == null)
             Debug.LogWarning("Main Camera not found. Movement bounds will not be applied.");
@@ -72,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // スペースキーでのトグル
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !esc.isPaused)
         {
             SpaceToggle = !SpaceToggle;
         }

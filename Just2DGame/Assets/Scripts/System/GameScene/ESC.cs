@@ -6,7 +6,7 @@ public class ESC : MonoBehaviour
     [Header("ÄŠJ’x‰„i•bj")]
     [SerializeField] float resumeDelay = 3f;
 
-    bool isPaused = false;
+    public bool isPaused = false;
     Coroutine resumeCoroutine;
 
     void Update()

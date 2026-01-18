@@ -6,6 +6,8 @@ public class ChainBullet : MonoBehaviour
 {
     Camera cam;
 
+    [SerializeField] ESC esc;
+
     [SerializeField] GameObject prefab1;     // 上下に生成するオブジェクト（1つずつ）
     [SerializeField] GameObject prefab2;     // 線上に間隔で生成するオブジェクト（途中用）
     [SerializeField] GameObject prefab2Final; // 線上の最後に生成する別プレハブ（最終弾、拘束を付与）
@@ -43,6 +45,11 @@ public class ChainBullet : MonoBehaviour
 
     void Start()
     {
+        if (esc == null)
+        {
+            esc = FindObjectOfType<ESC>();
+        }
+
         cam = Camera.main;
         if (cam == null)
             Debug.LogWarning("Main Camera not found. Movement bounds will not be applied.");
@@ -50,7 +57,7 @@ public class ChainBullet : MonoBehaviour
 
     void Update()
     {
-        if (!LeftCrickCoolTime && Input.GetMouseButtonDown(0))
+        if (!LeftCrickCoolTime && Input.GetMouseButtonDown(0) && !esc.isPaused)
         {
             LeftCrickCoolTime = true;
 
