@@ -792,6 +792,7 @@ GameObject:
   - component: {fileID: 1723781323}
   - component: {fileID: 1723781322}
   - component: {fileID: 1723781326}
+  - component: {fileID: 1723781327}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -959,6 +960,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
   hp: 500
+--- !u!114 &1723781327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723781321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6128be8eb0c5119469a886d7d303428d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  detectionRadius: 2
+  avoidanceStrength: 1
+  bulletTag: Bullet
+  bobAmplitude: 1
+  bobFrequency: 0.3
+  horizontalSpeed: 0.5
+  directionSwitchInterval: 3
+  cam: {fileID: 0}
 --- !u!1 &1762564277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,7 +1087,7 @@ GameObject:
   - component: {fileID: 2008753830}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1242,6 +1263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   speed: 6
   normalBullet: {fileID: 6572698622739657254, guid: cfae4962130634147ae8df0719322125, type: 3}
+  IsPlayerMoving: 0
+  SpaceToggle: 0
 --- !u!1 &2030158889
 GameObject:
   m_ObjectHideFlags: 0

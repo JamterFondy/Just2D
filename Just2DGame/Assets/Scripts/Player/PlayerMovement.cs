@@ -11,9 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] GameObject normalBullet; // 通常弾
 
-    bool PlayerMoving = false; // プレイヤーが移動中かどうかのフラグ
-
-    Vector3 pos;
+    public bool IsPlayerMoving = false; // プレイヤーが移動中かどうかのフラグ
+    public bool SpaceToggle = false; // スペースキーでのトグルフラグ
    
 
     void Start()
@@ -28,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        pos = transform.position;
-
         // 入力（W/A/S/D）
         Vector2 input = Vector2.zero;
         if (Input.GetKey(KeyCode.W)) input.y += 1f;
@@ -38,13 +35,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A)) input.x -= 1f;
         if (input.sqrMagnitude > 1f) input.Normalize();
 
-        if(input.x != 0 && input.y != 0)
+        if(input.x != 0 || input.y != 0)
         {
-            PlayerMoving = true;
+            IsPlayerMoving = true;
         }
         else
         {
-            PlayerMoving = false;
+            IsPlayerMoving = false;
         }
 
         // 移動
@@ -74,22 +71,35 @@ public class PlayerMovement : MonoBehaviour
             transform.position = pos;
         }
 
+        // スペースキーでのトグル
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SpaceToggle = !SpaceToggle;
+        }
+
     }
 
 
     IEnumerator SpawnNormalBullet()
     {
-        Quaternion angler = Quaternion.Euler(0f, 0f, 90f);
+        
+         Quaternion angler = Quaternion.Euler(0f, 0f, 90f);
 
-        while (true)
-        {
-            yield return new WaitForSeconds(0.05f);
+         while (true)
+         {
+             yield return new WaitForSeconds(0.05f);
+            // SpaceToggle が有効なときだけ弾を生成する
+            if (!SpaceToggle)
+                continue;
+
+            Vector3 pos = transform.position;
 
             Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y, pos.z), angler);
-            Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y + 0.2f, pos.z), angler);
-            Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y - 0.2f, pos.z), angler);
+             Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y + 0.2f, pos.z), angler);
+             Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y - 0.2f, pos.z), angler);
 
-        }
+         }
+        
            
     }
 
