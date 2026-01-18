@@ -4,24 +4,28 @@ using System.Collections;
 public class EnemyMovement : MonoBehaviour
 {
     [Header("回避設定")]
-    [SerializeField] float detectionRadius = 3f;       // 弾を検出して回避を始める半径
-    [SerializeField] float avoidanceStrength = 4f;     // 回避ベクトルの強さ
-    [SerializeField] string bulletTag = "Bullet";      // 回避対象のタグ（Inspectorで変更可）
+    [SerializeField] float detectionRadius = 3f;
+    [SerializeField] float avoidanceStrength = 4f;
+    [SerializeField] string bulletTag = "Bullet";
 
     [Header("浮遊（ボブ）動作")]
-    [SerializeField] float bobAmplitude = 0.5f;        // 上下振幅（単位: Unity 単位）
-    [SerializeField] float bobFrequency = 0.5f;        // 周波数（Hz）
+    [SerializeField] float bobAmplitude = 0.5f;
+    [SerializeField] float bobFrequency = 0.5f;
 
     [Header("基本移動")]
-    [SerializeField] float horizontalSpeed = 1f;       // 水平方向の速度（常に正の値を入れる）
-    [SerializeField] float directionSwitchInterval = 3f; // 方向を切り替える間隔（秒）
+    [SerializeField] float horizontalSpeed = 1f;
+    [SerializeField] float directionSwitchInterval = 3f;
 
     [Header("画面制限")]
     [SerializeField] Camera cam;
 
     Vector3 startPosition;
     float omega;
-    int horizontalDirection = -1; // 初期は左（-1）。必要なら Inspector で初期値を変える処理を追加してください。
+    int horizontalDirection = -1;
+
+    // 追加: 拘束状態管理
+    bool isRestrained = false;
+    float restraintTimer = 0f;
 
     void Start()
     {
@@ -40,7 +44,22 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        // --- 回避ベクトル計算（タグ "Bullet" を持つオブジェクト） ---
+        // 拘束中は一切の移動をしない（回避含む）
+        if (isRestrained)
+        {
+            restraintTimer -= Time.deltaTime;
+            if (restraintTimer <= 0f)
+            {
+                isRestrained = false;
+                restraintTimer = 0f;
+            }
+            else
+            {
+                // 拘束中は位置を更新しない（ただしカメラ外判定等は不要）
+                return;
+            }
+        }
+
         Vector3 avoid = Vector3.zero;
         GameObject[] bullets = GameObject.FindGameObjectsWithTag(bulletTag);
         foreach (var b in bullets)
@@ -57,7 +76,6 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-        // --- 基本の浮遊（ボブ）と横移動を速度ベースで作成 ---
         Vector3 bobVelocity = Vector3.up * (bobAmplitude * omega * Mathf.Cos(omega * Time.time));
         Vector3 horizVelocity = Vector3.right * horizontalDirection * horizontalSpeed;
         Vector3 baseVelocity = horizVelocity + bobVelocity;
@@ -69,8 +87,6 @@ public class EnemyMovement : MonoBehaviour
 
         transform.position += baseVelocity * Time.deltaTime;
 
-
-        // カメラの右半分内に制限（カメラがある場合）
         if (cam != null)
         {
             float distance = transform.position.z - cam.transform.position.z;
@@ -79,8 +95,8 @@ public class EnemyMovement : MonoBehaviour
             Vector3 rightTop = cam.ViewportToWorldPoint(new Vector3(1f, 1f, distance));
             Vector3 rightMiddle = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, distance));
 
-            float minX = rightMiddle.x;   // ビューポートの x = 0.5 を左端とする
-            float maxX = rightBottom.x;   // ビューポートの x = 1 を右端とする
+            float minX = rightMiddle.x;
+            float maxX = rightBottom.x;
             float minY = rightBottom.y;
             float maxY = rightTop.y;
 
@@ -103,7 +119,15 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    // デバッグ：検出半径とボブの中心点を表示
+    // 外部から拘束を適用するための API
+    public void ApplyRestraint(float duration)
+    {
+        if (duration <= 0f) return;
+        isRestrained = true;
+        // 新たに適用された拘束は現在の残り時間を上書きせず、長い方を採用
+        restraintTimer = Mathf.Max(restraintTimer, duration);
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

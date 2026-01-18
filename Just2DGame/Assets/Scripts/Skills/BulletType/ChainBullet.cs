@@ -20,6 +20,11 @@ public class ChainBullet : MonoBehaviour
     // 追加: prefab2 の向きがスプライトのデフォルト向きと合わない場合に調整するオフセット（度）
     [SerializeField] float prefab2RotationOffset = 0f;
 
+    // 追加: 最後に生成される prefab2 に付与する拘束の継続時間（秒）
+    [Header("Restraint (最後の prefab2 に付与)")]
+    [SerializeField] float restraintDuration = 2f;
+    [SerializeField] bool restraintDestroyBulletOnTrigger = true;
+
     Coroutine topCoroutine;
     Coroutine bottomCoroutine;
     Coroutine moveCoroutine;
@@ -35,7 +40,6 @@ public class ChainBullet : MonoBehaviour
     List<MovingInstance> spawnedPrefab2 = new List<MovingInstance>();
     int completedSpawnCoroutines = 0; // top/bottom 両方の生成コルーチンが終わったか判定
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         cam = Camera.main;
@@ -43,10 +47,8 @@ public class ChainBullet : MonoBehaviour
             Debug.LogWarning("Main Camera not found. Movement bounds will not be applied.");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // 左クリックで指定処理を実行
         if (!LeftCrickCoolTime && Input.GetMouseButtonDown(0))
         {
             LeftCrickCoolTime = true;
@@ -64,18 +66,13 @@ public class ChainBullet : MonoBehaviour
             spawnedPrefab2.Clear();
             completedSpawnCoroutines = 0;
 
-            // ① マウスポインタのワールド座標を取得
             Vector3 mouseScreen = Input.mousePosition;
-            // カメラとプレイヤーのZ差を使って正しいワールド座標を得る
             mouseScreen.z = transform.position.z - cam.transform.position.z;
             Vector3 mouseWorld = cam.ScreenToWorldPoint(mouseScreen);
-            // z はプレイヤーと同じにしておく
             mouseWorld.z = transform.position.z;
 
-            // ② 現在のオブジェクトの座標を取得
             Vector3 myPos = transform.position;
 
-            // ③ 現在のオブジェクトの上下 verticalOffset に prefab1 を生成
             Vector3 topPos = new Vector3(myPos.x, myPos.y + verticalOffset, myPos.z);
             Vector3 bottomPos = new Vector3(myPos.x, myPos.y - verticalOffset, myPos.z);
 
@@ -89,11 +86,8 @@ public class ChainBullet : MonoBehaviour
                 Debug.LogWarning("prefab1 is not assigned.");
             }
 
-
-            // ④ prefab1（start） -> マウスポインタ（end）に向けて、0.1秒ごとに prefab2 を生成（spacing ごとに移動）
             if (prefab2 != null)
             {
-                // 既存のコルーチンがあれば停止してから開始（連続実行を防ぐ）
                 if (topCoroutine != null) StopCoroutine(topCoroutine);
                 if (bottomCoroutine != null) StopCoroutine(bottomCoroutine);
 
@@ -107,38 +101,33 @@ public class ChainBullet : MonoBehaviour
         }
     }
 
-
-    // spawn コルーチンが1つ終了するたびに呼ばれる
     void OnSpawnCoroutineCompleted()
     {
         completedSpawnCoroutines++;
-        // 上下両方のコルーチンが完了したら、move を開始する（遅延付き）
         if (completedSpawnCoroutines >= 2)
         {
-            // moveCoroutine が既にあれば停止してから再開（安全措置）
             if (moveCoroutine != null) { StopCoroutine(moveCoroutine); moveCoroutine = null; }
             moveCoroutine = StartCoroutine(DelayThenMoveCoroutine(moveDelayAfterSpawn, moveSpeed, leftCrickCoolTime));
             StartCoroutine(CoolTimeL(leftCrickCoolTime));
         }
     }
 
-
-    // start -> end 間に spacing 間隔で prefab を生成するが、生成は spawnInterval 秒ごとに行う。
-    // 生成した prefab2 は spawnedPrefab2 リストに登録する。最後は必ず end に到達するように end にインスタンスを作る。
     IEnumerator CreateLineInstancesCoroutine(Vector3 start, Vector3 end, GameObject prefab, float spacing, float spawnInterval, System.Action onComplete)
     {
         Vector3 delta = end - start;
         float distance = delta.magnitude;
         if (distance <= 0.0001f)
         {
-            // ほとんど同じ位置なら end に1つ生成して終了
-            // 回転をマウスポインタ方向に合わせる
             Vector3 toTarget = end - start;
             float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
             Quaternion rot = Quaternion.Euler(0f, 0f, angle + prefab2RotationOffset);
 
             var go = Instantiate(prefab, end, rot);
             spawnedPrefab2.Add(new MovingInstance { obj = go, dir = (end - start).normalized });
+
+            // 最後の生成なので拘束属性を追加
+            TryAddRestraint(go);
+
             onComplete?.Invoke();
             yield break;
         }
@@ -147,7 +136,6 @@ public class ChainBullet : MonoBehaviour
 
         int step = 1;
 
-        // step=1 から始め、start + dir * (step * spacing) に生成していく
         while (true)
         {
             float nextDist = step * spacing;
@@ -156,30 +144,28 @@ public class ChainBullet : MonoBehaviour
                 Vector3 pos = start + dir * nextDist;
                 pos.z = start.z;
 
-                // ここで生成位置からマウスポインタ方向の角度を計算して回転を与える
                 Vector3 toTarget = end - pos;
                 float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
                 Quaternion rot = Quaternion.Euler(0f, 0f, angle + prefab2RotationOffset);
 
-
                 var go = Instantiate(prefab, pos, rot);
-                // 生成した prefab2 を追跡リストに登録（進行方向は start->end の方向）
                 spawnedPrefab2.Add(new MovingInstance { obj = go, dir = dir });
                 step++;
-                // 指定の間隔だけ待つ
                 yield return new WaitForSeconds(spawnInterval);
             }
             else
             {
-                // 最終位置（マウスポインタ）に到達させる
-                // 回転はマウスポインタ方向（ここでは向きは不要だが統一して回転を指定）
                 Vector3 posFinal = end;
-                Vector3 toTargetFinal = end - posFinal; // zero だが angle は 0 になる
+                Vector3 toTargetFinal = end - posFinal;
                 float angleFinal = Mathf.Atan2(toTargetFinal.y, toTargetFinal.x) * Mathf.Rad2Deg;
                 Quaternion rotFinal = Quaternion.Euler(0f, 0f, angleFinal + prefab2RotationOffset);
 
                 var go = Instantiate(prefab, end, rotFinal);
                 spawnedPrefab2.Add(new MovingInstance { obj = go, dir = dir });
+
+                // 最終位置に生成した prefab2 に拘束属性を追加
+                TryAddRestraint(go);
+
                 break;
             }
         }
@@ -187,20 +173,27 @@ public class ChainBullet : MonoBehaviour
         onComplete?.Invoke();
     }
 
+    void TryAddRestraint(GameObject go)
+    {
+        if (go == null) return;
 
-    // 最後の生成から delay 秒待って、spawnedPrefab2 にある全てのオブジェクトを
-    // 各自の dir に沿って毎フレーム移動させる（速度 moveSpeed）。移動は無期限に続く（必要なら停止条件を追加してください）。
+        // 既にコンポーネントが付いていなければ追加してパラメータをセット
+        var rb = go.GetComponent<RestraintBullet>();
+        if (rb == null)
+            rb = go.AddComponent<RestraintBullet>();
+
+        rb.restraintDuration = restraintDuration;
+        rb.destroyOnTrigger = restraintDestroyBulletOnTrigger;
+    }
+
     IEnumerator DelayThenMoveCoroutine(float delay, float moveSpeed, float cooltime)
     {
         yield return new WaitForSeconds(delay);
 
-        // 移動ループ
         while (true)
         {
-            // null や破棄済みオブジェクトを取り除く
             spawnedPrefab2.RemoveAll(mi => mi == null || mi.obj == null);
 
-            // すべて消えていたら終了
             if (spawnedPrefab2.Count == 0)
             {
                 moveCoroutine = null;
@@ -217,9 +210,7 @@ public class ChainBullet : MonoBehaviour
 
             yield return null;
         }
-
     }
-
 
     IEnumerator CoolTimeL(float cooltime)
     {
