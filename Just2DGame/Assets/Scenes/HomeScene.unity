@@ -385,6 +385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 410157239}
+  - component: {fileID: 410157240}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -408,6 +409,18 @@ Transform:
   - {fileID: 526153180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &410157240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410157238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0979959e6c629394893ebf22b63718d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,8 +589,8 @@ RectTransform:
   m_LocalScale: {x: 0.009259259, y: 0.009259259, z: 0.009259259}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 657484923}
-  - {fileID: 1450251146}
+  - {fileID: 1789776324}
+  - {fileID: 1276268612}
   m_Father: {fileID: 410157239}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -744,6 +757,7 @@ GameObject:
   - component: {fileID: 657484926}
   - component: {fileID: 657484925}
   - component: {fileID: 657484924}
+  - component: {fileID: 657484927}
   m_Layer: 5
   m_Name: GoBattleMap
   m_TagString: Untagged
@@ -758,17 +772,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657484922}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.85, y: 4.5, z: 4.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.026388887, y: 0.041666668, z: 0.041666668}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1689623056}
-  m_Father: {fileID: 526153180}
+  m_Father: {fileID: 1789776324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700.2, y: -426.7}
+  m_AnchoredPosition: {x: 4.767456, y: -3.4234009}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &657484924
@@ -814,7 +828,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 657484925}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 657484927}
+        m_TargetAssemblyTypeName: GoToBattleMap, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &657484925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,6 +879,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657484922}
   m_CullTransparentMesh: 1
+--- !u!114 &657484927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657484922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155ad900baae5f54ba2f63efc9529574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoToBattleMap
+  uiManager: {fileID: 0}
 --- !u!1 &1096832207
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,8 +904,9 @@ GameObject:
   - component: {fileID: 1096832211}
   - component: {fileID: 1096832210}
   - component: {fileID: 1096832209}
+  - component: {fileID: 1096832212}
   m_Layer: 5
-  m_Name: Cancell
+  m_Name: MapCancell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -935,7 +975,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1096832210}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1096832212}
+        m_TargetAssemblyTypeName: MapCancell, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &1096832210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,6 +1026,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096832207}
   m_CullTransparentMesh: 1
+--- !u!114 &1096832212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096832207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27995429096db4f45ba18f9ea3a7a626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapCancell
 --- !u!1 &1106231522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,6 +1495,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251937581}
   m_CullTransparentMesh: 1
+--- !u!1 &1276268611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1276268612}
+  - component: {fileID: 1276268613}
+  m_Layer: 0
+  m_Name: BattleMapSwitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1276268612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276268611}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 185.32367, y: -56.975395, z: -9719.999}
+  m_LocalScale: {x: 108, y: 108, z: 108}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1450251146}
+  m_Father: {fileID: 526153180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1276268613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276268611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0077e107bde2e42ab9d35a8ae2916e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleMapVisibility
+  target: {fileID: 1450251145}
 --- !u!1 &1332671944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,12 +1702,12 @@ Transform:
   m_GameObject: {fileID: 1450251145}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 49.64004, y: -24.83568, z: -9719.999}
-  m_LocalScale: {x: 108, y: 108, z: 108}
+  m_LocalPosition: {x: -1.2563299, y: 0.29759, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2040015263}
-  m_Father: {fileID: 526153180}
+  m_Father: {fileID: 1276268612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1627160470
 GameObject:
@@ -1992,6 +2102,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747831601}
   m_CullTransparentMesh: 1
+--- !u!1 &1789776323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789776324}
+  - component: {fileID: 1789776325}
+  m_Layer: 0
+  m_Name: GoToMapSwitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1789776324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789776323}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 185.32367, y: -56.975395, z: -9719.999}
+  m_LocalScale: {x: 108, y: 108, z: 108}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 657484923}
+  m_Father: {fileID: 526153180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1789776325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789776323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63f653a31e012d46ba63f5669948278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoToSwitch
+  target: {fileID: 657484922}
 --- !u!1 &1935634626
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,7 +2296,7 @@ GameObject:
   - component: {fileID: 2040015265}
   - component: {fileID: 2040015264}
   m_Layer: 0
-  m_Name: Map1
+  m_Name: WorldMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
