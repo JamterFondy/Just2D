@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] ESC esc;
+    [SerializeField] BattleESC esc;
 
     [SerializeField] float speed = 6f;
     Camera cam;
@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(esc == null)
         {
-            esc = FindObjectOfType<ESC>();
+            esc = FindObjectOfType<BattleESC>();
         }
 
         cam = Camera.main;

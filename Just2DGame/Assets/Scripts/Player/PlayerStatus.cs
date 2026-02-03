@@ -8,6 +8,10 @@ public class PlayerStatus : MonoBehaviour
     public int hp = 100;
     public bool Invincible = false;
 
+
+    public float leftCrickCT;
+    public bool LeftCrickCTBool;
+
     Coroutine invincibillty;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

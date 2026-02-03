@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ESC : MonoBehaviour
+public class BattleESC : MonoBehaviour
 {
     [Header("ÄŠJ’x‰„i•bj")]
     [SerializeField] float resumeDelay = 3f;

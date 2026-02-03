@@ -6,7 +6,9 @@ public class ChainBullet : MonoBehaviour
 {
     Camera cam;
 
-    [SerializeField] ESC esc;
+    [SerializeField] PlayerStatus playerStatus;
+
+    [SerializeField] BattleESC esc;
 
     [SerializeField] GameObject prefab1;     // 上下に生成するオブジェクト（1つずつ）
     [SerializeField] GameObject prefab2;     // 線上に間隔で生成するオブジェクト（途中用）
@@ -32,7 +34,7 @@ public class ChainBullet : MonoBehaviour
     Coroutine bottomCoroutine;
     Coroutine moveCoroutine;
 
-    bool LeftCrickCoolTime = false;
+    public bool LeftCrickCoolTime = false;
 
     class MovingInstance
     {
@@ -45,21 +47,32 @@ public class ChainBullet : MonoBehaviour
 
     void Start()
     {
+        if (playerStatus == null)
+        {
+            playerStatus = FindObjectOfType<PlayerStatus>();
+        }
+        
+        playerStatus.leftCrickCT = leftCrickCoolTime;
+
+
         if (esc == null)
         {
-            esc = FindObjectOfType<ESC>();
+            esc = FindObjectOfType<BattleESC>();
         }
 
         cam = Camera.main;
         if (cam == null)
             Debug.LogWarning("Main Camera not found. Movement bounds will not be applied.");
+
+
+        
     }
 
     void Update()
     {
         if (!LeftCrickCoolTime && Input.GetMouseButtonDown(0) && !esc.isPaused)
         {
-            LeftCrickCoolTime = true;
+            LeftCrickCoolTime = true; //左クリックがされたことを確認（Using状態）
 
             if (cam == null)
             {
@@ -228,8 +241,11 @@ public class ChainBullet : MonoBehaviour
 
     IEnumerator CoolTimeL(float cooltime)
     {
+        playerStatus.LeftCrickCTBool = true;　//クールタイムが正式に開始（Charging状態）
+
         yield return new WaitForSeconds(cooltime);
 
         LeftCrickCoolTime = false;
+        playerStatus.LeftCrickCTBool = false;
     }
 }
