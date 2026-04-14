@@ -6,6 +6,7 @@ public enum UIState
     Home,
     Map,
     PauseMenu,
+    CharacterSelect,
 }
 
 public class UIManager : MonoBehaviour
@@ -52,6 +53,12 @@ public class UIManager : MonoBehaviour
                 // Handle Pause Menu UI
 
                 currentState = UIState.PauseMenu;
+                break;
+
+            case UIState.CharacterSelect:
+                // Handle Character Select UI
+
+                currentState = UIState.CharacterSelect;
                 break;
         }
 
