@@ -1,0 +1,78 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class Character1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+{
+    [SerializeField] SelectCharacter selectCharacter;
+
+    int storedOriginalID;
+    bool hasStoredOriginal;
+    bool isPointerOver;
+    bool isPointerDown;
+
+    void Start()
+    {
+        // Inspector に未割り当てなら近くの SelectCharacter を自動で探す
+        if (selectCharacter == null)
+        {
+            selectCharacter = GetComponentInParent<SelectCharacter>();
+            if (selectCharacter == null)
+            {
+                selectCharacter = FindObjectOfType<SelectCharacter>();
+            }
+        }
+    }
+
+    void Update()
+    {
+        
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        storedOriginalID = selectCharacter.characterID;
+
+        isPointerOver = true;
+        TrySetToOne();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        isPointerDown = true;
+        TrySetToOne();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+  
+        // カーソルがボタン上にないか、または現在 characterID が 1 でないなら復元
+        if (!isPointerOver || (selectCharacter != null && selectCharacter.characterID != 1))
+        {
+            RestoreOriginal();
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        isPointerOver = false;
+        // 押されていない状態なら復元（または外部で characterID が変わっていれば Update 側で復元される）
+        if (!isPointerDown || (selectCharacter != null && selectCharacter.characterID != 1))
+        {
+            RestoreOriginal();
+        }
+    }
+
+    void TrySetToOne()
+    {
+        if (selectCharacter == null) return;
+
+        selectCharacter.characterID = 1;
+    }
+
+    void RestoreOriginal()
+    {
+        if (selectCharacter == null) return;
+
+        selectCharacter.characterID = storedOriginalID;
+    }
+}
