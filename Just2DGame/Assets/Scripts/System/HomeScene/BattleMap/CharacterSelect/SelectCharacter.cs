@@ -43,6 +43,10 @@ public class SelectCharacter : MonoBehaviour
                 spriteRenderer.enabled = true;
                 if (spriteRenderer != null) spriteRenderer.color = Color.yellow;
                 break;
+            case 3:
+                spriteRenderer.enabled = true;
+                if (spriteRenderer != null) spriteRenderer.color = Color.green;
+                break;
             default:
                 spriteRenderer.enabled = true;
                 if (spriteRenderer != null) spriteRenderer.color = Color.white;

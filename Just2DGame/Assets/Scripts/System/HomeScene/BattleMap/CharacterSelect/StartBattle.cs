@@ -4,7 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class StartBattle : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] GameObject selectCharacter;
+    [SerializeField] IDServer idServer;
+
+    public int serveID;
+
     void Start()
     {
         
@@ -18,6 +22,8 @@ public class StartBattle : MonoBehaviour
 
     public void OnClick()
     {
+        serveID = selectCharacter.GetComponent<SelectCharacter>().characterID;
+
         StartCoroutine(LoadBattleScene());
     }
 
