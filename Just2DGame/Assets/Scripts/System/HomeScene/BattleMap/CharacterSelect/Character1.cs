@@ -25,7 +25,10 @@ public class Character1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void Update()
     {
-        
+        if (selectCharacter.characterID != 1)
+        {
+            isPointerDown = false;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
