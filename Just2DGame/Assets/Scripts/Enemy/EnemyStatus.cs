@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyStatus : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class EnemyStatus : MonoBehaviour
     {
         // 簡易的な処理例
         Debug.Log($"{gameObject.name} died.");
+
+        // シーン遷移処理をコルーチンで開始（2秒待って MapScene に移動）
+        BattleFinish.Instance.MoveToMapAfterDelay();
+
         Destroy(gameObject);
     }
+
 }

@@ -1,15 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class IDServer : MonoBehaviour
+public class GoCharacterSelect : MonoBehaviour
 {
-    public int ID;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
     void Start()
     {
         
@@ -21,5 +16,8 @@ public class IDServer : MonoBehaviour
         
     }
 
-
+    public void OnClick()
+    {
+        SceneManager.LoadScene("CharacterSelectScene");
+    }
 }

@@ -17,14 +17,14 @@ public class HomeESC : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (_uiManager != null && _uiManager.currentState != UIState.Home && _uiManager.currentState == UIState.Map)
-            {
-                _uiManager.currentState = UIState.Home;
-            }
-            else if (_uiManager != null && _uiManager.currentState != UIState.Home && _uiManager.currentState == UIState.CharacterSelect)
-            {
-                _uiManager.currentState = UIState.Map;
-            }
+            //if (_uiManager != null && _uiManager.currentState != UIState.Home && _uiManager.currentState == UIState.Map)
+            //{
+            //    _uiManager.currentState = UIState.Home;
+            //}
+            //else if (_uiManager != null && _uiManager.currentState != UIState.Home && _uiManager.currentState == UIState.CharacterSelect)
+            //{
+            //    _uiManager.currentState = UIState.Map;
+            //}
         }
     }
 }

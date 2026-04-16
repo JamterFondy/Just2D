@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GoToBattleMap : MonoBehaviour
 {
@@ -23,9 +24,6 @@ public class GoToBattleMap : MonoBehaviour
 
     public void OnClick()
     {
-        var uiManager = FindObjectOfType<UIManager>();
-        if (uiManager == null) return;
-
-        uiManager.currentState = UIState.Map;
+        SceneManager.LoadScene("MapScene");
     } 
 }

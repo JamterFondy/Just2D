@@ -1,23 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class MapCancell : MonoBehaviour
+using UnityEngine.SceneManagement;
+
+public class StageSelect : MonoBehaviour
 {
+    [SerializeField] MapUIManager mapUIManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        mapUIManager = FindObjectOfType<MapUIManager>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnClick()
     {
-        var uiManager = FindObjectOfType<UIManager>();
-        if (uiManager == null) return;
-        uiManager.currentState = UIState.Home;
+        mapUIManager.currentState = MapUIState.MapSelect;
     }
 }

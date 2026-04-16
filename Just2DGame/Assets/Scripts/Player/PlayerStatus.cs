@@ -5,12 +5,14 @@ public class PlayerStatus : MonoBehaviour
 {
     [SerializeField] float invincibilityDuration = 1.0f; // 無敵時間（秒）
 
-    public int hp = 100;
-    public bool Invincible = false;
+    public int CharacterID;//キャラクターID番号
+
+    public int hp = 100;// プレイヤーのHP
+    public bool Invincible = false;// 無敵状態かどうか
 
 
-    public float leftCrickCT;
-    public bool LeftCrickCTBool;
+    public float leftCrickCT;//スキル弾のクールタイム
+    public bool LeftCrickCTBool;//スキル弾のクールタイム中かどうか
 
     Coroutine invincibillty;
 

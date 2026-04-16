@@ -1,18 +1,18 @@
 using System;
 using UnityEngine;
 
-public enum UIState
+public enum MapUIState
 {
-    Home,
-    PauseMenu,
+    Map,
+    MapSelect,
 }
 
-public class UIManager : MonoBehaviour
+public class MapUIManager : MonoBehaviour
 {
-    public event Action<UIState> StateChanged;
+    public event Action<MapUIState> StateChanged;
 
-    UIState _currentState;
-    public UIState currentState
+    MapUIState _currentState;
+    public MapUIState currentState
     {
         get => _currentState;
         set
@@ -26,25 +26,25 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        switch(currentState)
+
+        switch (currentState)
         {
-            case UIState.Home:
-                // Handle Home UI
-                
-                currentState = UIState.Home; 
+            case MapUIState.Map:
+                // Handle Map UI
+
+                currentState = MapUIState.Map;
                 break;
 
-            case UIState.PauseMenu:
-                // Handle Pause Menu UI
+            case MapUIState.MapSelect:
+                // Handle Map Select UI
 
-                currentState = UIState.PauseMenu;
+                currentState = MapUIState.MapSelect;
                 break;
         }
 
