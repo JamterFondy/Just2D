@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
 public enum CharaTrainingUIState
@@ -11,6 +12,9 @@ public enum CharaTrainingUIState
 }
 public class CharaTrainingUIManager : MonoBehaviour
 {
+    [SerializeField] GameObject LevelUp,CharaChoose,CharaTraining,Equipment;
+
+
     public event Action<CharaTrainingUIState> StateChanged;
 
     CharaTrainingUIState _currentState;
@@ -54,6 +58,38 @@ public class CharaTrainingUIManager : MonoBehaviour
                 // Handle Equipment UI
                 currentState = CharaTrainingUIState.Equipment;
                 break;
+        }
+
+        if (currentState == CharaTrainingUIState.None)
+        {
+            LevelUp.SetActive(true);
+            Equipment.SetActive(true);
+
+            CharaChoose.SetActive(false);
+            CharaTraining.SetActive(false);
+        }
+        else if (currentState == CharaTrainingUIState.CharaChoose)
+        {
+            CharaChoose.SetActive(true);
+
+            LevelUp.SetActive(false);
+            CharaTraining.SetActive(false);
+            Equipment.SetActive(false);
+        }
+        else if (currentState == CharaTrainingUIState.CharaTraining)
+        {
+            CharaTraining.SetActive(true);
+
+            LevelUp.SetActive(false);
+            CharaChoose.SetActive(false);
+            Equipment.SetActive(false);
+        }
+        else if (currentState == CharaTrainingUIState.Equipment)
+        {
+            Equipment.SetActive(false);
+            LevelUp.SetActive(false);
+            CharaChoose.SetActive(false);
+            CharaTraining.SetActive(false);
         }
     }
 }
