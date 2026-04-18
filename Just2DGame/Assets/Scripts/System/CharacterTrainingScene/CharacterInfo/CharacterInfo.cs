@@ -13,7 +13,7 @@ public class CharacterData
 }
 public class CharacterInfo : MonoBehaviour
 {
-    [SerializeField] string charaName, level, hp, atk;
+    public string id,charaName, level, hp, atk;
 
     // Cached references to child text UI components (supports Unity UI Text and TextMeshProUGUI)
     Text nameText;
@@ -58,14 +58,14 @@ public class CharacterInfo : MonoBehaviour
         }
 
         // Apply loaded data to this component
-        SetCharacter1Info(data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
+        SetCharacter1Info(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
     }
 
     // Allow setting info from a CharacterData instance
     public void SetCharacterInfoFromData(CharacterData data)
     {
         if (data == null) return;
-        SetCharacter1Info(data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
+        SetCharacter1Info(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -82,8 +82,10 @@ public class CharacterInfo : MonoBehaviour
         
     }
 
-    public void SetCharacter1Info(string name, string level, string hp, string atk)
+    public void SetCharacter1Info(string id, string name, string level, string hp, string atk)
     {
+
+        this.id = id;
         this.charaName = name;
         this.level = level;
         this.hp = hp;
