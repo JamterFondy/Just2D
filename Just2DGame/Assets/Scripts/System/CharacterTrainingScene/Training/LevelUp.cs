@@ -33,9 +33,28 @@ public class LevelUp : MonoBehaviour
                     characterInfo.hp = (int.Parse(characterInfo.hp) + int.Parse(characterInfo.level) * 5).ToString();
                     characterInfo.atk = (int.Parse(characterInfo.atk) + int.Parse(characterInfo.level) * 2).ToString();
 
-                    characterInfo.SetCharacter1Info(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
+                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
 
                     characterInfo.UpdateCharacter1Info();// キャラクターレベルアップ後の情報をJSONファイルに反映
+                }
+                else
+                {
+                    Debug.Log("LevelUp: キャラクターレベルは最大値に達しています");
+                }
+            }
+            else if(characterInfo.id == "2")
+            {
+                if(int.Parse(characterInfo.level) < 99)
+                {
+                    characterInfo.level = (int.Parse(characterInfo.level) + 1).ToString();
+                    Debug.Log("LevelUp: キャラクターレベルが " + characterInfo.level + " に上がりました");
+
+                    characterInfo.hp = (int.Parse(characterInfo.hp) + int.Parse(characterInfo.level) * 5).ToString();
+                    characterInfo.atk = (int.Parse(characterInfo.atk) + int.Parse(characterInfo.level) * 2).ToString();
+
+                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
+
+                    characterInfo.UpdateCharacter2Info();// キャラクターレベルアップ後の情報をJSONファイルに反映
                 }
                 else
                 {

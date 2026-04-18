@@ -31,6 +31,11 @@ public class CharacterInfo : MonoBehaviour
         return Path.Combine(Application.persistentDataPath, "Character1.json");
     }
 
+    string GetCharacter2JsonPath()
+    {
+        return Path.Combine(Application.persistentDataPath, "Character2.json");
+    }
+
     // Load Character1 data from JSON file. If file does not exist, create default data.
 
     public void LoadCharacter1FromJson()// JSONファイルからCharacter1のデータを読み込みます。ファイルが存在しない場合はデフォルトのデータを作成して保存します。
@@ -59,14 +64,43 @@ public class CharacterInfo : MonoBehaviour
         }
 
         // Apply loaded data to this component
-        SetCharacter1Info(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
+        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
+    }
+
+    public void LoadCharacter2FromJson()// JSONファイルからCharacter2のデータを読み込みます。ファイルが存在しない場合はデフォルトのデータを作成して保存します。
+    {
+        string path = GetCharacter2JsonPath();
+
+        CharacterData data;
+        if (!File.Exists(path))
+        {
+            data = new CharacterData
+            {
+                ID = 2,
+                Name = "Cathy",
+                Level = 1,
+                HP = 110,
+                ATK = 8
+            };
+            string json = JsonUtility.ToJson(data, true);
+            File.WriteAllText(path, json);
+            Debug.Log("CharacterInfo: 新規Character2.jsonを作成しました: " + path);
+        }
+        else
+        {
+            string json = File.ReadAllText(path);
+            data = JsonUtility.FromJson<CharacterData>(json);
+        }
+
+        // Apply loaded data to this component
+        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
     }
 
     // Allow setting info from a CharacterData instance
     public void SetCharacterInfoFromData(CharacterData data)
     {
         if (data == null) return;
-        SetCharacter1Info(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
+        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -83,7 +117,7 @@ public class CharacterInfo : MonoBehaviour
         
     }
 
-    public void SetCharacter1Info(string id, string name, string level, string hp, string atk)// キャラクターデータをこのコンポーネントにセットし、UIテキストも更新
+    public void SetCharacterInfo(string id, string name, string level, string hp, string atk)// キャラクターデータをこのコンポーネントにセットし、UIテキストも更新
     {
 
         this.id = id;
@@ -135,7 +169,11 @@ public class CharacterInfo : MonoBehaviour
         if (tmpAtkText != null) tmpAtkText.text = "ATK: " + atk;
     }
 
-    public void UpdateCharacter1Info()// 現在のキャラクターデータをJSONファイルに保存
+
+
+    // 現在のキャラクターデータをJSONファイルに保存
+
+    public void UpdateCharacter1Info()// Character1の現在のデータをJSONファイルに保存
     {
         // Update the JSON file with current character info
         string path = GetCharacter1JsonPath();
@@ -150,6 +188,23 @@ public class CharacterInfo : MonoBehaviour
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(path, json);
         Debug.Log("CharacterInfo: Character1.jsonを更新しました: " + path);
+    }
+
+    public void UpdateCharacter2Info()// Character2の現在のデータをJSONファイルに保存
+    {
+        // Update the JSON file with current character info
+        string path = GetCharacter2JsonPath();
+        CharacterData data = new CharacterData
+        {
+            ID = int.Parse(id),
+            Name = charaName,
+            Level = int.Parse(level),
+            HP = int.Parse(hp),
+            ATK = int.Parse(atk)
+        };
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(path, json);
+        Debug.Log("CharacterInfo: Character2.jsonを更新しました: " + path);
     }
 
     // このオブジェクト配下の UI Graphic（Image / Text / TMP 等）の raycastTarget を無効化します。
