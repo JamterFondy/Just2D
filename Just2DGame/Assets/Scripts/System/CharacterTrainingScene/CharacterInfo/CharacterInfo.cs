@@ -32,7 +32,8 @@ public class CharacterInfo : MonoBehaviour
     }
 
     // Load Character1 data from JSON file. If file does not exist, create default data.
-    public void LoadCharacter1FromJson()
+
+    public void LoadCharacter1FromJson()// JSONファイルからCharacter1のデータを読み込みます。ファイルが存在しない場合はデフォルトのデータを作成して保存します。
     {
         string path = GetCharacter1JsonPath();
 
@@ -82,7 +83,7 @@ public class CharacterInfo : MonoBehaviour
         
     }
 
-    public void SetCharacter1Info(string id, string name, string level, string hp, string atk)
+    public void SetCharacter1Info(string id, string name, string level, string hp, string atk)// キャラクターデータをこのコンポーネントにセットし、UIテキストも更新
     {
 
         this.id = id;
@@ -93,7 +94,7 @@ public class CharacterInfo : MonoBehaviour
         UpdateUIText();
     }
 
-    void CacheTextComponents()
+    void CacheTextComponents()// キャラクターデータをUIテキストに反映するためのテキストコンポーネントをキャッシュ
     {
         // Find UnityEngine.UI.Text components by child GameObject name
         var texts = GetComponentsInChildren<Text>(true);
@@ -118,7 +119,7 @@ public class CharacterInfo : MonoBehaviour
         }
     }
 
-    void UpdateUIText()
+    void UpdateUIText()// キャラクターデータをUIテキストに反映
     {
         // Ensure components are cached
         if (nameText == null && tmpNameText == null) CacheTextComponents();
@@ -132,6 +133,23 @@ public class CharacterInfo : MonoBehaviour
         if (tmpLevelText != null) tmpLevelText.text = "Lv. " + level;
         if (tmpHpText != null) tmpHpText.text = "HP: " + hp;
         if (tmpAtkText != null) tmpAtkText.text = "ATK: " + atk;
+    }
+
+    public void UpdateCharacter1Info()// 現在のキャラクターデータをJSONファイルに保存
+    {
+        // Update the JSON file with current character info
+        string path = GetCharacter1JsonPath();
+        CharacterData data = new CharacterData
+        {
+            ID = int.Parse(id),
+            Name = charaName,
+            Level = int.Parse(level),
+            HP = int.Parse(hp),
+            ATK = int.Parse(atk)
+        };
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(path, json);
+        Debug.Log("CharacterInfo: Character1.jsonを更新しました: " + path);
     }
 
     // このオブジェクト配下の UI Graphic（Image / Text / TMP 等）の raycastTarget を無効化します。

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelUp : MonoBehaviour
+public class ResetLevel : MonoBehaviour
 {
     [SerializeField] CharacterInfo characterInfo;
 
@@ -16,22 +16,23 @@ public class LevelUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnClick()
     {
-       if (characterInfo != null)
+        if (characterInfo != null)
         {
-            if(characterInfo.id == "1")
+            if (characterInfo.id == "1")
             {
-                if(int.Parse(characterInfo.level) < 99)
+                if (int.Parse(characterInfo.level) > 1)
                 {
-                    characterInfo.level = (int.Parse(characterInfo.level) + 1).ToString();
-                    Debug.Log("LevelUp: キャラクターレベルが " + characterInfo.level + " に上がりました");
+                    characterInfo.hp = "100";
+                    characterInfo.atk = "10";
 
-                    characterInfo.hp = (int.Parse(characterInfo.hp) + int.Parse(characterInfo.level) * 5).ToString();
-                    characterInfo.atk = (int.Parse(characterInfo.atk) + int.Parse(characterInfo.level) * 2).ToString();
+                    characterInfo.level = "1";
+                    Debug.Log("LevelUp: キャラクターレベルが1にリセットされました");
+
 
                     characterInfo.SetCharacter1Info(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
 
@@ -39,7 +40,7 @@ public class LevelUp : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("LevelUp: キャラクターレベルは最大値に達しています");
+                    Debug.Log("LevelUp: キャラクターレベルは最小値に達しています");
                 }
             }
         }
