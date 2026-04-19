@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CharacterSelectESC : MonoBehaviour
+public class StartGameFromData : MonoBehaviour
 {
     [SerializeField] LoadingManager loadingManager;
 
@@ -15,14 +15,12 @@ public class CharacterSelectESC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetKeyDown(KeyCode.Escape))   
-       {
-           OnClick();
-        }
+        
     }
 
     public void OnClick()
     {
-        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
+        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
+
     }
 }

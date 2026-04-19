@@ -4,10 +4,12 @@ using UnityEngine.UI;
 
 public class GoCharacterSelect : MonoBehaviour
 {
+    [SerializeField] LoadingManager loadingManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        loadingManager = FindObjectOfType<LoadingManager>();
     }
 
     // Update is called once per frame
@@ -18,6 +20,6 @@ public class GoCharacterSelect : MonoBehaviour
 
     public void OnClick()
     {
-        SceneManager.LoadScene("CharacterSelectScene");
+        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "CharacterSelectScene"));
     }
 }

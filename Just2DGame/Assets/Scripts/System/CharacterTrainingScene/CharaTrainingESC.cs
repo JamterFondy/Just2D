@@ -6,10 +6,13 @@ using static UnityEngine.CullingGroup;
 public class CharaTrainingESC : MonoBehaviour
 {
     [SerializeField] CharaTrainingUIManager charaTrainingUIManager;
+    [SerializeField] LoadingManager loadingManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         charaTrainingUIManager = FindObjectOfType<CharaTrainingUIManager>();
+        loadingManager = FindObjectOfType<LoadingManager>();
     }
 
     // Update is called once per frame
@@ -38,7 +41,7 @@ public class CharaTrainingESC : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("HomeScene");
+            loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
         }
         
     }

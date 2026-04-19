@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 public class GoToBattleMap : MonoBehaviour
 {
     [SerializeField] UIManager uiManager;
+    [SerializeField] LoadingManager loadingManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
+        loadingManager = FindObjectOfType<LoadingManager>();
 
     }
 
@@ -24,6 +26,6 @@ public class GoToBattleMap : MonoBehaviour
 
     public void OnClick()
     {
-        SceneManager.LoadScene("MapScene");
+        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
     } 
 }

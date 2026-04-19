@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 public class MapESC : MonoBehaviour
 {
     [SerializeField] MapUIManager mapUIManager;
+    [SerializeField] LoadingManager loadingManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mapUIManager = FindObjectOfType<MapUIManager>();
+        loadingManager = FindObjectOfType<LoadingManager>();
     }
 
     // Update is called once per frame
@@ -29,7 +31,7 @@ public class MapESC : MonoBehaviour
        }
        else if(mapUIManager.currentState == MapUIState.Map)
        {
-            SceneManager.LoadScene("HomeScene");
-       }
+            loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
+        }
     }
 }

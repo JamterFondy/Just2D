@@ -4,13 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class StartBattle : MonoBehaviour
 {
+    [SerializeField] LoadingManager loadingManager;
+
     [SerializeField] GameObject selectCharacter,charaInfoServer;
+    
 
     public int serveID;
 
     void Start()
     {
-        
+        loadingManager = FindObjectOfType<LoadingManager>();
     }
 
     // Update is called once per frame
@@ -27,17 +30,8 @@ public class StartBattle : MonoBehaviour
 
         charaInfoServer.GetComponent<CharaInfoServer>().SetCharacterInfo();
 
-        StartCoroutine(LoadBattleScene());
+        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "GameScene"));
     }
 
-    IEnumerator LoadBattleScene()
-    {
-        // シーンの非同期読み込みを開始
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GameScene");
-        // 読み込みが完了するまで待機
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
+    
 }

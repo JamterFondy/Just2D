@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class BattleFinish : MonoBehaviour
 {
+    [SerializeField] GameObject charaInfoServer;
+    [SerializeField] LoadingManager loadingManager;
+
     static BattleFinish _instance;
     public static BattleFinish Instance
     {
@@ -24,6 +27,12 @@ public class BattleFinish : MonoBehaviour
         else if (_instance != this) Destroy(gameObject);
     }
 
+    void Start()
+    {
+        charaInfoServer = GameObject.Find("CharaInfoServer");
+        loadingManager = FindAnyObjectByType<LoadingManager>();
+    }
+
     public void MoveToMapAfterDelay()
     {
         StartCoroutine(MoveToMapCoroutine());
@@ -32,6 +41,9 @@ public class BattleFinish : MonoBehaviour
     IEnumerator MoveToMapCoroutine()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("MapScene");
+        Destroy(charaInfoServer);
+
+        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
+
     }
 }

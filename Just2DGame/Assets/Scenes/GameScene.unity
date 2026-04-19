@@ -119,6 +119,65 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &295867566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 295867567}
+  - component: {fileID: 295867568}
+  m_Layer: 0
+  m_Name: Chara1Bullets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &295867567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295867566}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2008753827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295867568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295867566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b9d94cdce26f74f996fa99d1657dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChainBullet
+  playerStatus: {fileID: 0}
+  esc: {fileID: 0}
+  prefab1: {fileID: 8750526668469978218, guid: d1cc04ae0c48a43429628d823e3f717b, type: 3}
+  prefab2: {fileID: 4623724480720325466, guid: 10975e4651869074188c4a1971f50f17, type: 3}
+  prefab2Final: {fileID: 9140641675531097969, guid: 4df1482d788f3f247847661e5486cdda, type: 3}
+  verticalOffset: 0.8
+  spacing: 0.8
+  spawnInterval: 0.02
+  moveDelayAfterSpawn: 1
+  moveSpeed: 30
+  leftCrickCoolTime: 4
+  prefab2RotationOffset: 0
+  restraintDuration: 1.5
+  restraintDestroyBulletOnTrigger: 0
+  LeftCrickCoolTime: 0
 --- !u!1 &404351736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,7 +1764,6 @@ GameObject:
   - component: {fileID: 2008753829}
   - component: {fileID: 2008753831}
   - component: {fileID: 2008753832}
-  - component: {fileID: 2008753830}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1783,7 +1841,8 @@ Transform:
   m_LocalPosition: {x: -6.8, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 295867567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &2008753828
@@ -1849,33 +1908,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2008753830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008753824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b9d94cdce26f74f996fa99d1657dc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChainBullet
-  playerStatus: {fileID: 0}
-  esc: {fileID: 0}
-  prefab1: {fileID: 8750526668469978218, guid: d1cc04ae0c48a43429628d823e3f717b, type: 3}
-  prefab2: {fileID: 4623724480720325466, guid: 10975e4651869074188c4a1971f50f17, type: 3}
-  prefab2Final: {fileID: 9140641675531097969, guid: 4df1482d788f3f247847661e5486cdda, type: 3}
-  verticalOffset: 0.8
-  spacing: 0.8
-  spawnInterval: 0.02
-  moveDelayAfterSpawn: 1
-  moveSpeed: 30
-  leftCrickCoolTime: 4
-  prefab2RotationOffset: 0
-  restraintDuration: 1.5
-  restraintDestroyBulletOnTrigger: 0
-  LeftCrickCoolTime: 0
 --- !u!114 &2008753831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1905,9 +1937,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb60f01fb5b3ba84081738433fe2ff93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  charaInfoServer: {fileID: 0}
   invincibilityDuration: 1
   CharacterID: 0
   hp: 100
+  atk: 0
   Invincible: 0
   leftCrickCT: 0
   LeftCrickCTBool: 0
