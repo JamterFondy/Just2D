@@ -3,12 +3,14 @@ using System.Collections;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] IDServer idServer;//IDサーバーオブジェクト
+    [SerializeField] CharaInfoServer charaInfoServer;//IDサーバーオブジェクト
     [SerializeField] float invincibilityDuration = 1.0f; // 無敵時間（秒）
 
     public int CharacterID;//キャラクターID番号
+    public int hp;// プレイヤーのHP
+    public int atk;// プレイヤーの攻撃力
 
-    public int hp = 100;// プレイヤーのHP
+
     public bool Invincible = false;// 無敵状態かどうか
 
 
@@ -20,9 +22,11 @@ public class PlayerStatus : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        idServer = GameObject.Find("IDServer").GetComponent<IDServer>();
+        charaInfoServer = GameObject.Find("CharaInfoServer").GetComponent<CharaInfoServer>();
 
-        CharacterID = idServer.ID;
+        CharacterID = charaInfoServer.ID;
+        hp = charaInfoServer.HP;
+        atk = charaInfoServer.ATK;
     }
 
     // Update is called once per frame

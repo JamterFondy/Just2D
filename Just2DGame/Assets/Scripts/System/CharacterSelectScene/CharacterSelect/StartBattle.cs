@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class StartBattle : MonoBehaviour
 {
-    [SerializeField] GameObject selectCharacter,idServer;
+    [SerializeField] GameObject selectCharacter,charaInfoServer;
 
     public int serveID;
 
@@ -23,7 +23,9 @@ public class StartBattle : MonoBehaviour
     {
        
         serveID = selectCharacter.GetComponent<SelectCharacter>().characterID;
-        idServer.GetComponent<IDServer>().ID = serveID;
+        charaInfoServer.GetComponent<CharaInfoServer>().ID = serveID;
+
+        charaInfoServer.GetComponent<CharaInfoServer>().SetCharacterInfo();
 
         StartCoroutine(LoadBattleScene());
     }
