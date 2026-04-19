@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 295867567}
   - component: {fileID: 295867568}
+  - component: {fileID: 295867569}
   m_Layer: 0
   m_Name: Chara1Bullets
   m_TagString: Untagged
@@ -178,6 +179,22 @@ MonoBehaviour:
   restraintDuration: 1.5
   restraintDestroyBulletOnTrigger: 0
   LeftCrickCoolTime: 0
+--- !u!114 &295867569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295867566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c5508ee56dd516499eff0aa0f9c47b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NormalBullet
+  normalBullet: {fileID: 6572698622739657254, guid: cfae4962130634147ae8df0719322125, type: 3}
+  esc: {fileID: 0}
+  bulletSpeed: 30
+  SpaceToggle: 0
 --- !u!1 &404351736
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6bd54b6c77cf2848a56c9c4249e90ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleFinish
+  charaInfoServer: {fileID: 0}
+  loadingManager: {fileID: 0}
 --- !u!1 &511800620
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,7 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a12cf061a6bd549856f76f1831500f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalBulletToggle
-  player: {fileID: 0}
+  normalBullet: {fileID: 0}
   targetImage: {fileID: 0}
   normalOnSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   normalOffSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
@@ -1922,9 +1941,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   esc: {fileID: 0}
   speed: 6
-  normalBullet: {fileID: 6572698622739657254, guid: cfae4962130634147ae8df0719322125, type: 3}
   IsPlayerMoving: 0
-  SpaceToggle: 0
 --- !u!114 &2008753832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1939,7 +1956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
   charaInfoServer: {fileID: 0}
   invincibilityDuration: 1
-  CharacterID: 0
+  characterID: 0
   hp: 100
   atk: 0
   Invincible: 0

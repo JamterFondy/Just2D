@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class LastChainDamage : MonoBehaviour
 {
+    [SerializeField] PlayerStatus playerStatus;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerStatus = FindObjectOfType<PlayerStatus>();
     }
 
     // Update is called once per frame
@@ -23,7 +25,7 @@ public class LastChainDamage : MonoBehaviour
             if (enemystatus != null)
             {
                 // Apply damage to the object
-                enemystatus.ApplyDamage(30); // Example damage value
+                enemystatus.ApplyDamage((int)(playerStatus.atk * 0.5f)); // Example damage value
             }
         }
     }

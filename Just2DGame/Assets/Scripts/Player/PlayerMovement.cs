@@ -10,10 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 6f;
     Camera cam;
 
-    [SerializeField] GameObject normalBullet; // 通常弾
-
     public bool IsPlayerMoving = false; // プレイヤーが移動中かどうかのフラグ
-    public bool SpaceToggle = false; // スペースキーでのトグルフラグ
    
 
     void Start()
@@ -27,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
         if (cam == null)
             Debug.LogWarning("Main Camera not found. Movement bounds will not be applied.");
 
-        StartCoroutine(SpawnNormalBullet());
     }
 
     void Update()
@@ -77,37 +73,6 @@ public class PlayerMovement : MonoBehaviour
             transform.position = pos;
         }
 
-        // スペースキーでのトグル
-        if (Input.GetKeyDown(KeyCode.Space) && !esc.isPaused)
-        {
-            SpaceToggle = !SpaceToggle;
-        }
-
     }
-
-
-    IEnumerator SpawnNormalBullet()
-    {
-        
-         Quaternion angler = Quaternion.Euler(0f, 0f, 90f);
-
-         while (true)
-         {
-             yield return new WaitForSeconds(0.05f);
-            // SpaceToggle が有効なときだけ弾を生成する
-            if (!SpaceToggle)
-                continue;
-
-            Vector3 pos = transform.position;
-
-            Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y, pos.z), angler);
-             Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y + 0.2f, pos.z), angler);
-             Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y - 0.2f, pos.z), angler);
-
-         }
-        
-           
-    }
-
     
 }

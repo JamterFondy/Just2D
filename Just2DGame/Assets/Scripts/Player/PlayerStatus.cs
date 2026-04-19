@@ -6,7 +6,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] CharaInfoServer charaInfoServer;//IDサーバーオブジェクト
     [SerializeField] float invincibilityDuration = 1.0f; // 無敵時間（秒）
 
-    public int CharacterID;//キャラクターID番号
+    public int characterID;//キャラクターID番号
     public int hp;// プレイヤーのHP
     public int atk;// プレイヤーの攻撃力
 
@@ -24,7 +24,7 @@ public class PlayerStatus : MonoBehaviour
     {
         charaInfoServer = GameObject.Find("CharaInfoServer").GetComponent<CharaInfoServer>();
 
-        CharacterID = charaInfoServer.ID;
+        characterID = charaInfoServer.ID;
         hp = charaInfoServer.HP;
         atk = charaInfoServer.ATK;
     }
