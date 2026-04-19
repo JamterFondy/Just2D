@@ -865,6 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915f409fcb13b9948a35ea6cd7a47071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadingManager
+  loadTimeout: 30
 --- !u!4 &2141290678
 Transform:
   m_ObjectHideFlags: 0
