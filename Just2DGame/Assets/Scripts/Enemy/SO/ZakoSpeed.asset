@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ZakoSpeed
   m_EditorClassIdentifier: Assembly-CSharp::ZakoSpeedSO
   hp: 10
-  atk: 20
+  atk: 10
   def: 0
   speed: 10
-  runtimeATK: 0
+  runtimeATK: 10
   runtimeDEF: 0
-  runtimeSPEED: 0
+  runtimeSPEED: 10
