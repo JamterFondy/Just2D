@@ -43,53 +43,49 @@ public class CharaTrainingUIManager : MonoBehaviour
             case CharaTrainingUIState.None:
                 // Handle None UI
                 currentState = CharaTrainingUIState.None;
+
+                LevelUp.SetActive(true);
+                Equipment.SetActive(true);
+
+                CharaChoose.SetActive(false);
+                CharaTraining.SetActive(false);
+
                 break;
             case CharaTrainingUIState.CharaChoose:
                 // Handle Chara Choose UI
                 currentState = CharaTrainingUIState.CharaChoose;
+
+                CharaChoose.SetActive(true);
+
+                LevelUp.SetActive(false);
+                CharaTraining.SetActive(false);
+                Equipment.SetActive(false);
+
                 break;
 
             case CharaTrainingUIState.CharaTraining:
                 // Handle Chara Training UI
                 currentState = CharaTrainingUIState.CharaTraining;
+
+                CharaTraining.SetActive(true);
+
+                LevelUp.SetActive(false);
+                CharaChoose.SetActive(false);
+                Equipment.SetActive(false);
+
                 break;
 
             case CharaTrainingUIState.Equipment:
                 // Handle Equipment UI
                 currentState = CharaTrainingUIState.Equipment;
+
+                Equipment.SetActive(false);
+                LevelUp.SetActive(false);
+                CharaChoose.SetActive(false);
+                CharaTraining.SetActive(false);
+
                 break;
         }
 
-        if (currentState == CharaTrainingUIState.None)
-        {
-            LevelUp.SetActive(true);
-            Equipment.SetActive(true);
-
-            CharaChoose.SetActive(false);
-            CharaTraining.SetActive(false);
-        }
-        else if (currentState == CharaTrainingUIState.CharaChoose)
-        {
-            CharaChoose.SetActive(true);
-
-            LevelUp.SetActive(false);
-            CharaTraining.SetActive(false);
-            Equipment.SetActive(false);
-        }
-        else if (currentState == CharaTrainingUIState.CharaTraining)
-        {
-            CharaTraining.SetActive(true);
-
-            LevelUp.SetActive(false);
-            CharaChoose.SetActive(false);
-            Equipment.SetActive(false);
-        }
-        else if (currentState == CharaTrainingUIState.Equipment)
-        {
-            Equipment.SetActive(false);
-            LevelUp.SetActive(false);
-            CharaChoose.SetActive(false);
-            CharaTraining.SetActive(false);
-        }
     }
 }
