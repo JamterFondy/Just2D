@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DamageManager : MonoBehaviour
+public class NormalDamage : MonoBehaviour
 {
     [SerializeField] PlayerStatus playerStatus;
 
