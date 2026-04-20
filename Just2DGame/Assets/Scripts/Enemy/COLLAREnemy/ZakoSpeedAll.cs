@@ -59,12 +59,21 @@ public class ZakoSpeedAll : MonoBehaviour
                 Vector2 direction = (playerPos - myPos).normalized;
                 float distance = Vector2.Distance(myPos, playerPos);
 
-                // 距離が遠いほど速く、近いほど遅く（例: minSpeed～maxSpeedで線形補間）
+                // 距離が遠いほど速く、近いほど遅く
                 float minSpeed = speed * 0.3f;
                 float maxSpeed = speed * 1.0f;
-                followSpeed = Mathf.Lerp(minSpeed, maxSpeed, Mathf.Clamp01(distance / 10f)); // 10fは調整値
+                followSpeed = Mathf.Lerp(minSpeed, maxSpeed, Mathf.Clamp01(distance / 10f));
 
                 rb.linearVelocity = direction * followSpeed;
+
+                // プレイヤーの方向をx軸の負の方向（左）に合わせる
+                // 進行方向が左（-x）になるように回転
+                if (direction != Vector2.zero)
+                {
+                    // x軸負方向（左）をforwardにするため、directionの逆向き
+                    float angle = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(0, 0, angle);
+                }
             }
             elapsed += Time.deltaTime;
             yield return null;
@@ -75,9 +84,19 @@ public class ZakoSpeedAll : MonoBehaviour
         Vector2 moveDir = currentVelocity.normalized;
         if (moveDir == Vector2.zero)
         {
-            moveDir = Vector2.left; // 追従しなかった場合は左向き
+            moveDir = Vector2.left;
         }
         rb.linearVelocity = moveDir * followSpeed;
+
+        // 進行方向に自身の向きを合わせる
+        if (moveDir != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(-moveDir.y, -moveDir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
 
         yield return null;
     }
