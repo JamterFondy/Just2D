@@ -5,11 +5,13 @@ using UnityEngine.UI;
 public class CharacterSelectESC : MonoBehaviour
 {
     [SerializeField] LoadingManager loadingManager;
+    [SerializeField] GameObject charaInfoServer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         loadingManager = FindObjectOfType<LoadingManager>();
+        charaInfoServer = FindObjectOfType<CharaInfoServer>().gameObject;
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class CharacterSelectESC : MonoBehaviour
 
     public void OnClick()
     {
+        Destroy(charaInfoServer);
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
     }
 }

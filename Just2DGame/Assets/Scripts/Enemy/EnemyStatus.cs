@@ -35,7 +35,7 @@ public class EnemyStatus : MonoBehaviour
 
             if (normalDamage != null)
             {
-                damage = chainDamage.GetDamage();
+                damage = normalDamage.GetDamage();
             }
             else if (chainDamage != null)
             {

@@ -28,19 +28,19 @@ public class VolumeSlider : MonoBehaviour
         {
             case "MasterVolumeSlider":
                 sliderType = "Master";
-                masterVolume = PlayerPrefs.GetFloat("MasterVolume", 50f);
+                masterVolume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
                 slider.value = masterVolume;
                 slider.onValueChanged.AddListener(OnMasterVolumeChanged);
                 break;
             case "BGMVolumeSlider":
                 sliderType = "BGM";
-                bgmVolume = PlayerPrefs.GetFloat("BGMVolume", 100f);
+                bgmVolume = PlayerPrefs.GetFloat("BGMVolume", 1f);
                 slider.value = bgmVolume;
                 slider.onValueChanged.AddListener(OnBGMVolumeChanged);
                 break;
             case "SEVolumeSlider":
                 sliderType = "SE";
-                seVolume = PlayerPrefs.GetFloat("SEVolume", 100f);
+                seVolume = PlayerPrefs.GetFloat("SEVolume", 1f);
                 slider.value = seVolume;
                 slider.onValueChanged.AddListener(OnSEVolumeChanged);
                 break;
