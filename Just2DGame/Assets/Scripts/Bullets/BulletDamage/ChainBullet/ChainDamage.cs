@@ -4,10 +4,17 @@ public class ChainDamage : MonoBehaviour
 {
     [SerializeField] PlayerStatus playerStatus;
 
+    public int atk;
+    public int damage;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerStatus = FindObjectOfType<PlayerStatus>();
+
+        atk = playerStatus.atk;
+
+        damage = (int)(atk * 0.5f);
     }
 
     // Update is called once per frame
@@ -16,17 +23,9 @@ public class ChainDamage : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public int GetDamage()
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            // Check if the object has a Damageable component
-            EnemyStatus enemystatus = other.GetComponent<EnemyStatus>();
-            if (enemystatus != null)
-            {
-                // Apply damage to the object
-                enemystatus.ApplyDamage((int)(playerStatus.atk * 0.2f)); // Example damage value
-            }
-        }
+        return damage;
     }
+
 }

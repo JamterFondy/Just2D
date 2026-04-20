@@ -2,10 +2,27 @@ using UnityEngine;
 
 public class DamageManager : MonoBehaviour
 {
+    [SerializeField] PlayerStatus playerStatus;
+
+    public int atk;
+    public int damage;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerStatus = FindObjectOfType<PlayerStatus>();
+
+        atk = playerStatus.atk;
+
+        if(atk >= 10)
+        {
+            damage = (int)(atk * 0.1f);
+        }
+        else
+        {
+            damage = 1;
+        }
+
     }
 
     // Update is called once per frame
@@ -14,17 +31,8 @@ public class DamageManager : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public int GetDamage()
     {
-        if(other.gameObject.tag == "Enemy")
-        {
-            // Check if the object has a Damageable component
-            EnemyStatus enemystatus = other.GetComponent<EnemyStatus>();
-            if (enemystatus != null)
-            {
-                // Apply damage to the object
-                enemystatus.ApplyDamage(1); // Example damage value
-            }
-        }      
+        return damage;
     }
 }

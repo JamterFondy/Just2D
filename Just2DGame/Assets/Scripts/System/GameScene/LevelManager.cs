@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     // Optional: you can assign a parent transform for spawned enemies
     public Transform spawnParent;
 
+    public int stageID;
+
     void Start()
     {
         if (autoStart && levelData != null)
