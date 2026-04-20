@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyStatus : MonoBehaviour
 {
     [SerializeField] GameObject player;
+    [SerializeField] LoadingManager loadingManager;
 
     public int hp = 100;
 
@@ -11,6 +12,7 @@ public class EnemyStatus : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        loadingManager = FindObjectOfType<LoadingManager>();
     }
 
     // Update is called once per frame
@@ -58,6 +60,8 @@ public class EnemyStatus : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
+
+            Die();
         }
     }
 
