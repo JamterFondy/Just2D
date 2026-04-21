@@ -1,11 +1,10 @@
-
-using System;
 using UnityEngine;
+using System;
+using UnityEngine.UI;
 
-[DisallowMultipleComponent]
-public class StageSelectSwitch : MonoBehaviour
+public class SettingsUI : MonoBehaviour
 {
-    [SerializeField] GameObject target; // 表示/非表示を切り替える対象（ボタン本体など）
+    [SerializeField] GameObject target;
     UIManager uiManager;
 
     void Awake()
@@ -33,6 +32,7 @@ public class StageSelectSwitch : MonoBehaviour
     void UpdateVisibility(UIState state)
     {
         if (target == null) return;
-        target.SetActive(state == UIState.StageInfo);
+        target.SetActive(state == UIState.Settings);
     }
+
 }

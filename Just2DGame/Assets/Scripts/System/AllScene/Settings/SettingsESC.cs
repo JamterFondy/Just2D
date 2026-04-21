@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class SettingsESC : MonoBehaviour
 {
-    [SerializeField] TitleUIManager titleUIManager;
+    UIManager uiManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        titleUIManager = FindObjectOfType<TitleUIManager>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     // Update is called once per frame
@@ -23,6 +23,6 @@ public class SettingsESC : MonoBehaviour
     public void OnClick()
     {
         
-        titleUIManager.currentState = TitleUIState.Default;
+        uiManager.currentState = UIState.TitleDefault;
     }
 }

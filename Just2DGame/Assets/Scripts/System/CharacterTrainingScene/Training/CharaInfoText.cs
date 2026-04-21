@@ -1,13 +1,11 @@
-
-using System;
 using UnityEngine;
+using System;
 
-[DisallowMultipleComponent]
-public class StageSelectSwitch : MonoBehaviour
+public class CharaInfoText : MonoBehaviour
 {
-    [SerializeField] GameObject target; // 表示/非表示を切り替える対象（ボタン本体など）
+    [SerializeField] GameObject target;
     UIManager uiManager;
-
+    
     void Awake()
     {
         if (target == null) target = this.gameObject;
@@ -33,6 +31,6 @@ public class StageSelectSwitch : MonoBehaviour
     void UpdateVisibility(UIState state)
     {
         if (target == null) return;
-        target.SetActive(state == UIState.StageInfo);
+        target.SetActive(state == UIState.CharaTraining);
     }
 }

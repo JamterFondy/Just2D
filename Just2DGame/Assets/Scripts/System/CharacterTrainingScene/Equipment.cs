@@ -1,34 +1,43 @@
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using static UnityEngine.CullingGroup;
 
 public class Equipment : MonoBehaviour
 {
-    
-    [SerializeField] CharaTrainingUIManager charaTrainingUIManager;
+    [SerializeField] GameObject target;
+    UIManager uiManager;
 
     void Awake()
     {
-        charaTrainingUIManager = FindObjectOfType<CharaTrainingUIManager>();
-
-        if (charaTrainingUIManager != null)
+        if (target == null) target = this.gameObject;
+        uiManager = FindObjectOfType<UIManager>();
+        if (uiManager != null)
         {
-            Debug.LogWarning("CharaTrainingUIManager not found. Visibility won't update automatically.");
+            uiManager.StateChanged += OnStateChanged;
+            UpdateVisibility(uiManager.currentState);
+        }
+        else
+        {
+            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
         }
     }
-    void Start()
+
+    void OnDestroy()
     {
-        charaTrainingUIManager = FindObjectOfType<CharaTrainingUIManager>();
+        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void OnStateChanged(UIState state) => UpdateVisibility(state);
 
+    void UpdateVisibility(UIState state)
+    {
+        if (target == null) return;
+        target.SetActive(state == UIState.CharaTrainingDefault);
     }
 
     public void OnClick()
     {
-        charaTrainingUIManager.currentState = CharaTrainingUIState.Equipment;
+        uiManager.currentState = UIState.ChooseEquipment;
     }
 }

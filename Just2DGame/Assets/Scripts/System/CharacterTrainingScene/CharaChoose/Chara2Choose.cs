@@ -1,13 +1,16 @@
+using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
+using static UnityEngine.CullingGroup;
 
 [System.Serializable]
 
 public class Chara2Choose : MonoBehaviour
 {
-    [SerializeField] CharaTrainingUIManager charaTrainingUIManager;
     [SerializeField] CharacterInfo characterInfo; // キャラクター情報を表示するUIコンポーネント
+    [SerializeField] GameObject target;
+    UIManager uiManager;
 
     public int charaID = 2; // キャラのID
 
@@ -18,31 +21,45 @@ public class Chara2Choose : MonoBehaviour
 
     void Awake()
     {
-        charaTrainingUIManager = FindObjectOfType<CharaTrainingUIManager>();
         characterInfo = FindObjectOfType<CharacterInfo>();
-
-        if (charaTrainingUIManager == null)
-        {
-            Debug.LogWarning("CharaTrainingUIManager not found. Visibility won't update automatically.");
-        }
-
-        if (characterInfo == null)
+        if(characterInfo == null)
         {
             Debug.LogWarning("CharacterInfo not found. Character information won't be displayed.");
         }
+
+
+        if (target == null) target = this.gameObject;
+        uiManager = FindObjectOfType<UIManager>();
+        if (uiManager != null)
+        {
+            uiManager.StateChanged += OnStateChanged;
+            UpdateVisibility(uiManager.currentState);
+        }
+        else
+        {
+            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDestroy()
     {
-
+        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
     }
+
+    void OnStateChanged(UIState state) => UpdateVisibility(state);
+
+    void UpdateVisibility(UIState state)
+    {
+        if (target == null) return;
+        target.SetActive(state == UIState.ChooseTrainChara);
+    }
+
 
     public void OnClick()
     {
 
         characterInfo.LoadCharacter2FromJson();
 
-        charaTrainingUIManager.currentState = CharaTrainingUIState.CharaTraining;
+        uiManager.currentState = UIState.CharaTraining;
     }
 }

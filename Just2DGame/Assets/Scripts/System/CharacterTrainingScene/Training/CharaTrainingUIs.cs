@@ -1,11 +1,10 @@
-
-using System;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
-[DisallowMultipleComponent]
-public class GoToBattleMapVisibility : MonoBehaviour
+public class CharaTrainingUIs : MonoBehaviour
 {
-    [SerializeField] GameObject target; // 表示/非表示を切り替える対象（ボタン本体など）
+    [SerializeField] GameObject target;
     UIManager uiManager;
 
     void Awake()
@@ -33,6 +32,6 @@ public class GoToBattleMapVisibility : MonoBehaviour
     void UpdateVisibility(UIState state)
     {
         if (target == null) return;
-        target.SetActive(state == UIState.Home);
+        target.SetActive(state == UIState.CharaTraining);
     }
 }

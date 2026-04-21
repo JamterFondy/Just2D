@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class StageSelect : MonoBehaviour
 {
-    [SerializeField] MapUIManager mapUIManager;
+    UIManager uiManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        mapUIManager = FindObjectOfType<MapUIManager>();
+        uiManager = FindObjectOfType<UIManager>();
 
     }
 
@@ -21,6 +21,6 @@ public class StageSelect : MonoBehaviour
 
     public void OnClick()
     {
-        mapUIManager.currentState = MapUIState.MapSelect;
+        uiManager.currentState = UIState.StageInfo;
     }
 }

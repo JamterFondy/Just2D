@@ -5,13 +5,13 @@ using static UnityEngine.CullingGroup;
 
 public class CharaTrainingESC : MonoBehaviour
 {
-    [SerializeField] CharaTrainingUIManager charaTrainingUIManager;
     [SerializeField] LoadingManager loadingManager;
+    UIManager uiManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        charaTrainingUIManager = FindObjectOfType<CharaTrainingUIManager>();
+        uiManager = FindObjectOfType<UIManager>();
         loadingManager = FindObjectOfType<LoadingManager>();
     }
 
@@ -27,20 +27,21 @@ public class CharaTrainingESC : MonoBehaviour
 
     public void OnClick()
     {
-        if (charaTrainingUIManager.currentState == CharaTrainingUIState.CharaTraining)
+        if (uiManager.currentState == UIState.CharaTraining)
         {
-            charaTrainingUIManager.currentState = CharaTrainingUIState.CharaChoose;
+            uiManager.currentState = UIState.ChooseTrainChara;
         }
-        else if(charaTrainingUIManager.currentState == CharaTrainingUIState.CharaChoose)
+        else if(uiManager.currentState == UIState.ChooseTrainChara)
         {
-            charaTrainingUIManager.currentState = CharaTrainingUIState.None;
+            uiManager.currentState = UIState.CharaTrainingDefault;
         }
-        else if(charaTrainingUIManager.currentState == CharaTrainingUIState.Equipment)
+        else if(uiManager.currentState == UIState.ChooseEquipment)
         {
-            charaTrainingUIManager.currentState = CharaTrainingUIState.None;
+            uiManager.currentState = UIState.CharaTrainingDefault;
         }
         else
         {
+            uiManager.currentState = UIState.HomeDefault;
             loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
         }
         

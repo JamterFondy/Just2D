@@ -3,8 +3,27 @@ using UnityEngine;
 
 public enum UIState
 {
-    Home,
+    //全シーン共通の状態
+    Settings,
+
+    //タイトル画面の状態
+    TitleDefault,
+    GameStartConfirm,
+    Credit,
+
+    //ホーム画面の状態
+    HomeDefault,
     PauseMenu,
+
+    //キャラ育成画面の状態
+    CharaTrainingDefault,
+    ChooseTrainChara,
+    CharaTraining,
+    ChooseEquipment,
+
+    //ステージマップの状態
+    StageMapDefault,
+    StageInfo,
 }
 
 public class UIManager : MonoBehaviour
@@ -23,6 +42,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+
+        currentState = UIState.TitleDefault; // 初期状態をタイトル画面のデフォルトに設定
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,20 +59,6 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
-        switch(currentState)
-        {
-            case UIState.Home:
-                // Handle Home UI
-                
-                currentState = UIState.Home; 
-                break;
-
-            case UIState.PauseMenu:
-                // Handle Pause Menu UI
-
-                currentState = UIState.PauseMenu;
-                break;
-        }
 
     }
 }

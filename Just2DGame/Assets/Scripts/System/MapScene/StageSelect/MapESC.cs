@@ -1,16 +1,20 @@
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static UnityEngine.CullingGroup;
+using static UnityEngine.GraphicsBuffer;
 
 public class MapESC : MonoBehaviour
 {
-    [SerializeField] MapUIManager mapUIManager;
     [SerializeField] LoadingManager loadingManager;
+    UIManager uiManager;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
     void Start()
     {
-        mapUIManager = FindObjectOfType<MapUIManager>();
+        uiManager = FindObjectOfType<UIManager>();
         loadingManager = FindObjectOfType<LoadingManager>();
     }
 
@@ -23,15 +27,17 @@ public class MapESC : MonoBehaviour
         }
     }
 
+
     public void OnClick()
     {
-       if(mapUIManager.currentState == MapUIState.MapSelect)
+       if(uiManager.currentState == UIState.StageInfo)
        {
-           mapUIManager.currentState = MapUIState.Map;
+           uiManager.currentState = UIState.StageMapDefault;
        }
-       else if(mapUIManager.currentState == MapUIState.Map)
+       else
        {
+            uiManager.currentState = UIState.HomeDefault;
             loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
-        }
+       }
     }
 }

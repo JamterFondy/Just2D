@@ -265,7 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6d742e583cc554abedd32393549287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageSelect
-  mapUIManager: {fileID: 1425724318}
 --- !u!1 &108213802
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +493,7 @@ GameObject:
   - component: {fileID: 443774357}
   - component: {fileID: 443774356}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MapUIsCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,11 +514,11 @@ RectTransform:
   - {fileID: 86950268}
   - {fileID: 1137315045}
   - {fileID: 1497450032}
-  m_Father: {fileID: 1425724317}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.60952, y: 0.31619}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &443774356
@@ -953,7 +952,7 @@ GameObject:
   - component: {fileID: 1137315045}
   - component: {fileID: 1137315046}
   m_Layer: 0
-  m_Name: MapInfomation
+  m_Name: MapInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -989,51 +988,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageSelectSwitch
   target: {fileID: 1137315044}
---- !u!1 &1425724316
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1425724317}
-  - component: {fileID: 1425724318}
-  m_Layer: 0
-  m_Name: MapUIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1425724317
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425724316}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.60952, y: -0.31619, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 443774355}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1425724318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425724316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804c752b4a85e214ca7e284b57517001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MapUIManager
 --- !u!1 &1457774766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,7 +1270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c8f46e2c64acc468a47abc606ebec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapESC
-  mapUIManager: {fileID: 1425724318}
+  loadingManager: {fileID: 0}
 --- !u!1 &1577641234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,11 +1507,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e65f33e21f9634b83347ffda40fd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoCharacterSelect
+  loadingManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 1425724317}
+  - {fileID: 443774355}
   - {fileID: 108213805}
