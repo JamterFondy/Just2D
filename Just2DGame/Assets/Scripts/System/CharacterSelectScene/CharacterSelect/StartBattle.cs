@@ -14,18 +14,24 @@ public class StartBattle : MonoBehaviour
     void Start()
     {
         loadingManager = FindObjectOfType<LoadingManager>();
+
+        if(PlayerPrefs.HasKey("GoBattleCharacterID")) serveID = PlayerPrefs.GetInt("GoBattleCharacterID");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+         
     }
 
     public void OnClick()
     {
-       
         serveID = selectCharacter.GetComponent<SelectCharacter>().characterID;
+        if (serveID == 0) return; //キャラが選択されていないならバトルに行けない
+      
+        PlayerPrefs.SetInt("GoBattleCharacterID", serveID); //選択したキャラのIDを保存。次回はこの番号のキャラが選択されている状態になる。
+
+
         charaInfoServer.GetComponent<CharaInfoServer>().ID = serveID;
 
         charaInfoServer.GetComponent<CharaInfoServer>().SetCharacterInfo();

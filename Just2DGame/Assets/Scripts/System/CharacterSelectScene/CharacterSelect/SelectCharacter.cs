@@ -13,6 +13,10 @@ public class SelectCharacter : MonoBehaviour
     {
         // インスペクタで設定された characterID を尊重するため、ここで 0 に上書きしない
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        characterID = PlayerPrefs.GetInt("GoBattleCharacterID", 0); //保存されたキャラIDを読み込む。保存されていない場合は0（未選択）になる。
+        lastCharacterID = characterID; //初期状態を反映させるために lastCharacterID を更新
+
         ChangeIcon();
     }
 

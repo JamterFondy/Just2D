@@ -23,7 +23,11 @@ public class CharaInfoServer : MonoBehaviour
     }
     void Start()
     {
-        
+        if (PlayerPrefs.HasKey("GoBattleCharacterID"))
+        {
+            ID = PlayerPrefs.GetInt("GoBattleCharacterID");
+            SetCharacterInfo();
+        }
     }
 
     // Update is called once per frame

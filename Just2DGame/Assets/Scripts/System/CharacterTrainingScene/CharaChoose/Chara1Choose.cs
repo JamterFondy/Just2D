@@ -55,10 +55,9 @@ public class Chara1Choose : MonoBehaviour
     }
 
     public void OnClick()
-    {
-        characterInfo.LoadCharacter1FromJson();
+    {     
+        uiManager.currentState = UIState.CharaTraining;
 
-       
-        uiManager.currentState = UIState.CharaTraining;     
+        characterInfo.LoadCharacter1FromJson();
     }
 }
