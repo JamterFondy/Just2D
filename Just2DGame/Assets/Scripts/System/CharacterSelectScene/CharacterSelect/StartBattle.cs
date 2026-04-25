@@ -7,6 +7,8 @@ public class StartBattle : MonoBehaviour
     [SerializeField] LoadingManager loadingManager;
 
     [SerializeField] GameObject selectCharacter,charaInfoServer;
+
+    UIManager uiManager;
     
 
     public int serveID;
@@ -14,8 +16,9 @@ public class StartBattle : MonoBehaviour
     void Start()
     {
         loadingManager = FindObjectOfType<LoadingManager>();
+        uiManager = FindObjectOfType<UIManager>();
 
-        if(PlayerPrefs.HasKey("GoBattleCharacterID")) serveID = PlayerPrefs.GetInt("GoBattleCharacterID");
+        if (PlayerPrefs.HasKey("GoBattleCharacterID")) serveID = PlayerPrefs.GetInt("GoBattleCharacterID");
     }
 
     // Update is called once per frame
@@ -35,6 +38,9 @@ public class StartBattle : MonoBehaviour
         charaInfoServer.GetComponent<CharaInfoServer>().ID = serveID;
 
         charaInfoServer.GetComponent<CharaInfoServer>().SetCharacterInfo();
+
+        uiManager.currentScene = SceneType.Battle;
+        uiManager.currentState = UIState.InBattle;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "GameScene"));
     }

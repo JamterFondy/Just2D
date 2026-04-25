@@ -590,7 +590,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -850, y: 480}
+  m_AnchoredPosition: {x: -850, y: 422.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &585723591
@@ -605,6 +605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440c069e426ce6f4d9c15ece723176b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectESC
+  loadingManager: {fileID: 0}
+  charaInfoServer: {fileID: 0}
 --- !u!114 &585723592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,6 +1756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3456a3c046a3c647b2865fb4c80f7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartBattle
+  loadingManager: {fileID: 0}
   selectCharacter: {fileID: 1829708170}
   charaInfoServer: {fileID: 75102342}
   serveID: 0

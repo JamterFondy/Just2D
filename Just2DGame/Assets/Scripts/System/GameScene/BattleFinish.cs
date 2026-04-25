@@ -7,6 +7,8 @@ public class BattleFinish : MonoBehaviour
     [SerializeField] GameObject charaInfoServer;
     [SerializeField] LoadingManager loadingManager;
 
+    UIManager uiManager;
+
     static BattleFinish _instance;
     public static BattleFinish Instance
     {
@@ -31,6 +33,8 @@ public class BattleFinish : MonoBehaviour
     {
         charaInfoServer = GameObject.Find("CharaInfoServer");
         loadingManager = FindAnyObjectByType<LoadingManager>();
+
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     public void MoveToMapAfterDelay()
@@ -42,6 +46,9 @@ public class BattleFinish : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         Destroy(charaInfoServer);
+
+        uiManager.currentScene = SceneType.Map;
+        uiManager.currentState = UIState.StageMapDefault;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
 

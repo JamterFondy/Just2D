@@ -54,6 +54,9 @@ public class GoToBattleMap : MonoBehaviour
 
     public void OnClick()
     {
+        uiManager.currentScene = SceneType.Map;
+        uiManager.currentState = UIState.StageMapDefault;
+
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
     } 
 }

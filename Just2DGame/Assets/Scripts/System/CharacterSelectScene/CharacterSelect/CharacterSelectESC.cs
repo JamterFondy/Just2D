@@ -29,7 +29,10 @@ public class CharacterSelectESC : MonoBehaviour
     {
         Destroy(charaInfoServer);
 
+        uiManager.currentScene = SceneType.Map;
         uiManager.currentState = UIState.StageInfo;
+
+
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
     }
 }

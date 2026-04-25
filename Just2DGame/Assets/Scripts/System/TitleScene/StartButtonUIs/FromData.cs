@@ -16,6 +16,7 @@ public class FromData : MonoBehaviour
 
     public void OnClick()
     {
+        uiManager.currentScene = SceneType.Home;
         uiManager.currentState = UIState.HomeDefault;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
