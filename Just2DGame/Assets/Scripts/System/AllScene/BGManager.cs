@@ -46,11 +46,11 @@ public class BGManager : MonoBehaviour
 
     void UpdateAudio(UIState state)
     {
-        if (state == UIState.Settings) return; //設定を開く前後でBGMを再度読み込まない。
+        if (state == UIState.Settings || state == UIState.GameStartConfirm) return; //設定とゲーム開始確認を開く前後でBGMを再度読み込まない。
         if (audioSource == null) return;
 
-        //UIStateがSettings以外で他の状態に変わった際に今回のシーンを保存。
-        //Settingsを挟んだ際に前のシーンのBGMを継続して再生するために必要な処理。
+        //UIStateがSettingsなどの場面が大きく変わらない状態以外で他の状態に変わった際に今回のシーンを保存。
+        //Settingsなどを挟んだ際に前の状態やシーンのBGMを継続して再生するために必要な処理。
         if (preState == state) return;
         preState = state; 
         

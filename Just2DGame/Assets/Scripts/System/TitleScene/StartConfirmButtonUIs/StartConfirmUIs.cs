@@ -1,13 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using System;
 
-public class StartGameFromData : MonoBehaviour
+public class StartConfirmUIs : MonoBehaviour
 {
-    [SerializeField] LoadingManager loadingManager;
     [SerializeField] GameObject target;
     UIManager uiManager;
-
     void Awake()
     {
         if (target == null) target = this.gameObject;
@@ -23,11 +20,6 @@ public class StartGameFromData : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        loadingManager = FindObjectOfType<LoadingManager>();
-    }
-
     void OnDestroy()
     {
         if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
@@ -38,14 +30,6 @@ public class StartGameFromData : MonoBehaviour
     void UpdateVisibility(UIState state)
     {
         if (target == null) return;
-        target.SetActive(state == UIState.TitleDefault);
-    }
-
-    public void OnClick()
-    {
-        uiManager.currentState = UIState.HomeDefault;
-
-        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
-
+        target.SetActive(state == UIState.GameStartConfirm);
     }
 }

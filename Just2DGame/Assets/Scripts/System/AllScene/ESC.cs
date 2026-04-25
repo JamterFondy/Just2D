@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class ESC : MonoBehaviour
 {
-    [SerializeField] TitleUIManager titleUIManager;
+    UIManager uiManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        titleUIManager = FindObjectOfType<TitleUIManager>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     // Update is called once per frame
@@ -20,21 +20,21 @@ public class ESC : MonoBehaviour
     {
         if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Escape)
         {
-            if (titleUIManager != null)
+            if (uiManager != null)
             {
-                if (titleUIManager.currentState == TitleUIState.Settings)
+                if (uiManager.currentState == UIState.Settings)
                 {
-                    titleUIManager.currentState = TitleUIState.Default;
+                    uiManager.currentState = UIState.TitleDefault;
                     return;
                 }
-                else if (titleUIManager.currentState == TitleUIState.StartConfirm)
+                else if (uiManager.currentState == UIState.GameStartConfirm)
                 {
-                    titleUIManager.currentState = TitleUIState.Default;
+                    uiManager.currentState = UIState.TitleDefault;
                     return;
                 }
-                else if (titleUIManager.currentState == TitleUIState.Credit)
+                else if (uiManager.currentState == UIState.Credit)
                 {
-                    titleUIManager.currentState = TitleUIState.Default;
+                    uiManager.currentState = UIState.TitleDefault;
                     return;
 
                 }
