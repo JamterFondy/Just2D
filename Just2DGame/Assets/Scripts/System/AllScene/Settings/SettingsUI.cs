@@ -20,7 +20,10 @@ public class SettingsUI : MonoBehaviour
         {
             Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
         }
+
+        DontDestroyOnLoad(this.gameObject);
     }
+
 
     void OnDestroy()
     {

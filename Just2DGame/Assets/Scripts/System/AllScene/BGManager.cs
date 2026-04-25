@@ -7,7 +7,7 @@ using static UnityEngine.CullingGroup;
 public class BGManager : MonoBehaviour
 {
     UIManager uiManager;
-    public UIState preState; //前の状態を保存する変数。Settingsを挟んだ際に前のシーンのBGMを継続して再生するために必要。
+    public SceneType preScene; //前の状態を保存する変数。別シーンを挟んだ際に前のシーンのBGMを継続して再生するために必要。（現在は機能していない）
 
     public AudioSource audioSource;
 
@@ -16,7 +16,7 @@ public class BGManager : MonoBehaviour
          uiManager = FindObjectOfType<UIManager>();
          if (uiManager != null)
          {
-             uiManager.StateChanged += OnStateChanged;
+             uiManager.SceneChanged += OnSceneChanged;
         }
          else
          {
@@ -33,40 +33,30 @@ public class BGManager : MonoBehaviour
         audioSource.clip = Resources.Load<AudioClip>("Audio/TitleBGM");
         audioSource.Play();
 
-        preState = uiManager.currentState; //初期状態を保存
+        preScene = uiManager.currentScene; //初期状態を保存
     }
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
+        if (uiManager != null) uiManager.SceneChanged -= OnSceneChanged;
     }
 
 
-    void OnStateChanged(UIState state) => UpdateAudio(state);
-
-    void UpdateAudio(UIState state)
+    void OnSceneChanged(SceneType scene) => UpdateAudio(scene);
+    void UpdateAudio(SceneType scene)
     {
-        if (state == UIState.Settings || state == UIState.GameStartConfirm) return; //設定とゲーム開始確認を開く前後でBGMを再度読み込まない。
-        if (audioSource == null) return;
-
-        //UIStateがSettingsなどの場面が大きく変わらない状態以外で他の状態に変わった際に今回のシーンを保存。
-        //Settingsなどを挟んだ際に前の状態やシーンのBGMを継続して再生するために必要な処理。
-        if (preState == state) return;
-        preState = state; 
-        
-
-        switch (state)
+        switch (scene)
         {
-            case UIState.TitleDefault:
+            case SceneType.Title:
                 audioSource.clip = Resources.Load<AudioClip>("Audio/TitleBGM");
                 break;
-            case UIState.HomeDefault:
+            case SceneType.Home:
                 audioSource.clip = Resources.Load<AudioClip>("Audio/HomeBGM");
                 break;
-            case UIState.CharaTrainingDefault:
+            case SceneType.CharacterTraining:
                 audioSource.clip = Resources.Load<AudioClip>("Audio/CharaTrainingBGM");
                 break;
-            case UIState.StageMapDefault:
+            case SceneType.Map:
                 audioSource.clip = Resources.Load<AudioClip>("Audio/StageMapBGM");
                 break;
             default:

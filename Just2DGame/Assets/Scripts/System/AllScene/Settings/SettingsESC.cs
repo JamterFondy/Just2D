@@ -4,11 +4,13 @@ using UnityEngine.UI;
 public class SettingsESC : MonoBehaviour
 {
     UIManager uiManager;
+    TabSettings tabSettings;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
+        tabSettings = FindObjectOfType<TabSettings>();
     }
 
     // Update is called once per frame
@@ -22,7 +24,6 @@ public class SettingsESC : MonoBehaviour
 
     public void OnClick()
     {
-        
-        uiManager.currentState = UIState.TitleDefault;
+        uiManager.currentState = tabSettings.preState;
     }
 }

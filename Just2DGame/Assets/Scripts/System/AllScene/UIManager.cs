@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum SceneType
 {
+    Loading,
     Title,
     Home,
     CharacterTraining,
