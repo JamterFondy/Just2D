@@ -22,7 +22,7 @@ public class SettingsESC : MonoBehaviour
         }
     }
 
-    public void OnClick()
+    public void OnClick() //ToDo⇒SceneTypeがTitleやBattleなど、tabSettingsの参照を取れないときに対応できるようにする。（SceneTypeで場合分け？)
     {
         if(tabSettings == null) tabSettings = FindObjectOfType<TabSettings>();
 
