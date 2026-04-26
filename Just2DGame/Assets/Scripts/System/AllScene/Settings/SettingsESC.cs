@@ -24,6 +24,8 @@ public class SettingsESC : MonoBehaviour
 
     public void OnClick()
     {
+        if(tabSettings == null) tabSettings = FindObjectOfType<TabSettings>();
+
         uiManager.currentState = tabSettings.preState;
     }
 }
