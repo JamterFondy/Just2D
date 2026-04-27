@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b9d94cdce26f74f996fa99d1657dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChainBullet
+  chargingSprite: {fileID: 7815777748550919053, guid: dedba2810597a944b8e69e75a0e8bdba, type: 3}
+  fullSprite: {fileID: -3993684179713949436, guid: bb91f6598fb06f249b401a45deae07e4, type: 3}
   esc: {fileID: 0}
   prefab1: {fileID: 8750526668469978218, guid: d1cc04ae0c48a43429628d823e3f717b, type: 3}
   prefab2: {fileID: 4623724480720325466, guid: 10975e4651869074188c4a1971f50f17, type: 3}
@@ -973,8 +975,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillGage
   playerStatus: {fileID: 0}
-  imageFull: {fileID: 1375405664394881140, guid: 065c4ddfa0892844cac2e9883d6888b0, type: 3}
-  imageCharge: {fileID: 8769622721420541040, guid: d47eea5119fa1fb4197e7d5a2a35bb67, type: 3}
 --- !u!114 &1130638203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,7 +995,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -3993684179713949436, guid: bb91f6598fb06f249b401a45deae07e4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

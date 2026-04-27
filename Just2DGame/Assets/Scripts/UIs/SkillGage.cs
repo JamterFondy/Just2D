@@ -1,31 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-public enum SkillGageState
-{
-    Empty,
-    Charging,
-    Full,
-}
-
 public class SkillGage : MonoBehaviour
 {
     [SerializeField] PlayerStatus playerStatus;
 
-    [SerializeField] Image imageFull;
-    [SerializeField] Image imageCharge;
-
-    SkillGageState _currentState = SkillGageState.Empty;
-    public SkillGageState currentState
-    {
-        get => _currentState;
-        set
-        {
-            if (_currentState == value) return;
-            _currentState = value;
-            UpdateVisuals(_currentState);
-        }
-    }
+    Image imageFull; // ゲージが満タンのときの画像
+    Image imageCharge; // ゲージがチャージ中のときの画像
 
     void Start()
     {
@@ -38,37 +18,13 @@ public class SkillGage : MonoBehaviour
             }
         }
 
-        if (imageFull == null)
-        {
-            Debug.LogWarning("imageFull が未設定です。Full 表示が機能しません。");
-        }
-        if (imageCharge == null)
-        {
-            Debug.LogWarning("imageCharge が未設定です。Charging 表示が機能しません。");
-        }
-
-        // 初期状態設定（Visualも更新）
-        RefreshStateFromPlayer();
     }
 
-    void Update()
+    public void SetImage(Sprite sprite)
     {
-        RefreshStateFromPlayer();
+        Image image = GetComponent<Image>();
+
+        image.sprite = sprite;
     }
 
-    void RefreshStateFromPlayer()
-    {
-        if (playerStatus == null) return;
-
-        // クールタイム中は Charging、クールタイムでない（満了時）は Full にする
-        currentState = playerStatus.LeftCrickCTBool ? SkillGageState.Charging : SkillGageState.Full;
-    }
-
-    void UpdateVisuals(SkillGageState state)
-    {
-        // Full のときは imageFull を表示、Charging のときは imageCharge を表示。
-        // それ以外は両方非表示にする。
-        if (imageFull != null) imageFull.gameObject.SetActive(state == SkillGageState.Full);
-        if (imageCharge != null) imageCharge.gameObject.SetActive(state == SkillGageState.Charging);
-    }
 }
