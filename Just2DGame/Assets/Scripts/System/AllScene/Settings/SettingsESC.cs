@@ -25,7 +25,8 @@ public class SettingsESC : MonoBehaviour
     public void OnClick() //ToDo⇒SceneTypeがTitleやBattleなど、tabSettingsの参照を取れないときに対応できるようにする。（SceneTypeで場合分け？)
     {
         if(tabSettings == null) tabSettings = FindObjectOfType<TabSettings>();
-
-        uiManager.currentState = tabSettings.preState;
+        
+        if(uiManager.currentScene == SceneType.Title) uiManager.currentState = UIState.TitleDefault;
+        else uiManager.currentState = tabSettings.preState;
     }
 }

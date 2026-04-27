@@ -27,6 +27,8 @@ public class CharacterSelectESC : MonoBehaviour
 
     public void OnClick()
     {
+        if (uiManager.currentState == UIState.Settings) return; 
+
         Destroy(charaInfoServer);
 
         uiManager.currentScene = SceneType.Map;

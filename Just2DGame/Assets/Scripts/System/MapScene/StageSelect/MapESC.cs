@@ -36,6 +36,8 @@ public class MapESC : MonoBehaviour
        }
        else
        {
+            if(uiManager.currentState == UIState.Settings) return; 
+
             uiManager.currentScene = SceneType.Home;
             uiManager.currentState = UIState.HomeDefault;
 
