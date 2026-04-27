@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class ChainBullet : MonoBehaviour
 {
     Camera cam;
-
-    [SerializeField] PlayerStatus playerStatus;
+    SkillGage skillGage;
+    PlayerStatus playerStatus;
 
     [SerializeField] BattleESC esc;
 
@@ -64,7 +64,10 @@ public class ChainBullet : MonoBehaviour
         if (cam == null)
             Debug.LogWarning("Main Camera not found. Movement bounds will not be applied.");
 
-
+        if(skillGage == null)
+        {
+            skillGage = FindObjectOfType<SkillGage>();
+        }
         
     }
 
@@ -242,10 +245,12 @@ public class ChainBullet : MonoBehaviour
     IEnumerator CoolTimeL(float cooltime)
     {
         playerStatus.LeftCrickCTBool = true;　//クールタイムが正式に開始（Charging状態）
+        skillGage.currentState = SkillGageState.Charging; //スキルゲージの状態をChargingにする
 
         yield return new WaitForSeconds(cooltime);
 
         LeftCrickCoolTime = false;
         playerStatus.LeftCrickCTBool = false;
+        skillGage.currentState = SkillGageState.Full; //スキルゲージの状態をFullにする
     }
 }

@@ -164,7 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b9d94cdce26f74f996fa99d1657dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChainBullet
-  playerStatus: {fileID: 0}
   esc: {fileID: 0}
   prefab1: {fileID: 8750526668469978218, guid: d1cc04ae0c48a43429628d823e3f717b, type: 3}
   prefab2: {fileID: 4623724480720325466, guid: 10975e4651869074188c4a1971f50f17, type: 3}
@@ -319,7 +318,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 576155796}
-  - {fileID: 1215880667}
   - {fileID: 1215788560}
   - {fileID: 1130638201}
   m_Father: {fileID: 528650932}
@@ -539,7 +537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 528650932}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: BattleUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -975,8 +973,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillGage
   playerStatus: {fileID: 0}
-  imageFull: {fileID: 0}
-  imageCharge: {fileID: 0}
+  imageFull: {fileID: 1375405664394881140, guid: 065c4ddfa0892844cac2e9883d6888b0, type: 3}
+  imageCharge: {fileID: 8769622721420541040, guid: d47eea5119fa1fb4197e7d5a2a35bb67, type: 3}
 --- !u!114 &1130638203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1198,53 +1196,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215788559}
   m_CullTransparentMesh: 1
---- !u!1 &1215880666
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1215880667}
-  - component: {fileID: 1215880668}
-  m_Layer: 0
-  m_Name: SkillGage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1215880667
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215880666}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.65459335, y: -6.8663864, z: -4698}
-  m_LocalScale: {x: 52.2, y: 52.2, z: 52.2}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 511800621}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1215880668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215880666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0019fd6a91d2a9c4e890275b0c49fd8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillGage
-  playerStatus: {fileID: 0}
-  imageFull: {fileID: 0}
-  imageCharge: {fileID: 0}
 --- !u!1001 &1350602329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1815,7 +1766,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb60f01fb5b3ba84081738433fe2ff93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
-  charaInfoServer: {fileID: 0}
   invincibilityDuration: 1
   characterID: 0
   hp: 100

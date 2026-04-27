@@ -19,7 +19,7 @@ public class SkillGage : MonoBehaviour
     public SkillGageState currentState
     {
         get => _currentState;
-        private set
+        set
         {
             if (_currentState == value) return;
             _currentState = value;
@@ -60,7 +60,7 @@ public class SkillGage : MonoBehaviour
     {
         if (playerStatus == null) return;
 
-        // LeftCrickCTBool が true の間は Charging、false の間は Full にする
+        // クールタイム中は Charging、クールタイムでない（満了時）は Full にする
         currentState = playerStatus.LeftCrickCTBool ? SkillGageState.Charging : SkillGageState.Full;
     }
 

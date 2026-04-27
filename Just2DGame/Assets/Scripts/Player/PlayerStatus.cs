@@ -3,8 +3,9 @@ using System.Collections;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] CharaInfoServer charaInfoServer;//IDサーバーオブジェクト
-    [SerializeField] float invincibilityDuration = 1.0f; // 無敵時間（秒）
+    CharaInfoServer charaInfoServer;//IDサーバーオブジェクト
+
+    public float invincibilityDuration = 1.0f; // 無敵時間（秒）
 
     public int characterID;//キャラクターID番号
     public int hp;// プレイヤーのHP
