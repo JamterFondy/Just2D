@@ -47,8 +47,8 @@ public class ResetLevel : MonoBehaviour
             {
                 if (int.Parse(characterInfo.level) > 1)
                 {
-                    characterInfo.hp = "100";
-                    characterInfo.atk = "10";
+                    characterInfo.hp = "110";
+                    characterInfo.atk = "8";
                     characterInfo.level = "1";
                     Debug.Log("LevelUp: キャラクターレベルが1にリセットされました");
 
