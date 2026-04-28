@@ -250,7 +250,7 @@ public class ChainBullet : MonoBehaviour
         playerStatus.LeftCrickCTBool = true;　//クールタイムが正式に開始（Charging状態）
         if (skillGage != null && chargingSprite != null)
         {
-            skillGage.SetImage(chargingSprite);
+            skillGage.SetCoolTimeImage(chargingSprite, leftCrickCoolTime);
         }
 
         yield return new WaitForSeconds(cooltime);
@@ -259,7 +259,7 @@ public class ChainBullet : MonoBehaviour
         playerStatus.LeftCrickCTBool = false;
         if(skillGage != null && fullSprite != null)
         {
-            skillGage.SetImage(fullSprite);
+            skillGage.SetFullImage(fullSprite);
         }
 
     }
