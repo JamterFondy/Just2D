@@ -887,7 +887,7 @@ MonoBehaviour:
   verticalOffset: 0.8
   leftCrickCoolTime: 4
   spawnInterval: 0.5
-  repeatCount: 5
+  repeatCount: 6
   prefab2MoveDuration: 0.9
   prefab2StraightSpeed: 5
   LeftCrickCoolTime: 0

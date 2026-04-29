@@ -19,7 +19,7 @@ public class SpawnFishBullet : MonoBehaviour
     [SerializeField] float verticalOffset = 0.8f; // prefab1 の上下オフセット
     [SerializeField] float leftCrickCoolTime = 4f; // 左クリックのクールタイム
     [SerializeField] float spawnInterval = 0.5f; // interval between spawns (seconds)
-    [SerializeField] int repeatCount = 5; // number of times to spawn prefab2
+    [SerializeField] int repeatCount = 6; // number of times to spawn prefab2
     [SerializeField] float prefab2MoveDuration = 0.9f; // duration to follow ellipse
     [SerializeField] float prefab2StraightSpeed = 5f; // speed after reaching target
 
