@@ -33,6 +33,8 @@ public class ChainBullet : MonoBehaviour
     [SerializeField] float restraintDuration = 1.5f;
     [SerializeField] bool restraintDestroyBulletOnTrigger = false;
 
+    public bool canUseSkill = false; //BattleManagerによってtrueにされるのを待つ。CharacterIDに応じて使えるスキルを制限するため。
+
     Coroutine topCoroutine;
     Coroutine bottomCoroutine;
     Coroutine moveCoroutine;
@@ -47,6 +49,12 @@ public class ChainBullet : MonoBehaviour
 
     List<MovingInstance> spawnedPrefab2 = new List<MovingInstance>();
     int completedSpawnCoroutines = 0; // top/bottom 両方の生成コルーチンが終わったか判定
+
+
+    void Awake()
+    {
+        canUseSkill = false;
+    }
 
     void Start()
     {
@@ -71,12 +79,12 @@ public class ChainBullet : MonoBehaviour
         {
             skillGage = FindObjectOfType<SkillGage>().GetComponent<SkillGage>();
         }
-        
+
     }
 
     void Update()
     {
-        if (!LeftCrickCoolTime && Input.GetMouseButtonDown(0) && !esc.isPaused)
+        if (!LeftCrickCoolTime && Input.GetMouseButtonDown(0) && !esc.isPaused && canUseSkill)
         {
             LeftCrickCoolTime = true; //左クリックがされたことを確認（Using状態）
 

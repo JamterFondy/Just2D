@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class NormalBulletToggle : MonoBehaviour
 {
-    [Tooltip("参照するプレイヤーの NormalBullet コンポーネント。未設定なら自動で FindObjectOfType します。")]
-    [SerializeField] NormalBullet normalBullet;
+    [Tooltip("参照するプレイヤーの Chara1NormalBullet コンポーネント。未設定なら自動で FindObjectOfType します。")]
+    [SerializeField] Chara1NormalBullet chara1NormalBullet;
 
     [Tooltip("切り替える対象の UI Image。未設定ならこの GameObject の Image を使います。")]
     [SerializeField] Image targetImage;
@@ -19,31 +19,31 @@ public class NormalBulletToggle : MonoBehaviour
 
     void Start()
     {
-        if (normalBullet == null)
-            normalBullet = FindObjectOfType<NormalBullet>();
+        if (chara1NormalBullet == null)
+            chara1NormalBullet = FindObjectOfType<Chara1NormalBullet>();
 
         if (targetImage == null)
             targetImage = GetComponent<Image>();
 
-        if (normalBullet == null)
-            Debug.LogWarning("NormalBullet が見つかりません。NormalBulletToggle は機能しません。");
+        if (chara1NormalBullet == null)
+            Debug.LogWarning("Chara1NormalBullet が見つかりません。NormalBulletToggle は機能しません。");
 
         if (targetImage == null)
             Debug.LogWarning("Image コンポーネントが見つかりません。NormalBulletToggle を UI Image にアタッチするか、targetImage を設定してください。");
 
         // 初期表示を強制更新
-        if (normalBullet != null && targetImage != null)
+        if (chara1NormalBullet != null && targetImage != null)
         {
-            lastState = !normalBullet.SpaceToggle; // 強制的に Update で差し替えさせる
+            lastState = !chara1NormalBullet.SpaceToggle; // 強制的に Update で差し替えさせる
         }
     }
 
     void Update()
     {
-        if (normalBullet == null || targetImage == null)
+        if (chara1NormalBullet == null || targetImage == null)
             return;
 
-        bool current = normalBullet.SpaceToggle;
+        bool current = chara1NormalBullet.SpaceToggle;
         if (current == lastState)
             return;
 

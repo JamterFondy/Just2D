@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class NormalBullet : MonoBehaviour
+public class Chara1NormalBullet : MonoBehaviour
 {
     [SerializeField] GameObject normalBullet; // 通常弾
     [SerializeField] BattleESC esc;
@@ -9,8 +9,14 @@ public class NormalBullet : MonoBehaviour
 
     public bool SpaceToggle = false; // スペースキーでのトグルフラグ
 
+    public bool canUseSkill = false; //BattleManagerによってtrueにされるのを待つ。CharacterIDに応じて使えるスキルを制限するため。
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    void Awake()
+    {
+        canUseSkill = false;
+    }
+   
     void Start()
     {
         esc = FindObjectOfType<BattleESC>();
@@ -21,7 +27,7 @@ public class NormalBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !esc.isPaused)
+        if (Input.GetKeyDown(KeyCode.Space) && !esc.isPaused && canUseSkill)
         {
             SpaceToggle = !SpaceToggle;
         }

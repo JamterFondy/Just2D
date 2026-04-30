@@ -180,6 +180,7 @@ MonoBehaviour:
   prefab2RotationOffset: 0
   restraintDuration: 1.5
   restraintDestroyBulletOnTrigger: 0
+  canUseSkill: 0
   LeftCrickCoolTime: 0
 --- !u!114 &295867569
 MonoBehaviour:
@@ -197,6 +198,7 @@ MonoBehaviour:
   esc: {fileID: 0}
   bulletSpeed: 30
   SpaceToggle: 0
+  canUseSkill: 0
 --- !u!1 &404351736
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a12cf061a6bd549856f76f1831500f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalBulletToggle
-  normalBullet: {fileID: 0}
+  chara1NormalBullet: {fileID: 0}
   targetImage: {fileID: 0}
   normalOnSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   normalOffSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
@@ -810,8 +812,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 675134449}
+  - component: {fileID: 675134450}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: BattleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,6 +837,18 @@ Transform:
   - {fileID: 434449521}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &675134450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675134448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835fecb7f7a056f49ab330a5744aefa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleManager
 --- !u!1 &1007822212
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +907,7 @@ MonoBehaviour:
   prefab2MoveDuration: 0.9
   prefab2StraightSpeed: 5
   LeftCrickCoolTime: 0
+  canUseSkill: 0
 --- !u!114 &1007822215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,6 +927,7 @@ MonoBehaviour:
   speed: 7
   sinAmplitude: 1
   sinFrequency: 4
+  canUseSkill: 0
 --- !u!1 &1071950756
 GameObject:
   m_ObjectHideFlags: 0

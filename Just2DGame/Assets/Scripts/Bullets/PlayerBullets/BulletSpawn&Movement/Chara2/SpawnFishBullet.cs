@@ -25,7 +25,15 @@ public class SpawnFishBullet : MonoBehaviour
 
     public bool LeftCrickCoolTime = false;
 
+    public bool canUseSkill = false; //BattleManagerによってtrueにされるのを待つ。CharacterIDに応じて使えるスキルを制限するため。
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    void Awake()
+    {
+        canUseSkill = false;
+    }
+
     void Start()
     {
         if (playerStatus == null)
@@ -49,12 +57,13 @@ public class SpawnFishBullet : MonoBehaviour
         {
             skillGage = FindObjectOfType<SkillGage>().GetComponent<SkillGage>();
         }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!LeftCrickCoolTime && Input.GetMouseButtonDown(1) && !esc.isPaused)
+        if (!LeftCrickCoolTime && Input.GetMouseButtonDown(0) && !esc.isPaused && canUseSkill)
         {
             LeftCrickCoolTime = true;
 
@@ -182,14 +191,28 @@ public class SpawnFishBullet : MonoBehaviour
         if (topObj != null) Destroy(topObj);
         if (bottomObj != null) Destroy(bottomObj);
 
-        // reset cooldown after leftCrickCoolTime seconds (use configured value)
-        // Optionally could start cooldown timer; here we wait leftCrickCoolTime then reset
-        float ct = 0f;
-        while (ct < leftCrickCoolTime)
+        
+        StartCoroutine(CoolTimeL(leftCrickCoolTime));
+
+    }
+
+
+    IEnumerator CoolTimeL(float cooltime)
+    {
+        playerStatus.LeftCrickCTBool = true;　//クールタイムが正式に開始（Charging状態）
+        if (skillGage != null && chargingSprite != null)
         {
-            ct += Time.deltaTime;
-            yield return null;
+            skillGage.SetCoolTimeImage(chargingSprite, leftCrickCoolTime);
         }
+
+        yield return new WaitForSeconds(cooltime);
+
         LeftCrickCoolTime = false;
+        playerStatus.LeftCrickCTBool = false;
+        if (skillGage != null && fullSprite != null)
+        {
+            skillGage.SetFullImage(fullSprite);
+        }
+
     }
 }

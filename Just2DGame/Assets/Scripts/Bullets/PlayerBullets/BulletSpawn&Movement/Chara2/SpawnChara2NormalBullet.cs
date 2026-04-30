@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SpawnChara2NormalBullet : MonoBehaviour
 {
+    BattleESC esc;
+
     [Header("Spawn Settings")]
     [SerializeField] GameObject prefab;
     [SerializeField] float spawnInterval = 0.5f;
@@ -15,12 +17,21 @@ public class SpawnChara2NormalBullet : MonoBehaviour
     [SerializeField] float sinFrequency = 4f; // radians per second
 
     bool spawnToggle = false; // toggled by V key
+    public bool canUseSkill = false; //BattleManagerによってtrueにされるのを待つ。CharacterIDに応じて使えるスキルを制限するため。
+
     Coroutine spawnCoroutine;
+
+    void Start()
+    {
+        spawnToggle = false;
+
+        esc = FindObjectOfType<BattleESC>();
+    }
 
     void Update()
     {
-        // Toggle spawning with C key
-        if (Input.GetKeyDown(KeyCode.C))
+        // Toggle spawning with Space key
+        if (Input.GetKeyDown(KeyCode.Space) && !esc.isPaused && canUseSkill)
         {
             spawnToggle = !spawnToggle;
             if (spawnToggle)
