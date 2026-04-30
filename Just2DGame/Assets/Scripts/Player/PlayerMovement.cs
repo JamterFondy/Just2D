@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
     Camera cam;
 
     public bool IsPlayerMoving = false; // プレイヤーが移動中かどうかのフラグ
-   
+    public bool CanMove = false; // プレイヤーが移動できるかどうかのフラグ
+
 
     void Start()
     {
@@ -24,10 +25,13 @@ public class PlayerMovement : MonoBehaviour
         if (cam == null)
             Debug.LogWarning("Main Camera not found. Movement bounds will not be applied.");
 
+
+        CanMove = false;
     }
 
     void Update()
     {
+        if (!CanMove) return;
 
         // 入力（W/A/S/D）
         Vector2 input = Vector2.zero;

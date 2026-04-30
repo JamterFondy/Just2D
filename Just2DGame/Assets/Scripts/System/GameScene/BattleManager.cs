@@ -6,6 +6,7 @@ public class BattleManager : MonoBehaviour
     CharaInfoServer charaInfoServer;
 
     GameObject player;
+    PlayerMovement playerMovement;
 
     //Character1
     GameObject chara1Bullets;
@@ -28,6 +29,7 @@ public class BattleManager : MonoBehaviour
         CharacterID = charaInfoServer.ID;
 
         player = GameObject.Find("Player");
+        playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -74,6 +76,9 @@ public class BattleManager : MonoBehaviour
             chara2NormalBullet.canUseSkill = true;
             chara2SkillBullet.canUseSkill = true;
         }
+
+
+        playerMovement.CanMove = true; // プレイヤーの移動を許可
 
         yield break;
     }

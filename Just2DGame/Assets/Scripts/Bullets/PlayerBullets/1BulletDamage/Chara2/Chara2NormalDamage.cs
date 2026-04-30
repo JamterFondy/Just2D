@@ -14,7 +14,7 @@ public class Chara2NormalDamage : MonoBehaviour
 
         atk = playerStatus.atk;
 
-        if((int)(atk * 0.05f) < 1)
+        if(atk * 0.05f <= 1)
         {
             damage = 1;
         }

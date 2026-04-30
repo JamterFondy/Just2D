@@ -1850,6 +1850,7 @@ MonoBehaviour:
   esc: {fileID: 0}
   speed: 6
   IsPlayerMoving: 0
+  CanMove: 0
 --- !u!114 &2008753832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1864,7 +1865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
   invincibilityDuration: 1
   characterID: 0
-  hp: 100
+  hp: 0
   atk: 0
   Invincible: 0
   leftCrickCT: 0

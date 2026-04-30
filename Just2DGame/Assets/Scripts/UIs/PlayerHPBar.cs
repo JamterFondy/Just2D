@@ -8,7 +8,7 @@ public class PlayerHPBar : MonoBehaviour
     [SerializeField] RectTransform fillRect;  // Image を使わない場合に幅で縮める子 RectTransform（任意）
     [SerializeField] bool debugLogs = false;
 
-    int maxHp;
+    public int maxHp;
     bool useFillAmount = false;
     float originalFillRectWidth = 0f;
 
@@ -67,7 +67,7 @@ public class PlayerHPBar : MonoBehaviour
             }
         }
 
-        maxHp = Mathf.Max(1, playerStatus.hp);
+        maxHp = playerStatus.hp;
         if (useFillAmount)
             image.fillAmount = 1f;
         else
@@ -80,7 +80,7 @@ public class PlayerHPBar : MonoBehaviour
         if (playerStatus == null) return;
 
         float currentHp = playerStatus.hp;
-        float ratio = Mathf.Clamp01(currentHp / (float)maxHp);
+        float ratio = Mathf.Clamp01(currentHp / maxHp);
 
         if (useFillAmount)
         {

@@ -21,7 +21,7 @@ public class PlayerStatus : MonoBehaviour
     Coroutine invincibillty;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         charaInfoServer = GameObject.Find("CharaInfoServer").GetComponent<CharaInfoServer>();
 
@@ -30,11 +30,7 @@ public class PlayerStatus : MonoBehaviour
         atk = charaInfoServer.ATK;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void ApplyDamage(int amount)
     {
