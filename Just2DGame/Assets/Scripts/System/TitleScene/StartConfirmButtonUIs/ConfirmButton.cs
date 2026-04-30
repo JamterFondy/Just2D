@@ -90,8 +90,8 @@ public class ConfirmButton : MonoBehaviour
 
         if (loadingManager != null)
         {
-            uiManager.currentScene = SceneType.Home;
-            uiManager.currentState = UIState.HomeDefault;
+            uiManager.currentScene = SceneType.Loading;
+            uiManager.currentState = UIState.Loading;
 
             loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
         }

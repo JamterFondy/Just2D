@@ -43,8 +43,8 @@ public class CharaTrainingESC : MonoBehaviour
         {
             if(uiManager.currentState == UIState.Settings) return;
 
-            uiManager.currentScene = SceneType.Home;
-            uiManager.currentState = UIState.HomeDefault;
+            uiManager.currentScene = SceneType.Loading;
+            uiManager.currentState = UIState.Loading;
 
             loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
         }

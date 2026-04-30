@@ -16,6 +16,7 @@ public enum UIState
 {
     //全シーン共通の状態
     Settings,
+    Loading,
 
     //タイトル画面の状態
     TitleDefault,
@@ -80,16 +81,38 @@ public class UIManager : MonoBehaviour
         currentState = UIState.TitleDefault; // 初期状態をタイトル画面のデフォルトに設定
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void LoadSceneRecive(string sceneName)
     {
-        
-    }
+        if(sceneName == "TitleScene")
+        {
+            currentScene = SceneType.Title;
+            currentState = UIState.TitleDefault;
+        }
+        else if (sceneName == "HomeScene")
+        {
+            currentScene = SceneType.Home;
+            currentState = UIState.HomeDefault;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-
+        }
+        else if (sceneName == "CharacterTrainingScene")
+        {
+            currentScene = SceneType.CharacterTraining;
+            currentState = UIState.CharaTrainingDefault;
+        }
+        else if (sceneName == "MapScene")
+        {
+            currentScene = SceneType.Map;
+            currentState = UIState.StageMapDefault;
+        }
+        else if (sceneName == "CharacterSelectScene")
+        {
+            currentScene = SceneType.CharacterSelect;
+            currentState = UIState.CharaSelectDefault;
+        }
+        else if (sceneName == "BattleScene")
+        {
+            currentScene = SceneType.Battle;
+            currentState = UIState.InBattle;
+        }
     }
 }

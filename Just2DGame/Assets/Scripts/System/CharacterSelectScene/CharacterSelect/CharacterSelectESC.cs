@@ -31,8 +31,8 @@ public class CharacterSelectESC : MonoBehaviour
 
         Destroy(charaInfoServer);
 
-        uiManager.currentScene = SceneType.Map;
-        uiManager.currentState = UIState.StageInfo;
+        uiManager.currentScene = SceneType.Loading;
+        uiManager.currentState = UIState.Loading;
 
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));

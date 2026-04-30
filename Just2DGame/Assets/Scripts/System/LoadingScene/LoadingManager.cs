@@ -4,12 +4,15 @@ using System.Collections;
 
 public class LoadingManager : MonoBehaviour
 {
+    UIManager uiManager;
+
     public float loadTimeout = 30f; // seconds to wait before considering load failed
 
     void Start()
     {
         // Persist the GameObject so the loading coroutine survives scene changes
         DontDestroyOnLoad(gameObject);
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     // LoadingScene を先に読み込んでから target を読み込む例
@@ -121,6 +124,12 @@ public class LoadingManager : MonoBehaviour
         Scene newlyLoaded = SceneManager.GetSceneByName(targetSceneName);
         if (newlyLoaded.IsValid())
             SceneManager.SetActiveScene(newlyLoaded);
+
+        string newSceneName = targetSceneName;
+        if (uiManager != null)
+        {
+            uiManager.LoadSceneRecive(targetSceneName);
+        }
 
         // 8) Loading シーンをアンロード（存在するか確認してから実行）
         if (loadingScene.IsValid() && loadingScene.isLoaded)

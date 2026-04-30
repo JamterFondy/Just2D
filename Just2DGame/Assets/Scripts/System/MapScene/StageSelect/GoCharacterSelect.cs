@@ -16,8 +16,8 @@ public class GoCharacterSelect : MonoBehaviour
 
     public void OnClick()
     {
-        uiManager.currentScene = SceneType.CharacterSelect;
-        uiManager.currentState = UIState.CharaSelectDefault;
+        uiManager.currentScene = SceneType.Loading;
+        uiManager.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "CharacterSelectScene"));
     }

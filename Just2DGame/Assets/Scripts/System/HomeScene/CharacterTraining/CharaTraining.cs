@@ -53,8 +53,8 @@ public class CharaTraining : MonoBehaviour
 
     public void OnClick()
     {
-        uiManager.currentScene = SceneType.CharacterTraining;
-        uiManager.currentState = UIState.CharaTrainingDefault;
+        uiManager.currentScene = SceneType.Loading;
+        uiManager.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "CharacterTrainingScene"));
     }

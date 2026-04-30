@@ -39,8 +39,8 @@ public class StartBattle : MonoBehaviour
 
         charaInfoServer.GetComponent<CharaInfoServer>().SetCharacterInfo();
 
-        uiManager.currentScene = SceneType.Battle;
-        uiManager.currentState = UIState.InBattle;
+        uiManager.currentScene = SceneType.Loading;
+        uiManager.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "GameScene"));
     }
