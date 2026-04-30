@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8041253915870145594}
   - component: {fileID: 2495993325980218257}
   - component: {fileID: -2128017904502224332}
+  - component: {fileID: -8430618849221180444}
   m_Layer: 3
   m_Name: Chara2NormalBullet
   m_TagString: Bullet
@@ -127,3 +128,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &-8430618849221180444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3116980802676700644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b065bf8fd3f05d41bc042388816708d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chara2NormalDamage
+  playerStatus: {fileID: 0}
+  atk: 0
+  damage: 0
