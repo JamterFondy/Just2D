@@ -174,6 +174,8 @@ public class ChainBullet : MonoBehaviour
             {
                 Vector3 pos = start + dir * nextDist;
                 pos.z = start.z;
+                // Shift prefab2 forward in Z to avoid overlapping with final prefab
+                pos.z += 0.15f;
 
                 Vector3 toTarget = end - pos;
                 float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;

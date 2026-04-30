@@ -844,6 +844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1007822213}
   - component: {fileID: 1007822214}
+  - component: {fileID: 1007822215}
   m_Layer: 0
   m_Name: Chara2Bullets
   m_TagString: Untagged
@@ -891,6 +892,25 @@ MonoBehaviour:
   prefab2MoveDuration: 0.9
   prefab2StraightSpeed: 5
   LeftCrickCoolTime: 0
+--- !u!114 &1007822215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007822212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afd6862d04591944a823dd63142387b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnChara2NormalBullet
+  prefab: {fileID: 3116980802676700644, guid: 523377ba88b6e7c459b7c69c92733c87, type: 3}
+  spawnInterval: 0.5
+  spawnXOffset: 0.5
+  spawnYOffset: 0.3
+  speed: 7
+  sinAmplitude: 1
+  sinFrequency: 4
 --- !u!1 &1071950756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,7 +1292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4580181700187251296, guid: 2a44474204eb8b24f89c4828861f4622, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4580181700187251296, guid: 2a44474204eb8b24f89c4828861f4622, type: 3}
       propertyPath: m_LocalRotation.w
