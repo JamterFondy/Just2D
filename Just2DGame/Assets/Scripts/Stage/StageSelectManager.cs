@@ -9,7 +9,7 @@ public class StageSelectManager : MonoBehaviour
     // Replace the content of layout.JSON under Assets/Scripts/Stage with the file named layout_{stageNum}.* (json)
     public void DetermineStageLayout()
     {
-        string stageFolder = Path.Combine(Application.dataPath, "Resources", "StageLayouts"); //ToDo stageFolderはResourcesフォルダ内に入れるべきかもしれないが、現状はこのまま
+        string stageFolder = Path.Combine(Application.dataPath, "Resources", "StageLayouts"); 
         if (!Directory.Exists(stageFolder))
         {
             Debug.LogWarning($"StageSelectManager: stage folder not found: {stageFolder}");
