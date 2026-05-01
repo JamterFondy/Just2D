@@ -109,7 +109,7 @@ public class UIManager : MonoBehaviour
             currentScene = SceneType.CharacterSelect;
             currentState = UIState.CharaSelectDefault;
         }
-        else if (sceneName == "BattleScene")
+        else if (sceneName == "GameScene")
         {
             currentScene = SceneType.Battle;
             currentState = UIState.InBattle;
