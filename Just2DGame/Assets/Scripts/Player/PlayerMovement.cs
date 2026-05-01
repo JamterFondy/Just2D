@@ -31,7 +31,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!CanMove) return;
+        if (!CanMove)
+        {
+            transform.position += new Vector3(2.2f, 0f, 0f) * Time.deltaTime; // 強制的に右に移動させる。画面外から入ってくる演出。
+
+            return;
+        }
 
         // 入力（W/A/S/D）
         Vector2 input = Vector2.zero;

@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerStatus : MonoBehaviour
 {
     CharaInfoServer charaInfoServer;//IDサーバーオブジェクト
+    BattleFinish battleFinish;//バトル終了オブジェクト
 
     public float invincibilityDuration = 1.0f; // 無敵時間（秒）
 
@@ -24,6 +25,7 @@ public class PlayerStatus : MonoBehaviour
     void Awake()
     {
         charaInfoServer = GameObject.Find("CharaInfoServer").GetComponent<CharaInfoServer>();
+        battleFinish = GameObject.Find("BattleFinish").GetComponent<BattleFinish>();
 
         characterID = charaInfoServer.ID;
         hp = charaInfoServer.HP;
@@ -45,6 +47,9 @@ public class PlayerStatus : MonoBehaviour
     {
         // 簡易的な処理例
         Debug.Log($"You died.");
+
+        battleFinish.MoveToMapAfterDelay();
+
         Destroy(gameObject);
     }
 
