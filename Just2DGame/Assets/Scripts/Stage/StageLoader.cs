@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using UnityEngine;
 
 public class StageLoader : MonoBehaviour
@@ -7,7 +8,6 @@ public class StageLoader : MonoBehaviour
 
     public GameObject collarZakoSpeedPrefab;
     public GameObject collarBossPrefab;
-    public GameObject spikePrefab;
 
     [System.Serializable]
     public class EnemyLayoutEntry
@@ -46,7 +46,8 @@ public class StageLoader : MonoBehaviour
 
     void LoadLayout()
     {
-        var layout = JsonUtility.FromJson<StageLayout>(stageData.layoutJson.text);
+        TextAsset jsonFile = Resources.Load<TextAsset>("StageLayouts/layout");
+        var layout = JsonUtility.FromJson<StageLayout>(jsonFile.text);
 
         if (layout == null || layout.enemies == null || layout.enemies.Length == 0)
         {
@@ -61,7 +62,8 @@ public class StageLoader : MonoBehaviour
     // Orchestrator: spawn all entries with given InsNum, then proceed to next InsNum if any
     IEnumerator SpawnEnemySequence(StageLayout layout, int insNum)
     {
-        // find entries for this insNum
+        Debug.Log("シークエンス開始");
+
         var entries = new System.Collections.Generic.List<EnemyLayoutEntry>();
         foreach (var e in layout.enemies)
         {
@@ -129,13 +131,14 @@ public class StageLoader : MonoBehaviour
     // Coroutine to spawn enemies for a single layout entry
     IEnumerator SpawnEnemyByNumber(EnemyLayoutEntry entry)
     {
+        Debug.Log($"スポーン開始: {entry.Type}、位置: ({entry.x}, {entry.y})、開始遅延: {entry.StartDelay}, スポーン数: {entry.SpawnNum}, スポーン間隔: {entry.SpawnSpan}");
+
         if (entry == null) yield break;
 
         // determine prefab by Type
         GameObject prefab = null;
         if (entry.Type == "CollarZakoSpeed") prefab = collarZakoSpeedPrefab;
         else if (entry.Type == "CollarBoss") prefab = collarBossPrefab;
-        else if (entry.Type == "Spike") prefab = spikePrefab;
         else
         {
             Debug.LogWarning($"StageLoader: Unknown enemy Type '{entry.Type}'");

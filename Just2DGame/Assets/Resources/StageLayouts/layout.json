@@ -1,0 +1,7 @@
+{
+  "enemies": [
+    { "Type": "CollarZakoSpeed", "InsNum": 1, "x": 8, "y": 3, "SpawnNum": 5, "SpawnSpan": 0.5, "StartDelay": 8},
+    { "Type": "CollarZakoSpeed", "InsNum": 2, "x": 8, "y": -3, "SpawnNum": 5, "SpawnSpan": 0.5, "StartDely": 3 },
+    { "Type": "CollarBoss", "InsNum": 3, "x": 6, "y": 0, "SpawnNum": 1, "SpawnSpan": 1, "StartDelay": 5}
+  ]
+}
