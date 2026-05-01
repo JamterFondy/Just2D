@@ -115,13 +115,40 @@ public class ZakoSpeedAll : MonoBehaviour
         else if (collision.CompareTag("Bullet"))
         {
             int damage = 0;
-            // ChainDamageなど、弾の種類ごとにダメージを取得
+
+            //弾側で計算したダメージを取得するためのコンポーネントを取得
+            //Chara1
+            var chara1NormalDamage = collision.GetComponent<NormalDamage>();
             var chainDamage = collision.GetComponent<ChainDamage>();
-            if (chainDamage != null)
+            var lastChainDamage = collision.GetComponent<LastChainDamage>();
+
+            //Chara2
+            var chara2NormalDamage = collision.GetComponent<Chara2NormalDamage>();
+            var fishDamage = collision.GetComponent<FishDamage>();
+
+            //弾の種類に応じたダメージの取得
+
+            if (chara1NormalDamage != null)//ここからChara1の弾のダメージ判定
+            {
+                damage = chara1NormalDamage.GetDamage();
+            }
+            else if (chainDamage != null)
             {
                 damage = chainDamage.GetDamage();
             }
-            // 他の弾種も同様にGetDamage()を持たせておけば拡張可能
+            else if (lastChainDamage != null)
+            {
+                damage = lastChainDamage.GetDamage();
+            }
+            else if (chara2NormalDamage != null) //ここからChara2の弾のダメージ判定
+            {
+                damage = chara2NormalDamage.GetDamage();
+            }
+            else if (fishDamage != null)
+            {
+                damage = fishDamage.GetDamage();
+            }
+
 
             if (damage > 0)
             {
@@ -129,6 +156,7 @@ public class ZakoSpeedAll : MonoBehaviour
             }
         }
     }
+    
 
     public void ApplyDamage(int damage)
     {

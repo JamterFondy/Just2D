@@ -7,7 +7,7 @@ public class EBCZakoSpeedDamage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        zakoSpeedAll = GameObject.Find("COLLARZakoSpeed").GetComponent<ZakoSpeedAll>();
+        zakoSpeedAll = GameObject.Find("COLLARZakoSpeed(Clone)").GetComponent<ZakoSpeedAll>(); //ToDo 同時に複数のZakoSpeedAllがでるため、攻撃量が変動する場合はこれはよくない。
     }
 
     // Update is called once per frame
