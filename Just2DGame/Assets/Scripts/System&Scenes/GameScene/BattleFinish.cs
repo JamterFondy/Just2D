@@ -9,6 +9,8 @@ public class BattleFinish : MonoBehaviour
 
     UIManager uiManager;
 
+    int BossDiedCount = 0;
+
     static BattleFinish _instance;
     public static BattleFinish Instance
     {
@@ -34,8 +36,15 @@ public class BattleFinish : MonoBehaviour
         charaInfoServer = GameObject.Find("CharaInfoServer");
         loadingManager = FindAnyObjectByType<LoadingManager>();
 
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
     }
+
+    public void CountBossDied()
+    {
+        BossDiedCount ++;
+
+    }
+
 
     public void MoveToMapAfterDelay()
     {

@@ -10,7 +10,7 @@ public class SkillGage : MonoBehaviour
     {
         if (playerStatus == null)
         {
-            playerStatus = FindObjectOfType<PlayerStatus>();
+            playerStatus = FindAnyObjectByType<PlayerStatus>();
             if (playerStatus == null)
             {
                 Debug.LogWarning("PlayerStatus ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñBSkillGage ‚Í“®ì‚µ‚Ü‚¹‚ñB");

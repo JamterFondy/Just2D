@@ -38,7 +38,7 @@ public class SpawnFishBullet : MonoBehaviour
     {
         if (playerStatus == null)
         {
-            playerStatus = FindObjectOfType<PlayerStatus>();
+            playerStatus = FindAnyObjectByType<PlayerStatus>();
         }
 
         playerStatus.leftCrickCT = leftCrickCoolTime;
@@ -46,7 +46,7 @@ public class SpawnFishBullet : MonoBehaviour
 
         if (esc == null)
         {
-            esc = FindObjectOfType<BattleESC>();
+            esc = FindAnyObjectByType<BattleESC>();
         }
 
         cam = Camera.main;
@@ -55,7 +55,7 @@ public class SpawnFishBullet : MonoBehaviour
 
         if (skillGage == null)
         {
-            skillGage = FindObjectOfType<SkillGage>().GetComponent<SkillGage>();
+            skillGage = FindAnyObjectByType<SkillGage>().GetComponent<SkillGage>();
         }
 
     }

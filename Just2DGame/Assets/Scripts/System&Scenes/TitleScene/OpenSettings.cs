@@ -10,7 +10,7 @@ public class OpenSettings : MonoBehaviour
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
         if (uiManager != null)
         {
             uiManager.StateChanged += OnStateChanged;
@@ -25,7 +25,7 @@ public class OpenSettings : MonoBehaviour
 
     void Start()
     {
-        buttonSE = FindObjectOfType<ButtonSE>();
+        buttonSE = FindAnyObjectByType<ButtonSE>();
     }
 
     void OnDestroy()

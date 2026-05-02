@@ -11,9 +11,21 @@ public class BGManager : MonoBehaviour
 
     public AudioSource audioSource;
 
+    public static BGManager Instance { get; private set; }
     void Awake()
     {
-         uiManager = FindObjectOfType<UIManager>();
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+
+        uiManager = FindAnyObjectByType<UIManager>();
          if (uiManager != null)
          {
              uiManager.SceneChanged += OnSceneChanged;
@@ -27,7 +39,6 @@ public class BGManager : MonoBehaviour
     
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         audioSource = GetComponent<AudioSource>();
 
         audioSource.clip = Resources.Load<AudioClip>("Audio/TitleBGM");
@@ -73,6 +84,21 @@ public class BGManager : MonoBehaviour
         else
         {
             audioSource.Stop();
+        }
+    }
+
+
+    public void PlayBattleBGM(String battleBGMName)
+    {
+        audioSource.clip = Resources.Load<AudioClip>($"Audio/{battleBGMName}");
+        if (audioSource.clip != null)
+        {
+            Debug.Log("曲はいただいたぜ");
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning($"BGManager: Battle BGM '{battleBGMName}' not found.");
         }
     }
 

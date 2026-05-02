@@ -10,9 +10,9 @@ public class GoCharacterSelect : MonoBehaviour
 
     void Start()
     {
-        loadingManager = FindObjectOfType<LoadingManager>();
-        uiManager = FindObjectOfType<UIManager>();
-        stageSelectManager = FindObjectOfType<StageSelectManager>();
+        loadingManager = FindAnyObjectByType<LoadingManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
+        stageSelectManager = FindAnyObjectByType<StageSelectManager>();
     }
 
 

@@ -25,7 +25,7 @@ public class BattleManager : MonoBehaviour
 
     void Awake()
     {
-        charaInfoServer = FindObjectOfType<CharaInfoServer>();
+        charaInfoServer = FindAnyObjectByType<CharaInfoServer>();
         CharacterID = charaInfoServer.ID;
 
         player = GameObject.Find("Player");

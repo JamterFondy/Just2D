@@ -15,8 +15,8 @@ public class StartBattle : MonoBehaviour
 
     void Start()
     {
-        loadingManager = FindObjectOfType<LoadingManager>();
-        uiManager = FindObjectOfType<UIManager>();
+        loadingManager = FindAnyObjectByType<LoadingManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
 
         if (PlayerPrefs.HasKey("GoBattleCharacterID")) serveID = PlayerPrefs.GetInt("GoBattleCharacterID");
     }

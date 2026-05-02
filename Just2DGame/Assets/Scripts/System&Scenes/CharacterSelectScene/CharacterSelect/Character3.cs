@@ -18,7 +18,7 @@ public class Character3 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             selectCharacter = GetComponentInParent<SelectCharacter>();
             if (selectCharacter == null)
             {
-                selectCharacter = FindObjectOfType<SelectCharacter>();
+                selectCharacter = FindAnyObjectByType<SelectCharacter>();
             }
         }
     }

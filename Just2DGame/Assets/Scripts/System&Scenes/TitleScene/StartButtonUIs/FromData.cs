@@ -10,9 +10,9 @@ public class FromData : MonoBehaviour
 
     void Start()
     {
-        loadingManager = FindObjectOfType<LoadingManager>();
-        uiManager = FindObjectOfType<UIManager>();
-        buttonSE = FindObjectOfType<ButtonSE>();
+        loadingManager = FindAnyObjectByType<LoadingManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
+        buttonSE = FindAnyObjectByType<ButtonSE>();
     }
 
 

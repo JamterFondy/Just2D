@@ -19,7 +19,7 @@ public class Chara1NormalBullet : MonoBehaviour
    
     void Start()
     {
-        esc = FindObjectOfType<BattleESC>();
+        esc = FindAnyObjectByType<BattleESC>();
 
         StartCoroutine(SpawnNormalBullet());
     }

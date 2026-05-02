@@ -21,7 +21,7 @@ public class Chara1Choose : MonoBehaviour
 
     void Awake()
     {
-        characterInfo = FindObjectOfType<CharacterInfo>();
+        characterInfo = FindAnyObjectByType<CharacterInfo>();
         if(characterInfo == null)
         {
             Debug.LogWarning("CharacterInfo not found. Character information won't be displayed.");
@@ -29,7 +29,7 @@ public class Chara1Choose : MonoBehaviour
 
 
         if (target == null) target = this.gameObject;
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
         if (uiManager != null)
         {
             uiManager.StateChanged += OnStateChanged;

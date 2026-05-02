@@ -15,7 +15,7 @@ public class GoToBattleMap : MonoBehaviour
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
         if (uiManager != null)
         {
             uiManager.StateChanged += OnStateChanged;
@@ -31,7 +31,7 @@ public class GoToBattleMap : MonoBehaviour
     {
         if (loadingManager == null)
         {
-            loadingManager = FindObjectOfType<LoadingManager>();
+            loadingManager = FindAnyObjectByType<LoadingManager>();
             if (loadingManager == null)
             {
                 Debug.LogError("LoadingManager not found. Please assign it in the inspector.");

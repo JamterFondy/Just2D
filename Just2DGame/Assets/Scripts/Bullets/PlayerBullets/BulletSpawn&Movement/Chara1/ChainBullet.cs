@@ -61,7 +61,7 @@ public class ChainBullet : MonoBehaviour
     {
         if (playerStatus == null)
         {
-            playerStatus = FindObjectOfType<PlayerStatus>();
+            playerStatus = FindAnyObjectByType<PlayerStatus>();
         }
         
         playerStatus.leftCrickCT = leftCrickCoolTime;
@@ -69,7 +69,7 @@ public class ChainBullet : MonoBehaviour
 
         if (esc == null)
         {
-            esc = FindObjectOfType<BattleESC>();
+            esc = FindAnyObjectByType<BattleESC>();
         }
 
         cam = Camera.main;
@@ -78,14 +78,14 @@ public class ChainBullet : MonoBehaviour
 
         if(skillGage == null)
         {
-            skillGage = FindObjectOfType<SkillGage>().GetComponent<SkillGage>();
+            skillGage = FindAnyObjectByType<SkillGage>().GetComponent<SkillGage>();
         }
 
         // Try to find SkillSE in several ways (persistent object may be in DontDestroyOnLoad scene)
         if (skillSE == null)
         {
             // 1) Try simple FindObjectOfType (works if object is active)
-            skillSE = Object.FindObjectOfType<SkillSE>();
+            skillSE = Object.FindAnyObjectByType<SkillSE>();
         }
 
         if (skillSE == null)

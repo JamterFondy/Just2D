@@ -8,8 +8,8 @@ public class TabSettings : MonoBehaviour
 
     void Start()
     {
-        uiManager = FindObjectOfType<UIManager>();
-        buttonSE = FindObjectOfType<ButtonSE>();
+        uiManager = FindAnyObjectByType<UIManager>();
+        buttonSE = FindAnyObjectByType<ButtonSE>();
     }
 
     public void OnClick()

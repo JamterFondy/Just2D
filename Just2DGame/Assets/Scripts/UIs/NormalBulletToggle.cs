@@ -20,7 +20,7 @@ public class NormalBulletToggle : MonoBehaviour
     void Start()
     {
         if (chara1NormalBullet == null)
-            chara1NormalBullet = FindObjectOfType<Chara1NormalBullet>();
+            chara1NormalBullet = FindAnyObjectByType<Chara1NormalBullet>();
 
         if (targetImage == null)
             targetImage = GetComponent<Image>();

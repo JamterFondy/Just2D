@@ -9,8 +9,8 @@ public class CancelButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        uiManager = FindObjectOfType<UIManager>();
-        buttonSE = FindObjectOfType<ButtonSE>();
+        uiManager = FindAnyObjectByType<UIManager>();
+        buttonSE = FindAnyObjectByType<ButtonSE>();
     }
 
     // Update is called once per frame

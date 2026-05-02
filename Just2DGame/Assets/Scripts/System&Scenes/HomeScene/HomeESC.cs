@@ -6,7 +6,7 @@ public class HomeESC : MonoBehaviour
 
     void Start()
     {
-        _uiManager = FindObjectOfType<UIManager>();
+        _uiManager = FindAnyObjectByType<UIManager>();
         if (_uiManager == null)
         {
             Debug.LogWarning("UIManager ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñBHomeESC ‚Í“®ì‚µ‚Ü‚¹‚ñB");

@@ -11,9 +11,9 @@ public class CharacterSelectESC : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        loadingManager = FindObjectOfType<LoadingManager>();
-        charaInfoServer = FindObjectOfType<CharaInfoServer>().gameObject;
-        uiManager = FindObjectOfType<UIManager>();
+        loadingManager = FindAnyObjectByType<LoadingManager>();
+        charaInfoServer = FindAnyObjectByType<CharaInfoServer>().gameObject;
+        uiManager = FindAnyObjectByType<UIManager>();
     }
 
     // Update is called once per frame

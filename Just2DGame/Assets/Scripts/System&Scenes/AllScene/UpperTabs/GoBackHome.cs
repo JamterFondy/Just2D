@@ -9,9 +9,9 @@ public class GoBackHome : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        loadingManager = FindObjectOfType<LoadingManager>();
-        uiManager = FindObjectOfType<UIManager>(); 
-        buttonSE = FindObjectOfType<ButtonSE>();
+        loadingManager = FindAnyObjectByType<LoadingManager>();
+        uiManager = FindAnyObjectByType<UIManager>(); 
+        buttonSE = FindAnyObjectByType<ButtonSE>();
     }
 
     public void OnClick()
@@ -22,7 +22,7 @@ public class GoBackHome : MonoBehaviour
         }
         else
         {
-            loadingManager = FindObjectOfType<LoadingManager>();
+            loadingManager = FindAnyObjectByType<LoadingManager>();
 
             uiManager.currentScene = SceneType.Loading;
             uiManager.currentState = UIState.Loading;

@@ -25,7 +25,7 @@ public class SpawnChara2NormalBullet : MonoBehaviour
     {
         spawnToggle = false;
 
-        esc = FindObjectOfType<BattleESC>();
+        esc = FindAnyObjectByType<BattleESC>();
     }
 
     void Update()

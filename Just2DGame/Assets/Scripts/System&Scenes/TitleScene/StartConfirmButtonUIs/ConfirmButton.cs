@@ -12,8 +12,8 @@ public class ConfirmButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        uiManager = FindObjectOfType<UIManager>();
-        buttonSE = FindObjectOfType<ButtonSE>();
+        uiManager = FindAnyObjectByType<UIManager>();
+        buttonSE = FindAnyObjectByType<ButtonSE>();
     }
 
     public void OnClick()
@@ -76,7 +76,7 @@ public class ConfirmButton : MonoBehaviour
 
 
         // 4) Start loading via LoadingManager
-        var loadingManager = FindObjectOfType<LoadingManager>();
+        var loadingManager = FindAnyObjectByType<LoadingManager>();
         if (loadingManager == null)
         {
             // Create a LoadingManager if none exists so coroutine can run

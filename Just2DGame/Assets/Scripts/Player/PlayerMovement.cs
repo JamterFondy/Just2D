@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(esc == null)
         {
-            esc = FindObjectOfType<BattleESC>();
+            esc = FindAnyObjectByType<BattleESC>();
         }
 
         cam = Camera.main;

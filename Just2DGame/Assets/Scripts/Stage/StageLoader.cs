@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class StageLoader : MonoBehaviour
 {
-    public StageData stageData;
+    private StageLayout layout;
+
+    public BGManager bgManager;
 
     public GameObject collarZakoSpeedPrefab;
     public GameObject collarBossPrefab;
@@ -22,16 +24,45 @@ public class StageLoader : MonoBehaviour
     }
 
     [System.Serializable]
+    public class StageData
+    {
+        public string StageName;
+        public string Background;
+        public string BGM;
+    }
+
+    [System.Serializable]
+    public class QuestData
+    {
+        public int BossCount;
+        public string MainQuest;
+        public string SubQuest;
+    }
+
+    [System.Serializable]
     public class StageLayout
     {
         public EnemyLayoutEntry[] enemies;
+        public StageData stageData;
+        public QuestData questData;
     }
 
+    void Awake()
+    {
+        bgManager = FindAnyObjectByType<BGManager>();
+    }
     void Start()
     {
+        LoadJson();
         LoadBackground();
         LoadBGM();
         LoadLayout();
+    }
+
+    void LoadJson()
+    {
+        TextAsset jsonFile = Resources.Load<TextAsset>("StageLayouts/layout");
+        layout = JsonUtility.FromJson<StageLayout>(jsonFile.text);
     }
 
     void LoadBackground()
@@ -41,14 +72,27 @@ public class StageLoader : MonoBehaviour
 
     void LoadBGM()
     {
-        // BGM を差し替える処理
+        if (layout == null || layout.stageData == null)
+        {
+            Debug.Log("StageLoader: No stage data found in layoutJson.");
+            return;
+        }
+
+        string bgmName = layout.stageData.BGM;
+        
+        if (bgManager != null)
+        {
+            bgManager.PlayBattleBGM(bgmName);
+            Debug.Log("BGM受け渡し完了");
+        }
+        else
+        {
+            Debug.Log("BGManagerなんかねぇよ");
+        }
     }
 
     void LoadLayout()
     {
-        TextAsset jsonFile = Resources.Load<TextAsset>("StageLayouts/layout");
-        var layout = JsonUtility.FromJson<StageLayout>(jsonFile.text);
-
         if (layout == null || layout.enemies == null || layout.enemies.Length == 0)
         {
             Debug.LogWarning("StageLoader: No layout entries found in layoutJson.");
@@ -62,8 +106,6 @@ public class StageLoader : MonoBehaviour
     // Orchestrator: spawn all entries with given InsNum, then proceed to next InsNum if any
     IEnumerator SpawnEnemySequence(StageLayout layout, int insNum)
     {
-        Debug.Log("シークエンス開始");
-
         var entries = new System.Collections.Generic.List<EnemyLayoutEntry>();
         foreach (var e in layout.enemies)
         {

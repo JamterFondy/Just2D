@@ -13,8 +13,8 @@ public class StageSelect : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        uiManager = FindObjectOfType<UIManager>();
-        stageSelectManager = FindObjectOfType<StageSelectManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
+        stageSelectManager = FindAnyObjectByType<StageSelectManager>();
 
         objName = gameObject.name;
 

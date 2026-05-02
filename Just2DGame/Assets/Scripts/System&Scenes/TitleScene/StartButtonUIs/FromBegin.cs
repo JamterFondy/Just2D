@@ -9,8 +9,8 @@ public class FromBegin : MonoBehaviour
 
     void Start()
     {
-        uiManager = FindObjectOfType<UIManager>();
-        buttonSE = FindObjectOfType<ButtonSE>();
+        uiManager = FindAnyObjectByType<UIManager>();
+        buttonSE = FindAnyObjectByType<ButtonSE>();
     }
 
     

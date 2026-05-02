@@ -12,7 +12,7 @@ public class EnemyStatus : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        loadingManager = FindObjectOfType<LoadingManager>();
+        loadingManager = FindAnyObjectByType<LoadingManager>();
     }
 
     // Update is called once per frame

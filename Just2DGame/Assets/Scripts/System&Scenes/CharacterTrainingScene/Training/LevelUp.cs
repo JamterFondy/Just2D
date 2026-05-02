@@ -10,7 +10,7 @@ public class LevelUp : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        characterInfo = FindObjectOfType<CharacterInfo>();
+        characterInfo = FindAnyObjectByType<CharacterInfo>();
     }
 
     // Update is called once per frame

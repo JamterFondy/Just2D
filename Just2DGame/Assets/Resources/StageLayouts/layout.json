@@ -1,7 +1,17 @@
 {
   "enemies": [
     { "Type": "CollarZakoSpeed", "InsNum": 1, "x": 8, "y": 3, "SpawnNum": 5, "SpawnSpan": 0.5, "StartDelay": 8},
-    { "Type": "CollarZakoSpeed", "InsNum": 2, "x": 8, "y": -3, "SpawnNum": 5, "SpawnSpan": 0.5, "StartDely": 3 },
+    { "Type": "CollarZakoSpeed", "InsNum": 2, "x": 8, "y": -3, "SpawnNum": 5, "SpawnSpan": 0.5, "StartDelay": 3 },
     { "Type": "CollarBoss", "InsNum": 3, "x": 6, "y": 0, "SpawnNum": 1, "SpawnSpan": 1, "StartDelay": 5}
-  ]
+  ],
+  "stageData": {
+     "StageName": "1-1",
+     "Background": "Rojiura", 
+     "BGM": "TitleBGM"
+  },
+  "questData": {
+     "BossCount": 1,
+     "MainQuest": "Defeat Boss Enemy",
+     "SubQuest": "Defeat Enemies As You Can"
+  }
 }

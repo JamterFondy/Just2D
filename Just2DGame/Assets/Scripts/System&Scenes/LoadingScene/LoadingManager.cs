@@ -12,7 +12,7 @@ public class LoadingManager : MonoBehaviour
     {
         // Persist the GameObject so the loading coroutine survives scene changes
         DontDestroyOnLoad(gameObject);
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
     }
 
     // LoadingScene を先に読み込んでから target を読み込む例

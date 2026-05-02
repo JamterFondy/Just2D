@@ -10,7 +10,7 @@ public class SettingsUI : MonoBehaviour
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
         if (uiManager != null)
         {
             uiManager.StateChanged += OnStateChanged;

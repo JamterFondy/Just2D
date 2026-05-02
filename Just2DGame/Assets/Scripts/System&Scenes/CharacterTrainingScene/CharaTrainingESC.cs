@@ -11,8 +11,8 @@ public class CharaTrainingESC : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        uiManager = FindObjectOfType<UIManager>();
-        loadingManager = FindObjectOfType<LoadingManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
+        loadingManager = FindAnyObjectByType<LoadingManager>();
     }
 
     // Update is called once per frame

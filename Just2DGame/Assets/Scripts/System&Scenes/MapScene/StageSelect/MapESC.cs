@@ -14,8 +14,8 @@ public class MapESC : MonoBehaviour
 
     void Start()
     {
-        uiManager = FindObjectOfType<UIManager>();
-        loadingManager = FindObjectOfType<LoadingManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
+        loadingManager = FindAnyObjectByType<LoadingManager>();
     }
 
     // Update is called once per frame
