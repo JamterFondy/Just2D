@@ -93,7 +93,7 @@ public class BGManager : MonoBehaviour
         audioSource.clip = Resources.Load<AudioClip>($"Audio/{battleBGMName}");
         if (audioSource.clip != null)
         {
-            Debug.Log("曲はいただいたぜ");
+            Debug.Log("曲はいただいたぜ"); //ToDo これは表示されるが、曲が流れないからそれを確認する（十中八九、上にあるswitchのdefaultが悪さしてる）
             audioSource.Play();
         }
         else
