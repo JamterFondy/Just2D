@@ -59,6 +59,9 @@ public class BGManager : MonoBehaviour
             case SceneType.Map:
                 audioSource.clip = Resources.Load<AudioClip>("Audio/StageMapBGM");
                 break;
+            case SceneType.Loading:
+                audioSource.clip = null;
+                break;
             default:
                 audioSource.clip = null; // その他の状態では音楽を停止
                 break;

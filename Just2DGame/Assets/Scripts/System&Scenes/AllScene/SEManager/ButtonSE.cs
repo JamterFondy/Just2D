@@ -1,22 +1,28 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
-public class SEVolume : MonoBehaviour
+public class ButtonSE : MonoBehaviour
 {
     AudioSource audioSource;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
         float seVolume = PlayerPrefs.GetFloat("SEVolume", 1.0f);
 
         audioSource.volume = 1.0f * masterVolume * seVolume;
+    }
+
+
+    public void PlayButtonSE(string seFile)
+    {
+        audioSource.clip = Resources.Load<AudioClip>($"SEs/ButtonSE/{seFile}");
+
+        audioSource.Play();
     }
 }

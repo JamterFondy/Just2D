@@ -7,17 +7,13 @@ using static UnityEngine.CullingGroup;
 public class ConfirmButton : MonoBehaviour
 {
     UIManager uiManager;
+    ButtonSE buttonSE;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        buttonSE = FindObjectOfType<ButtonSE>();
     }
 
     public void OnClick()
@@ -92,6 +88,8 @@ public class ConfirmButton : MonoBehaviour
         {
             uiManager.currentScene = SceneType.Loading;
             uiManager.currentState = UIState.Loading;
+
+            buttonSE.PlayButtonSE("Confirm");
 
             loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
         }

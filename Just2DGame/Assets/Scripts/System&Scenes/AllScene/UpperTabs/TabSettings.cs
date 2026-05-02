@@ -4,10 +4,12 @@ public class TabSettings : MonoBehaviour
 {
     UIManager uiManager;
     public UIState preState;
-    
+    ButtonSE buttonSE;
+
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
+        buttonSE = FindObjectOfType<ButtonSE>();
     }
 
     public void OnClick()
@@ -16,10 +18,12 @@ public class TabSettings : MonoBehaviour
         {
             preState = uiManager.currentState;
             uiManager.currentState = UIState.Settings;
+            buttonSE.PlayButtonSE("Confirm");
         }
         else
         {
             uiManager.currentState = preState;
+            buttonSE.PlayButtonSE("Cancel");
         }
     }
 

@@ -4,18 +4,14 @@ public class GoBackHome : MonoBehaviour
 {
     LoadingManager loadingManager;
     UIManager uiManager;
+    ButtonSE buttonSE;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         loadingManager = FindObjectOfType<LoadingManager>();
         uiManager = FindObjectOfType<UIManager>(); 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        buttonSE = FindObjectOfType<ButtonSE>();
     }
 
     public void OnClick()
@@ -30,6 +26,8 @@ public class GoBackHome : MonoBehaviour
 
             uiManager.currentScene = SceneType.Loading;
             uiManager.currentState = UIState.Loading;
+
+            buttonSE.PlayButtonSE("GoHome");
 
             loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
         }

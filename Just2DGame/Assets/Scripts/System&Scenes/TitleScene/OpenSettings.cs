@@ -5,6 +5,7 @@ public class OpenSettings : MonoBehaviour
 {
     [SerializeField] GameObject target;
     UIManager uiManager;
+    ButtonSE buttonSE;
 
     void Awake()
     {
@@ -19,6 +20,12 @@ public class OpenSettings : MonoBehaviour
         {
             Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
         }
+
+    }
+
+    void Start()
+    {
+        buttonSE = FindObjectOfType<ButtonSE>();
     }
 
     void OnDestroy()
@@ -39,5 +46,6 @@ public class OpenSettings : MonoBehaviour
     public void OnClick()
     {    
          uiManager.currentState = UIState.Settings;
+         buttonSE.PlayButtonSE("Confirm");
     }
 }
