@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d39d0bcbaedf74db609f83a7f848b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageLoader
-  stageData: {fileID: 0}
+  bgManager: {fileID: 0}
   collarZakoSpeedPrefab: {fileID: 4277192615784852146, guid: 136325ad26f0a744da1a8777c6473691, type: 3}
   collarBossPrefab: {fileID: 5524538765639439114, guid: 2a44474204eb8b24f89c4828861f4622, type: 3}
 --- !u!4 &164689288
@@ -216,7 +216,7 @@ MonoBehaviour:
   skillGage: {fileID: 0}
   esc: {fileID: 0}
   prefab1: {fileID: 8750526668469978218, guid: d1cc04ae0c48a43429628d823e3f717b, type: 3}
-  prefab2: {fileID: 4623724480720325466, guid: 10975e4651869074188c4a1971f50f17, type: 3}
+  prefab2: {fileID: 2314207707319448741, guid: 10975e4651869074188c4a1971f50f17, type: 3}
   prefab2Final: {fileID: 9140641675531097969, guid: 4df1482d788f3f247847661e5486cdda, type: 3}
   verticalOffset: 0.8
   spacing: 0.8
