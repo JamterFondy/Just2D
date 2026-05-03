@@ -195,7 +195,7 @@ public class StageLoader : MonoBehaviour
         {
             if (prefab != null)
             {
-                Vector2 pos = new Vector2(entry.x, entry.y);
+                Vector3 pos = new Vector3(entry.x, entry.y, 0.5f); //敵のスポーン位置。全ての敵を統一でz = 0.5fで統一しているが、表示に問題が出る可能性を考えJSONにz座標を加えたほうがいいかもしれない。
                 Instantiate(prefab, pos, Quaternion.identity);
             }
             i++;
