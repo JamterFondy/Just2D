@@ -30,15 +30,9 @@ public class SettingsESC : MonoBehaviour
 
         if (uiManager.currentScene == SceneType.Title) uiManager.currentState = UIState.TitleDefault;
         else if (uiManager.currentScene == SceneType.Battle) uiManager.currentState = UIState.BattlePauseMenu;
-        else
+        else uiManager.currentState = tabSettings.preState;
 
 
-
-
-
-
-
-
-            buttonSE.PlayButtonSE("Cancel");
+        buttonSE.PlayButtonSE("Cancel");
     }
 }
