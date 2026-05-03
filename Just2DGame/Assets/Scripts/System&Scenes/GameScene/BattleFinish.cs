@@ -42,7 +42,6 @@ public class BattleFinish : MonoBehaviour
     public void CountBossDied()
     {
         BossDiedCount ++;
-
     }
 
 
@@ -60,6 +59,5 @@ public class BattleFinish : MonoBehaviour
         uiManager.currentState = UIState.StageMapDefault;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
-
     }
 }

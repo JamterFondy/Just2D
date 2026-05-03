@@ -3,11 +3,19 @@ using System.Collections;
 
 public class BattleESC : MonoBehaviour
 {
+
     [Header("再開遅延（秒）")]
     [SerializeField] float resumeDelay = 3f;
 
     public bool isPaused = false;
     Coroutine resumeCoroutine;
+
+    UIManager uiManager;
+
+    void Start()
+    {
+        uiManager = FindAnyObjectByType<UIManager>();
+    }
 
     void Update()
     {
@@ -16,18 +24,6 @@ public class BattleESC : MonoBehaviour
             if (!isPaused)
             {
                 PauseGame();
-            }
-            else
-            {
-                // ポーズ中：再開カウントをトグル（未開始なら開始、開始中ならキャンセル）
-                if (resumeCoroutine == null)
-                    resumeCoroutine = StartCoroutine(ResumeAfterDelayRealtime(Mathf.Max(0f, resumeDelay)));
-                else
-                {
-                    StopCoroutine(resumeCoroutine);
-                    resumeCoroutine = null;
-                    Debug.Log("Resume cancelled. Still paused.");
-                }
             }
         }
     }
@@ -38,9 +34,30 @@ public class BattleESC : MonoBehaviour
         Time.timeScale = 0f;
         AudioListener.pause = true;
 
+        uiManager.currentState = UIState.BattlePauseMenu;
+
         isPaused = true;
         Debug.Log("Game paused. Press ESC again to start " + resumeDelay + "s resume timer.");
     }
+
+
+    public void RestartBattle()
+    {
+
+        // ポーズ中：再開カウントをトグル（未開始なら開始、開始中ならキャンセル）
+        if (resumeCoroutine == null)
+            resumeCoroutine = StartCoroutine(ResumeAfterDelayRealtime(Mathf.Max(0f, resumeDelay)));
+        else
+        {
+            StopCoroutine(resumeCoroutine);
+            resumeCoroutine = null;
+            Debug.Log("Resume cancelled. Still paused.");
+        }
+
+        uiManager.currentState = UIState.InBattle;
+    }
+
+
 
     IEnumerator ResumeAfterDelayRealtime(float delay)
     {
@@ -51,6 +68,7 @@ public class BattleESC : MonoBehaviour
         // 再開
         Time.timeScale = 1f;
         AudioListener.pause = false;
+        
 
         isPaused = false;
         resumeCoroutine = null;

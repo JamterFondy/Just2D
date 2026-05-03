@@ -25,7 +25,7 @@ public enum UIState
 
     //ホーム画面の状態
     HomeDefault,
-    PauseMenu,
+    HomePauseMenu,
 
     //キャラ育成画面の状態
     CharaTrainingDefault,
@@ -42,6 +42,7 @@ public enum UIState
 
     //バトル中の状態
     InBattle,
+    BattlePauseMenu,
 }
 
 public class UIManager : MonoBehaviour
