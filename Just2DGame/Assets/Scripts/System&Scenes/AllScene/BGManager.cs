@@ -73,9 +73,7 @@ public class BGManager : MonoBehaviour
             case SceneType.Loading:
                 audioSource.clip = null;
                 break;
-            default:
-                audioSource.clip = null; // その他の状態では音楽を停止
-                break;
+            
         }
         if (audioSource.clip != null)
         {
