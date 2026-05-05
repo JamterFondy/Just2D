@@ -55,8 +55,16 @@ public class BattleFinish : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Destroy(charaInfoServer);
 
-        uiManager.currentScene = SceneType.Map;
-        uiManager.currentState = UIState.StageMapDefault;
+        uiManager.currentScene = SceneType.Loading;
+        uiManager.currentState = UIState.Loading;
+
+        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
+    }
+
+    public void QuitStage()
+    {
+        uiManager.currentScene = SceneType.Loading;
+        uiManager.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
     }

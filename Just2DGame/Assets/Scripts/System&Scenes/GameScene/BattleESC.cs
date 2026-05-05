@@ -75,6 +75,19 @@ public class BattleESC : MonoBehaviour
         Debug.Log("Game resumed.");
     }
 
+    public void QuitStage()
+    {
+        // 再開
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+
+
+        isPaused = false;
+        resumeCoroutine = null;
+        Debug.Log("Game resumed.");
+    }
+
+
     void OnDestroy()
     {
         // 念のため復帰処理（破棄時に TimeScale が 0 のままにならないよう）
