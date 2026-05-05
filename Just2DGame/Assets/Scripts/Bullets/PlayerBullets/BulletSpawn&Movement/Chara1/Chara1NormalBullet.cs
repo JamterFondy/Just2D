@@ -48,9 +48,9 @@ public class Chara1NormalBullet : MonoBehaviour
             Vector3 pos = transform.position;
 
             // Instantiate and apply movement to the right (+x) when SpaceToggle is true
-            var b1 = Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y, pos.z), angler) as GameObject;
-            var b2 = Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y + 0.2f, pos.z), angler) as GameObject;
-            var b3 = Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y - 0.2f, pos.z), angler) as GameObject;
+            var b1 = Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y, pos.z + 0.5f), angler) as GameObject;
+            var b2 = Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y + 0.2f, pos.z + 0.5f), angler) as GameObject;
+            var b3 = Instantiate(normalBullet, new Vector3(pos.x - 2f, pos.y - 0.2f, pos.z + 0.5f), angler) as GameObject;
 
             ApplyRightwardMovement(b1);
             ApplyRightwardMovement(b2);

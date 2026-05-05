@@ -11,6 +11,10 @@ public class StageLoader : MonoBehaviour
     public GameObject collarZakoSpeedPrefab;
     public GameObject collarBossPrefab;
 
+    public string stageName;
+
+
+
     [System.Serializable]
     public class EnemyLayoutEntry
     {
@@ -55,7 +59,7 @@ public class StageLoader : MonoBehaviour
     {
         LoadJson();
         LoadBackground();
-        LoadBGM();
+        LoadStageData();
         LoadLayout();
     }
 
@@ -70,7 +74,7 @@ public class StageLoader : MonoBehaviour
         // 背景を差し替える処理
     }
 
-    void LoadBGM()
+    void LoadStageData()
     {
         if (layout == null || layout.stageData == null)
         {
@@ -78,12 +82,15 @@ public class StageLoader : MonoBehaviour
             return;
         }
 
+        stageName = layout.stageData.StageName;
+        string background = layout.stageData.Background;
         string bgmName = layout.stageData.BGM;
-        
+
+
         if (bgManager != null)
         {
             bgManager.PlayBattleBGM(bgmName);
-            Debug.Log("BGM受け渡し完了");
+           
         }
         else
         {

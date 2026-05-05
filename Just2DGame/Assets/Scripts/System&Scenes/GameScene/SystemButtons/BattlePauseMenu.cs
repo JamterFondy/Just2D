@@ -1,9 +1,13 @@
 using UnityEngine;
+using TMPro;
 
 public class BattlePauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject target;
+    [SerializeField] TMP_Text stageName;
     UIManager uiManager;
+
+    StageLoader stageLoader;
 
     void Awake()
     {
@@ -31,5 +35,12 @@ public class BattlePauseMenu : MonoBehaviour
     {
         if (target == null) return;
         target.SetActive(state == UIState.BattlePauseMenu);
+        
+        if(stageLoader == null)
+        {
+            stageLoader = FindAnyObjectByType<StageLoader>();
+        }
+
+        stageName.text = stageLoader.stageName;
     }
 }

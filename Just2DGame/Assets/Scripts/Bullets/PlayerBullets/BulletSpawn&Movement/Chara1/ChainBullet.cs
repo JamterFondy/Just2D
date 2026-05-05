@@ -141,8 +141,8 @@ public class ChainBullet : MonoBehaviour
 
             Vector3 myPos = transform.position;
 
-            Vector3 topPos = new Vector3(myPos.x, myPos.y + verticalOffset, myPos.z);
-            Vector3 bottomPos = new Vector3(myPos.x, myPos.y - verticalOffset, myPos.z);
+            Vector3 topPos = new Vector3(myPos.x, myPos.y + verticalOffset, myPos.z + 0.5f);
+            Vector3 bottomPos = new Vector3(myPos.x, myPos.y - verticalOffset, myPos.z + 0.5f);
 
             if (prefab1 != null)
             {
