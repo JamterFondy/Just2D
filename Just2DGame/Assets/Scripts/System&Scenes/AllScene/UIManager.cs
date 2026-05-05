@@ -43,6 +43,7 @@ public enum UIState
     //バトル中の状態
     InBattle,
     BattlePauseMenu,
+    BattleQuitConfirm,
 }
 
 public class UIManager : MonoBehaviour
@@ -82,7 +83,7 @@ public class UIManager : MonoBehaviour
         currentState = UIState.TitleDefault; // 初期状態をタイトル画面のデフォルトに設定
     }
 
-    public void LoadSceneRecive(string sceneName)
+    public void LoadSceneReceive(string sceneName)
     {
         if(sceneName == "TitleScene")
         {

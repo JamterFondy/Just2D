@@ -1,20 +1,9 @@
 using UnityEngine;
 
-public class QuitStage : MonoBehaviour
+public class ConfirmQuit : MonoBehaviour
 {
     BattleFinish battleFinish;
     BattleESC battleESC;
-
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
 
     public void OnClick()
     {

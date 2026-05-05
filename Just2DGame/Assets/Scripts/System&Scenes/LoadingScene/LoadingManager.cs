@@ -128,7 +128,7 @@ public class LoadingManager : MonoBehaviour
         string newSceneName = targetSceneName;
         if (uiManager != null)
         {
-            uiManager.LoadSceneRecive(targetSceneName);
+            uiManager.LoadSceneReceive(targetSceneName);
         }
 
         // 8) Loading シーンをアンロード（存在するか確認してから実行）
