@@ -5,6 +5,10 @@ public class ShowEquipments : MonoBehaviour
     [SerializeField] GameObject target;
     UIManager uiManager;
 
+    Vector3 defaultPos;
+    Vector3 prePos;
+    Vector3 centerPos;
+
     void Awake()
     {
         if (target == null) target = this.gameObject;
@@ -18,6 +22,8 @@ public class ShowEquipments : MonoBehaviour
         {
             Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
         }
+
+        defaultPos = transform.position; //初期の位置を獲得
     }
 
     void OnDestroy()

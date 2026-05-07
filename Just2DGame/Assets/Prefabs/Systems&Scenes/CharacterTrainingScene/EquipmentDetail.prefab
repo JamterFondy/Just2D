@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e887a90bdb3b1d24fae9876bf0d013c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OnCursorPannel
+  IsCursorOn: 0
 --- !u!1 &4312539090165598270
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,6 +496,7 @@ GameObject:
   - component: {fileID: 1171665126853532178}
   - component: {fileID: 9032929295627317324}
   - component: {fileID: 9181233564371423101}
+  - component: {fileID: 8965732409018934575}
   m_Layer: 5
   m_Name: SetEquipment
   m_TagString: Untagged
@@ -603,7 +605,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9032929295627317324}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8965732409018934575}
+        m_TargetAssemblyTypeName: SetEquipToChara, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8965732409018934575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8509309837262753118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2644727614610d4b8e6fd8bf0088db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetEquipToChara
 --- !u!1 &9092597334853923499
 GameObject:
   m_ObjectHideFlags: 0
