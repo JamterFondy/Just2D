@@ -17,6 +17,13 @@ public class OnCursorPannel : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
 
     void Update()
     {
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            GameObject pannelCanvas = transform.parent.gameObject;
+
+            Destroy(pannelCanvas);
+        }
+
         if (IsCursorOn) return;
 
         if(Input.GetMouseButton(0))
