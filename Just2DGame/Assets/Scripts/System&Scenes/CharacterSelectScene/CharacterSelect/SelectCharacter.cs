@@ -6,7 +6,9 @@ public class SelectCharacter : MonoBehaviour
     public int characterID;
 
     SpriteRenderer spriteRenderer;
+
     public int lastCharacterID = int.MinValue;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
