@@ -1,12 +1,12 @@
 {
   "Texts": [
-   {"TextNum": 1, "Text": "――薄暗い路地の裏、獣たちの足音が静かに下水道の水を揺らす。"},
-   {"TextNum": 2, "Text": "絶えず薄い煙を吐き出す通気口からいくつかの笑い声が響いてくる頃、ある一つの看板が静かに月明りを反射した。"},
-   {"TextNum": 3, "Text": "〈Tipsy Doggy's Bar〉――なんとも可愛らしい名を付けられた酒場だ"},
-   {"TextNum": 4, "Text": "そんな酒場の雰囲気に飛び込むように、一匹の獣が軽快な足取りでその入り口に歩み寄っていく"},
+   {"TextNum": 1, "Character": "None", "Text": "――薄暗い路地の裏、獣たちの足音が静かに下水道の水を揺らす。", "Transition": "None", "Image": "DrunkerTown", "BGM": "None"},
+   {"TextNum": 2, "Character": "None", "Text": "絶えず薄い煙を吐き出す通気口からいくつかの笑い声が響いてくる頃、ある一つの看板が静かに月明りを反射した。", "Transition": "None", "Image": "DrunkerTown", "BGM": "None"},
+   {"TextNum": 3, "Character": "None", "Text": "〈Tipsy Doggy's Bar〉――なんとも可愛らしい名を付けられた酒場だ", "Transition": "None", "Image": "TipsyDoggysBar", "BGM": "None"},
+   {"TextNum": 4, "Character": "None", "Text": "そんな酒場の雰囲気に飛び込むように、ある一匹の獣が軽快な足取りでその入り口に歩み寄っていく", "Transition": "None", "Image": "TipsyDoggysBar", "BGM": "None"},
+   {"TextNum": 5, "Character": "None", "Text": "――カランカランッ", "Transition": "BlackOut", "Image" : "BarFront", "BGM": "HomeBGM"}
 
-    ]
+  ]
    
-
 
 }
