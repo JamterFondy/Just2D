@@ -152,6 +152,8 @@ public class StageLoader : MonoBehaviour
 
         if (entry == null) yield break;
 
+
+        //以下、敵のタイプに則したプリファブを指定
         GameObject prefab = null;
         if (entry.Type == "CollarZakoSpeed") prefab = collarZakoSpeedPrefab;
         else if (entry.Type == "CollarBoss") prefab = collarBossPrefab;

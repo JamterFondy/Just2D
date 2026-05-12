@@ -51,6 +51,7 @@ public class ConfirmButton : MonoBehaviour
         PlayerPrefs.SetFloat("MasterVolume", master);
         PlayerPrefs.SetFloat("BGMVolume", bgm);
         PlayerPrefs.SetFloat("SEVolume", se);
+        PlayerPrefs.SetInt("GameProgress", 0); //チュートリアルからの開始になる。続きからを選択できなくなる。
         PlayerPrefs.Save();
 
 
@@ -75,13 +76,12 @@ public class ConfirmButton : MonoBehaviour
         }
 
 
-        // 4) Start loading via LoadingManager
+        // 4) ローディングの開始処理
         var loadingManager = FindAnyObjectByType<LoadingManager>();
         if (loadingManager == null)
         {
-            // Create a LoadingManager if none exists so coroutine can run
-            var go = new GameObject("LoadingManager");
-            loadingManager = go.AddComponent<LoadingManager>();
+            var newLoadingManager = new GameObject("LoadingManager");
+            loadingManager = newLoadingManager.AddComponent<LoadingManager>();
         }
 
         if (loadingManager != null)
