@@ -115,37 +115,43 @@ public class StageLoader : MonoBehaviour
         
     }
 
-    // Orchestrator: spawn all entries with given InsNum, then proceed to next InsNum if any
+    // JSONファイルのInsNumとスクリプトのinsNumが等号となる行のデータを受けてリスト化し、それを敵スポーンの処理に投げる関数。
     IEnumerator SpawnEnemySequence(StageLayout layout, int insNum)
     {
+        // layout内のenemiesを参照し、その内のInsNumが現在のinsNumと等しい行をentriesリストとして上書き。
+        // つまりentriesはリストであるが、その中身はJSONの一行分ということになる。今回は(1 * N)の行列のリスト化ということ。
         var entries = layout.enemies
             .Where(e => e != null && e.InsNum == insNum)
             .ToList();
 
-        if (entries.Count == 0)
+
+        if (entries.Count == 0)// 今回獲得したentriesにデータが入っていない場合の処理。JSONファイルが正しく記述されていれば処理されることはない。
         {
-            // 次の InsNum が存在するか確認
+            // 次の InsNum が存在するか確認。いる場合はinsNum+1をして上記の処理を行う。
             if (layout.enemies.Any(e => e != null && e.InsNum > insNum))
                 yield return StartCoroutine(SpawnEnemySequence(layout, insNum + 1));
 
             yield break;
         }
 
+
         // 全エントリのコルーチンを開始
         List<Coroutine> coroutines = new List<Coroutine>();
         foreach (var entry in entries)
             coroutines.Add(StartCoroutine(SpawnEnemyByNumber(entry, insNum)));
 
+
         // 最大時間だけ待つ（SpawnEnemyByNumber は時間が決まっている）
         float maxWait = entries.Max(e => e.StartDelay + e.SpawnNum * e.SpawnSpan) + 0.1f;
         yield return new WaitForSeconds(maxWait);
+
 
         // 次の InsNum へ
         yield return StartCoroutine(SpawnEnemySequence(layout, insNum + 1)); //ToDo　この時にJSOＮの敵構成ファイルの行を取って、次が最終行の敵生成である場合、その敵にボスコンポーネントを付与するようにする。
     }
 
 
-    // Coroutine to spawn enemies for a single layout entry
+    // 上の関数からもらったentry(entriesに含まれているデータの一つ一つ)を参考に実際に敵生成を行う関数。
     IEnumerator SpawnEnemyByNumber(EnemyLayoutEntry entry, int currentInsNum)
     {
         Debug.Log($"スポーン開始: {entry.Type}、位置: ({entry.x}, {entry.y})、開始遅延: {entry.StartDelay}, スポーン数: {entry.SpawnNum}, スポーン間隔: {entry.SpawnSpan}");
@@ -153,7 +159,7 @@ public class StageLoader : MonoBehaviour
         if (entry == null) yield break;
 
 
-        //以下、敵のタイプに則したプリファブを指定
+        //以下、敵のタイプに則したプリファブを指定。
         GameObject prefab = null;
         if (entry.Type == "CollarZakoSpeed") prefab = collarZakoSpeedPrefab;
         else if (entry.Type == "CollarBoss") prefab = collarBossPrefab;

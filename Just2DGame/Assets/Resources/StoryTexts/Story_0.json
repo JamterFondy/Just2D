@@ -1,5 +1,5 @@
 {
-  "Texts": [
+  "layout": [
    {"TextNum": 1, "Character": "None", "Text": "――薄暗い路地の裏、獣たちの足音が静かに下水道の水を揺らす。", "Transition": "None", "Image": "DrunkerTown", "BGM": "None"},
    {"TextNum": 2, "Character": "None", "Text": "絶えず薄い煙を吐き出す通気口からいくつかの笑い声が響いてくる頃、ある一つの看板が静かに月明りを反射した。", "Transition": "None", "Image": "DrunkerTown", "BGM": "None"},
    {"TextNum": 3, "Character": "None", "Text": "〈Tipsy Doggy's Bar〉――なんとも可愛らしい名を付けられた酒場だ", "Transition": "None", "Image": "TipsyDoggysBar", "BGM": "None"},
