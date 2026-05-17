@@ -45,12 +45,6 @@ public enum UIState
     BattlePauseMenu,
     BattleQuitConfirm,
 }
-public enum SceneEvent
-{
-    None,
-    Tutorial,
-    Story,
-}
 
 public class UIManager : MonoBehaviour
 {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,15 @@ using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 using static StageLoader;
 using static UnityEngine.EventSystems.EventTrigger;
+
+
+public enum StoryMode
+{
+    None,
+    Tutorial,
+    Story,
+}
+
 
 
 public class TextStoryManager : MonoBehaviour
@@ -20,6 +30,10 @@ public class TextStoryManager : MonoBehaviour
 
     public int storyNum = 0; // ストーリーの進捗度。テキストのまとまりを管理する。
     public int textPage = 1; // テキストの進捗度。１ストーリー内におけるテキストの進捗を管理する。StoryCountが変動すると初期値に戻る。
+
+    public bool isTextClicked = false; // テキスト表示時にクリックが押されたかどうか（次のページに進むための行動がされたか）を計る。
+                                       // ToDo => テキストを一文字ずつ出す場合、テキストが全部出たかどうかのboolを取り、falseならクリックによって全テキストが表示されてtrueに、trueならクリックされたときに次ページに行くようにする。
+
 
     // UI系統のゲームオブジェクトのアタッチ
     [SerializeField] SpriteRenderer charaIconObj;
@@ -54,6 +68,23 @@ public class TextStoryManager : MonoBehaviour
     }
 
 
+    // イベントドリブン
+    public event Action<StoryMode> StoryModeChanged;
+
+    StoryMode _storyMode;
+
+    public StoryMode storyMode
+    {
+        get => _storyMode;
+        set
+        {
+            if (_storyMode == value) return;
+            _storyMode = value;
+            StoryModeChanged?.Invoke(_storyMode);
+        }
+    }
+
+
     void Awake()
     {
         uiManager = FindAnyObjectByType<UIManager>();
@@ -70,14 +101,6 @@ public class TextStoryManager : MonoBehaviour
         storyNum = PlayerPrefs.GetInt("StoryNum");
         textPage = PlayerPrefs.GetInt("TextNum");
     }
-
-
-
-    public void StoryMode(bool IsStoryMode)
-    {
-        if (IsStoryMode) LoadStory();
-    }
-
 
 
     void LoadStory()
@@ -170,7 +193,49 @@ public class TextStoryManager : MonoBehaviour
         backgroundImageObj.sprite = currentImage;
 
 
+        // クリックされるまで次ページには進まず、待機する。
+        yield return new WaitUntil(() => isTextClicked);
+
+        isTextClicked = false;
+        
+        if(IsEndOfStory)
+        {
+            // 終了処理を書く。（トランジション方法やらBGMの変更やら）
+
+
+            // 格納用の変数やらローカル変数を初期化（ = null）
+            currentCharacter = null;
+            currentTransition = null;
+            currentImage = null;
+            currentBGM = null;
+
+            character = null;
+            text = null;
+            transition = null;
+            image = null;
+            bgm = null;
+
+
+            // ストーリー進捗を上昇(UpdateStoryNum())させ、ストーリーモードを終了する。
+            UpdateStoryNum();
+            storyMode = StoryMode.None;
+        }
+        else
+        {
+            // 最終ページでないならページを次に移行し、ストーリーのサイクルを回す。
+            textPage++;
+            StoryCycle(storyLayout);
+        }
+
         yield return null;
+    }
+
+    void OnClick() // これだとボタンじゃないと使えなくなるから、「クリック動作がされたら」という条件関数を使う（Update()? クリックのイベント化？）
+    {
+        if(storyMode != StoryMode.None && isTextClicked == false)
+        {
+            isTextClicked = true;
+        }
     }
 
 
