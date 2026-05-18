@@ -6,6 +6,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using static StageLoader;
 using static UnityEngine.EventSystems.EventTrigger;
 
@@ -25,7 +27,7 @@ public class TextStoryManager : MonoBehaviour
 
     private StoryLayout storyLayout;
 
-    Sprite currentCharacter, currentTransition, currentImage;
+    Image currentCharacter,currentImage,currentTransition;
     AudioClip currentBGM;
 
     public int storyNum = 0; // ストーリーの進捗度。テキストのまとまりを管理する。
@@ -36,17 +38,18 @@ public class TextStoryManager : MonoBehaviour
 
 
     // UI系統のゲームオブジェクトのアタッチ
-    [SerializeField] SpriteRenderer charaIconObj;
+    [SerializeField] GameObject canvas;
+    [SerializeField] Image charaIconObj;
     [SerializeField] TextMeshProUGUI storyTextObj;
-    [SerializeField] SpriteRenderer transitionImageObj;
-    [SerializeField] SpriteRenderer backgroundImageObj;
+    [SerializeField] Image transitionImageObj;
+    [SerializeField] Image backgroundImageObj;
     BGManager bgManager;
 
 
     // 使用する全リソース（素材）のアタッチをするリスト
-    [SerializeField] Sprite[] Characters;
-    [SerializeField] Sprite[] Transitions;
-    [SerializeField] Sprite[] Images;
+    [SerializeField] Image[] Characters;
+    [SerializeField] Image[] Transitions;
+    [SerializeField] Image[] Images;
     [SerializeField] AudioClip[] BGMs;
 
 
@@ -84,14 +87,29 @@ public class TextStoryManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private InputAction clickAction;
+    private void OnEnable()
+    {
+        clickAction.performed += OnClick;
+        clickAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        clickAction.performed -= OnClick;
+        clickAction.Disable();
+    }
+
+
+
 
     void Awake()
     {
         uiManager = FindAnyObjectByType<UIManager>();
         bgManager = FindAnyObjectByType<BGManager>();
+
+        canvas.SetActive(false);
     }
-
-
 
     void Start()
     {
@@ -103,7 +121,7 @@ public class TextStoryManager : MonoBehaviour
     }
 
 
-    void LoadStory()
+    public void LoadStory()
     {
         // まずstoryNumに応じたストーリー情報が入っているJSONファイルを読み込む。
         TextAsset jsonFile = Resources.Load<TextAsset>($"StoryTexts/Story_{storyNum}");
@@ -111,6 +129,7 @@ public class TextStoryManager : MonoBehaviour
 
 
         // 次にテキスト・キャラクター・テキストなどの情報をTextNumに従って受け取る処理を動かす。
+        canvas.SetActive(true);
         StoryCycle(storyLayout);
     }
 
@@ -187,10 +206,10 @@ public class TextStoryManager : MonoBehaviour
 
         // そして各オブジェクトのSpriteやテキストを変更する。
         // ToDo BGMはBGManagerに直接受け取った内容を受け渡す形になる。UIManagerのSceneEventの状態（T or F）に応じてBGM変化方法を変えた後、AudioClipを受け取る変数をBGManager内に作るなど。
-        charaIconObj.sprite = currentCharacter;
+        charaIconObj.sprite = currentCharacter.sprite;
         storyTextObj.text = text;
-        transitionImageObj.sprite = currentTransition;
-        backgroundImageObj.sprite = currentImage;
+        transitionImageObj.sprite = currentTransition.sprite;
+        backgroundImageObj.sprite = currentImage.sprite;
 
 
         // クリックされるまで次ページには進まず、待機する。
@@ -218,6 +237,7 @@ public class TextStoryManager : MonoBehaviour
 
             // ストーリー進捗を上昇(UpdateStoryNum())させ、ストーリーモードを終了する。
             UpdateStoryNum();
+            canvas.SetActive(false);
             storyMode = StoryMode.None;
         }
         else
@@ -230,7 +250,7 @@ public class TextStoryManager : MonoBehaviour
         yield return null;
     }
 
-    void OnClick() // これだとボタンじゃないと使えなくなるから、「クリック動作がされたら」という条件関数を使う（Update()? クリックのイベント化？）
+    void OnClick(InputAction.CallbackContext ctx)
     {
         if(storyMode != StoryMode.None && isTextClicked == false)
         {
