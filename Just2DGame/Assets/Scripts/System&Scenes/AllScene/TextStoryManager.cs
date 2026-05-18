@@ -105,6 +105,8 @@ public class TextStoryManager : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(this);
+
         uiManager = FindAnyObjectByType<UIManager>();
         bgManager = FindAnyObjectByType<BGManager>();
 
