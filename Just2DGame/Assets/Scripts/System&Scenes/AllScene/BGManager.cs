@@ -29,7 +29,7 @@ public class BGManager : MonoBehaviour
          if (uiManager != null)
          {
              uiManager.SceneChanged += OnSceneChanged;
-        }
+         }
          else
          {
              Debug.LogWarning("UIManager not found. BG music won't change automatically.");
