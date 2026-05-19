@@ -6062,8 +6062,13 @@ MonoBehaviour:
   storyTextObj: {fileID: 166254325}
   transitionImageObj: {fileID: 1096353466}
   backgroundImageObj: {fileID: 14431463}
-  Characters: []
-  Transitions: []
+  Characters:
+  - {fileID: 3483360546945567320, guid: e11d6ecaf93cb1049acad69cf1e53ce8, type: 3}
+  - {fileID: 253833388553395835, guid: 8d0aee8de74249e459503ffdd2f1b22f, type: 3}
+  - {fileID: 4330994339258781040, guid: da53a308ef1ca704395e28e3d4c8b703, type: 3}
+  Transitions:
+  - {fileID: -3217447237452444701, guid: 4aad97b5d11003742b22f88d4f28526a, type: 3}
+  - {fileID: -5191169316149617693, guid: 54287bce3c6f77448b5f3335d4b157a9, type: 3}
   Images: []
   BGMs: []
   clickAction:

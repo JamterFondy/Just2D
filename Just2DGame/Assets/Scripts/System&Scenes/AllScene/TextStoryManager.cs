@@ -27,7 +27,7 @@ public class TextStoryManager : MonoBehaviour
 
     private StoryLayout storyLayout;
 
-    Image currentCharacter,currentImage,currentTransition;
+    Sprite currentCharacter,currentImage,currentTransition;
     AudioClip currentBGM;
 
     public int storyNum = 0; // ストーリーの進捗度。テキストのまとまりを管理する。
@@ -47,9 +47,9 @@ public class TextStoryManager : MonoBehaviour
 
 
     // 使用する全リソース（素材）のアタッチをするリスト
-    [SerializeField] Image[] Characters;
-    [SerializeField] Image[] Transitions;
-    [SerializeField] Image[] Images;
+    [SerializeField] Sprite[] Characters;
+    [SerializeField] Sprite[] Transitions;
+    [SerializeField] Sprite[] Images;
     [SerializeField] AudioClip[] BGMs;
 
 
@@ -185,33 +185,40 @@ public class TextStoryManager : MonoBehaviour
 
 
         // 次にImage画像系はリストの中から今回の格納データと名前一致するものを取得する。
+        //　ToDo => 名前一致だと「…_0」とかで一致しなくなる可能性があるため現在は一部一致にしている。だが、表情差分を入れる際にこれだと正しく表示できない為、必要になったら直す。
         foreach (var c in Characters)
         {
-            if (c.name == character) currentCharacter = c;
+            if (c.name.Contains(character)) currentCharacter = c;
         } 
 
         foreach (var t in Transitions)
         {
-            if (t.name == transition) currentTransition = t;
+            if (t.name.Contains(transition)) currentTransition = t;
         }
 
         foreach (var i in Images)
         {
-            if (i.name == image) currentImage = i;
+            if (i.name.Contains(image)) currentImage = i;
         }
 
         foreach (var b in BGMs)
         {
-            if (b.name == bgm) currentBGM = b;
+            if (b.name.Contains(bgm)) currentBGM = b;
         }
 
 
         // そして各オブジェクトのSpriteやテキストを変更する。
         // ToDo BGMはBGManagerに直接受け取った内容を受け渡す形になる。UIManagerのSceneEventの状態（T or F）に応じてBGM変化方法を変えた後、AudioClipを受け取る変数をBGManager内に作るなど。
-        charaIconObj.sprite = currentCharacter.sprite;
-        storyTextObj.text = text;
-        transitionImageObj.sprite = currentTransition.sprite;
-        backgroundImageObj.sprite = currentImage.sprite;
+        
+         charaIconObj.sprite = currentCharacter;
+         storyTextObj.text = text;
+         transitionImageObj.sprite = currentTransition;
+
+        if(currentImage != null)
+        {
+            backgroundImageObj.sprite = currentImage;
+        }
+        
 
 
         // クリックされるまで次ページには進まず、待機する。
@@ -252,8 +259,10 @@ public class TextStoryManager : MonoBehaviour
         yield return null;
     }
 
-    void OnClick(InputAction.CallbackContext ctx)
+    void OnClick(InputAction.CallbackContext ctx) // ToDo => クリックの入力が受け付けられていない。要確認。
     {
+        Debug.Log("クリック検知");
+
         if(storyMode != StoryMode.None && isTextClicked == false)
         {
             isTextClicked = true;
