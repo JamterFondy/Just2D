@@ -607,6 +607,7 @@ GameObject:
   - component: {fileID: 166254323}
   - component: {fileID: 166254324}
   - component: {fileID: 166254325}
+  - component: {fileID: 166254326}
   m_Layer: 5
   m_Name: StoryText
   m_TagString: Untagged
@@ -732,6 +733,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &166254326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166254322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11fd4b27b6cb6646815289f165df1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadeInText
+  tmp: {fileID: 166254325}
+  interval: 0.05
 --- !u!1 &233627247
 GameObject:
   m_ObjectHideFlags: 0
@@ -6192,6 +6207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4999547b4d7db3d418e9ccc270a4c22f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextStoryManager
+  textFadeIn: {fileID: 166254326}
   storyNum: 0
   textPage: 1
   isTextClicked: 0

@@ -30,6 +30,8 @@ public class TextStoryManager : MonoBehaviour
     Sprite currentCharacter,currentImage,currentTransition;
     AudioClip currentBGM;
 
+    [SerializeField] TextFadeIn textFadeIn; 
+
     public int storyNum = 0; // ストーリーの進捗度。テキストのまとまりを管理する。
     public int textPage = 1; // テキストの進捗度。１ストーリー内におけるテキストの進捗を管理する。StoryCountが変動すると初期値に戻る。
 
@@ -211,9 +213,14 @@ public class TextStoryManager : MonoBehaviour
         // そして各オブジェクトのSpriteやテキストを変更する。
         // ToDo BGMはBGManagerに直接受け取った内容を受け渡す形になる。UIManagerのSceneEventの状態（T or F）に応じてBGM変化方法を変えた後、AudioClipを受け取る変数をBGManager内に作るなど。
         
-         charaIconObj.sprite = currentCharacter;
-         storyTextObj.text = text;
-         transitionImageObj.sprite = currentTransition;
+        charaIconObj.sprite = currentCharacter;
+
+        storyTextObj.text = text;
+
+         
+        textFadeIn.StartCoroutine(textFadeIn.FadeIn());
+
+        transitionImageObj.sprite = currentTransition;
 
         if(currentImage != null)
         {
