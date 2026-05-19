@@ -115,22 +115,23 @@ public class TextStoryManager : MonoBehaviour
 
     void Start()
     {
-        if (!PlayerPrefs.HasKey("StoryNukm")) PlayerPrefs.SetInt("StoryNum", 0); // ストーリーの進捗がnullならStoryNum=0で初期化（チュートリアルからスタートになる）
+        if (!PlayerPrefs.HasKey("StoryNum")) PlayerPrefs.SetInt("StoryNum", 0); // ストーリーの進捗がnullならStoryNum=0で初期化（チュートリアルからスタートになる）
         if (!PlayerPrefs.HasKey("TextPage")) PlayerPrefs.SetInt("TextPage", 1); // テキストは１
-
-        storyNum = PlayerPrefs.GetInt("StoryNum");
-        textPage = PlayerPrefs.GetInt("TextNum");
     }
 
 
     public void LoadStory()
     {
-        // まずstoryNumに応じたストーリー情報が入っているJSONファイルを読み込む。
+        // 最初にstoryNumとtextPageをPlayerPrefsから受け取る。これによって、どのストーリーのどのテキストを表示するかが決まる。
+        storyNum = PlayerPrefs.GetInt("StoryNum");
+        textPage = PlayerPrefs.GetInt("TextNum");
+
+        // 次にstoryNumに応じたストーリー情報が入っているJSONファイルを読み込む。
         TextAsset jsonFile = Resources.Load<TextAsset>($"StoryTexts/Story_{storyNum}");
         storyLayout = JsonUtility.FromJson<StoryLayout>(jsonFile.text);
 
 
-        // 次にテキスト・キャラクター・テキストなどの情報をTextNumに従って受け取る処理を動かす。
+        // そしてテキスト・キャラクター・テキストなどの情報をTextNumに従って受け取る処理を動かす。
         canvas.SetActive(true);
         StoryCycle(storyLayout);
     }
@@ -259,8 +260,10 @@ public class TextStoryManager : MonoBehaviour
         yield return null;
     }
 
-    void OnClick(InputAction.CallbackContext ctx) // ToDo => クリックの入力が受け付けられていない。要確認。
+    public void OnClick(InputAction.CallbackContext ctx) // ToDo => クリックの入力が受け付けられていない。要確認。
     {
+        if (!ctx.started) return;
+
         Debug.Log("クリック検知");
 
         if(storyMode != StoryMode.None && isTextClicked == false)
