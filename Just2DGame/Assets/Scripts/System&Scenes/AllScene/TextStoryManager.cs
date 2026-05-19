@@ -259,9 +259,25 @@ public class TextStoryManager : MonoBehaviour
         }
         else
         {
-            // 最終ページでないならページを次に移行し、ストーリーのサイクルを回す。
-            textPage++;
-            StoryCycle(storyLayout);
+            if(textFadeIn.isAllTextAppeared)
+            {
+                // 最終ページでないならページを次に移行し、ストーリーのサイクルを回す。
+                textPage++;
+                StoryCycle(storyLayout);
+            }
+            else
+            {
+                // テキストがすべて表示されていない場合は、テキストをすべて表示させる。
+                textFadeIn.skipRequest = true;
+
+                yield return new WaitUntil(() => isTextClicked);
+
+                isTextClicked = false;
+
+                textPage++;
+                StoryCycle(storyLayout);
+            }
+            
         }
 
         yield return null;
