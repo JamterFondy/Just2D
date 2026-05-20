@@ -216,8 +216,8 @@ public class TextStoryManager : MonoBehaviour
         charaIconObj.sprite = currentCharacter;
 
         storyTextObj.text = text;
-
-         
+        
+        
         textFadeIn.StartCoroutine(textFadeIn.FadeIn());
 
         transitionImageObj.sprite = currentTransition;
