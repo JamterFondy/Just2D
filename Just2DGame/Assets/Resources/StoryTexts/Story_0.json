@@ -2,9 +2,20 @@
   "layout": [
    {"TextNum": 1, "Character": "None", "Text": "――薄暗い路地の裏、獣たちの足音が静かに下水道の水を揺らす。", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "None"},
    {"TextNum": 2, "Character": "None", "Text": "絶えず薄い煙を吐き出す通気口からいくつかの笑い声が響いてくる頃、ある一つの看板が静かに月明りを反射した。", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "None"},
-   {"TextNum": 3, "Character": "None", "Text": "〈Tipsy Doggy's Bar〉――なんとも可愛らしい名を付けられた酒場だ", "Transition": "NoneT", "Image": "TipsyDoggysBar", "BGM": "None"},
-   {"TextNum": 4, "Character": "None", "Text": "そんな酒場の雰囲気に飛び込むように、ある一匹の獣が軽快な足取りでその入り口に歩み寄っていく", "Transition": "NoneT", "Image": "TipsyDoggysBar", "BGM": "None"},
-   {"TextNum": 5, "Character": "None", "Text": "――カランカランッ", "Transition": "BlackOut", "Image" : "BarFront", "BGM": "HomeBGM"}
+   {"TextNum": 3, "Character": "None", "Text": "〈Tipsy Doggy's Bar〉――なんとも可愛らしい名を付けられた酒場だ。", "Transition": "NoneT", "Image": "TipsyDoggysBar", "BGM": "None"},
+   {"TextNum": 4, "Character": "None", "Text": "そんな酒場の雰囲気に飛び込むように、ある一匹の獣が軽快な足取りでその入り口に歩み寄っていく。", "Transition": "NoneT", "Image": "TipsyDoggysBar", "BGM": "None"},
+   {"TextNum": 5, "Character": "None", "Text": "――カランカランッ。", "Transition": "BlackOut", "Image" : "BarFront", "BGM": "HomeBGM"},
+   {"TextNum": 6, "Character": "Cathy", "Text": "「～♪」", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"},
+   {"TextNum": 7, "Character": "Cathy", "Text": "「相変わらずここの席はいつも空いているのね？マスター」", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"},
+   {"TextNum": 8, "Character": "Owner", "Text": "「あんたがいっつも使っているから、怖くて誰も座れねぇのさ」", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"},
+   {"TextNum": 9, "Character": "Cathy", "Text": "「あら、失礼ね。こんなにかわいい歌姫が座っている席が怖いはずないでしょう？」", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"},
+   {"TextNum": 10, "Character": "Owner", "Text": "「誰が席の方を恐れるんだか……まぁいい、今日は何を飲むんだ？」", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"},
+   {"TextNum": 11, "Character": "None", "Text": "白毛の歌手、キャシーはいたずらに笑うと、カウンターに置かれたメニューに手を伸ばす。", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"},
+   {"TextNum": 12, "Character": "Owner", "Text": "「めずらしいな、あんたがメニューを手に取るなんて。まるで初客みたいじゃないか」", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"},
+   {"TextNum": 13, "Character": "Cathy", "Text": "「今日の私はちょっと特別な気分なのかもしれないわね？でも困ったわ、今日の気分に合うお酒がイマイチ分からないわね……」", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"},
+   {"TextNum": 14, "Character": "None", "Text": "すると彼女は横に座っていた一匹の客にもたれかかるようににして口を開いた。", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"},
+   {"TextNum": 15, "Character": "Cathy", "Text": "「ねぇ、あなたはどう思う？今日の私に似合うお酒はどれかしら？」", "Transition": "NoneT", "Image": "DrunkerTown", "BGM": "HomeBGM"}
+
 
   ]
    
