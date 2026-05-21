@@ -6,13 +6,14 @@ public class FromData : MonoBehaviour
 {
     [SerializeField] LoadingManager loadingManager;
     UIManager uiManager;
-    ButtonSE buttonSE;
+    SEManager seManager;
+
 
     void Start()
     {
         loadingManager = FindAnyObjectByType<LoadingManager>();
         uiManager = FindAnyObjectByType<UIManager>();
-        buttonSE = FindAnyObjectByType<ButtonSE>();
+        seManager = FindAnyObjectByType<SEManager>();
     }
 
 
@@ -21,7 +22,7 @@ public class FromData : MonoBehaviour
         uiManager.currentScene = SceneType.Loading;
         uiManager.currentState = UIState.Loading;
 
-        buttonSE.PlayButtonSE("Confirm");
+        seManager.PlaySE("Button", "Confirm_Button");
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
 

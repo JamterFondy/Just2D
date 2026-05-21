@@ -4,14 +4,14 @@ public class GoBackHome : MonoBehaviour
 {
     LoadingManager loadingManager;
     UIManager uiManager;
-    ButtonSE buttonSE;
+    SEManager seManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         loadingManager = FindAnyObjectByType<LoadingManager>();
         uiManager = FindAnyObjectByType<UIManager>(); 
-        buttonSE = FindAnyObjectByType<ButtonSE>();
+        seManager = FindAnyObjectByType<SEManager>();
     }
 
     public void OnClick()
@@ -27,7 +27,7 @@ public class GoBackHome : MonoBehaviour
             uiManager.currentScene = SceneType.Loading;
             uiManager.currentState = UIState.Loading;
 
-            buttonSE.PlayButtonSE("GoHome");
+            seManager.PlaySE("Button", "GoHome_Button");
 
             loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
         }

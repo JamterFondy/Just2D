@@ -10,7 +10,7 @@ public class ChainBullet : MonoBehaviour
     Camera cam;
     [SerializeField]SkillGage skillGage;
     PlayerStatus playerStatus;
-    SkillSE skillSE;
+    SEManager seManager;
 
     [SerializeField] BattleESC esc;
 
@@ -76,42 +76,19 @@ public class ChainBullet : MonoBehaviour
         if (cam == null)
             Debug.LogWarning("Main Camera not found. Movement bounds will not be applied.");
 
+
         if(skillGage == null)
         {
             skillGage = FindAnyObjectByType<SkillGage>().GetComponent<SkillGage>();
         }
 
-        // Try to find SkillSE in several ways (persistent object may be in DontDestroyOnLoad scene)
-        if (skillSE == null)
+        
+        if (seManager == null)
         {
-            // 1) Try simple FindObjectOfType (works if object is active)
-            skillSE = Object.FindAnyObjectByType<SkillSE>();
+            seManager = FindAnyObjectByType<SEManager>();
         }
-
-        if (skillSE == null)
-        {
-            // 2) Try find under SEManager -> BattleSEs -> SkillSE
-            var seMgr = GameObject.Find("SEManager");
-            if (seMgr != null)
-            {
-                var t = seMgr.transform.Find("BattleSEs/SkillSE");
-                if (t != null)
-                    skillSE = t.GetComponent<SkillSE>();
-            }
-        }
-
-        if (skillSE == null)
-        {
-            // 3) Fallback: search all loaded objects (includes DontDestroyOnLoad objects)
-            var all = Resources.FindObjectsOfTypeAll<SkillSE>();
-            if (all != null && all.Length > 0)
-                skillSE = all[0];
-        }
-
-        if (skillSE == null)
-            Debug.LogWarning("ChainBullet: SkillSE component not found. Skill SFX won't play.");
-
     }
+
 
     void Update()
     {
@@ -119,7 +96,7 @@ public class ChainBullet : MonoBehaviour
         {
             LeftCrickCoolTime = true; //左クリックがされたことを確認（Using状態）
 
-            skillSE.PlaySkillSE("ChainSkillSE1");
+            seManager.PlaySE("Skill", "ChainSkill1_Skill");
 
             if (cam == null)
             {
@@ -240,7 +217,7 @@ public class ChainBullet : MonoBehaviour
                 spawnedPrefab2.Add(new MovingInstance { obj = go, dir = dir });
 
                 //最終弾生成と共にSEを再生（最後専用）
-                skillSE.PlaySkillSE("ChainSkillSE2");
+                seManager.PlaySE("Skill", "ChainSkill2_Skill");
 
                 // 最終位置に生成した prefab2Final（または fallback の prefab）に拘束属性を追加（最後専用）
                 TryAddRestraintToFinal(go);

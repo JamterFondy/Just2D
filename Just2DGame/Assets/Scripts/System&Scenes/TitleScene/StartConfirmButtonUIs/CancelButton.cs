@@ -4,13 +4,13 @@ using System;
 public class CancelButton : MonoBehaviour
 {
     UIManager uiManager;
-    ButtonSE buttonSE;
+    SEManager seManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         uiManager = FindAnyObjectByType<UIManager>();
-        buttonSE = FindAnyObjectByType<ButtonSE>();
+        seManager = FindAnyObjectByType<SEManager>();
     }
 
     // Update is called once per frame
@@ -22,6 +22,6 @@ public class CancelButton : MonoBehaviour
     public void OnClick()
     {
         uiManager.currentState = UIState.TitleDefault;
-        buttonSE.PlayButtonSE("Cancel");
+        seManager.PlaySE("Button", "Cancel_Button");
     }
 }

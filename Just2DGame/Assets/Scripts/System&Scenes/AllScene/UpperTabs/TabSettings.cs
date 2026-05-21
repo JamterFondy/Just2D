@@ -4,12 +4,12 @@ public class TabSettings : MonoBehaviour
 {
     UIManager uiManager;
     public UIState preState;
-    ButtonSE buttonSE;
+    SEManager seManager;
 
     void Start()
     {
         uiManager = FindAnyObjectByType<UIManager>();
-        buttonSE = FindAnyObjectByType<ButtonSE>();
+        seManager = FindAnyObjectByType<SEManager>();
     }
 
     public void OnClick()
@@ -18,12 +18,12 @@ public class TabSettings : MonoBehaviour
         {
             preState = uiManager.currentState;
             uiManager.currentState = UIState.Settings;
-            buttonSE.PlayButtonSE("Confirm");
+            seManager.PlaySE("Button", "Confirm_Button");
         }
         else
         {
             uiManager.currentState = preState;
-            buttonSE.PlayButtonSE("Cancel");
+            seManager.PlaySE("Button", "Cancel_Button");
         }
     }
 

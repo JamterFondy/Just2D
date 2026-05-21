@@ -4,19 +4,19 @@ using UnityEngine.UI;
 public class FromBegin : MonoBehaviour
 {
     UIManager uiManager;
-    ButtonSE buttonSE;
+    SEManager seManager;
 
 
     void Start()
     {
         uiManager = FindAnyObjectByType<UIManager>();
-        buttonSE = FindAnyObjectByType<ButtonSE>();
+        seManager = FindAnyObjectByType<SEManager>();
     }
 
     
     public void OnClick()
     {
         uiManager.currentState = UIState.GameStartConfirm;
-        buttonSE.PlayButtonSE("Confirm");
+        seManager.PlaySE("Button", "Confirm_Button");
     }
 }

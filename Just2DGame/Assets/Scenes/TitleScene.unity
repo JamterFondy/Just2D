@@ -344,6 +344,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91566750}
   m_CullTransparentMesh: 1
+--- !u!1 &103450906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 103450907}
+  m_Layer: 0
+  m_Name: TextVoice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &103450907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103450906}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.1552199, y: -0.9797, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1764587617}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &113410258
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +778,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FadeInText
   tmp: {fileID: 166254325}
   interval: 0.05
+  isAllTextAppeared: 0
+  skipRequest: 0
 --- !u!1 &233627247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,7 +1212,7 @@ GameObject:
   - component: {fileID: 336106012}
   - component: {fileID: 336106013}
   m_Layer: 0
-  m_Name: SkillSE
+  m_Name: Skill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1540,7 +1573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 375779141}
   m_Layer: 0
-  m_Name: NormalSE
+  m_Name: Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4348,7 +4381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1152121525}
   m_Layer: 0
-  m_Name: DamageSE
+  m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5509,7 +5542,7 @@ GameObject:
   - component: {fileID: 1749095311}
   - component: {fileID: 1749095312}
   m_Layer: 0
-  m_Name: ButtonSE
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5668,6 +5701,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45152940594047b4fa5fd896cd1edfab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SEManager
+  seObjs:
+  - {fileID: 1749095309}
+  - {fileID: 103450906}
+  - {fileID: 375779140}
+  - {fileID: 336106010}
+  - {fileID: 1152121524}
+  - {fileID: 2112030959}
+  seClips:
+  - {fileID: 8300000, guid: f1c82629d9eaef64c87d65add448c6f1, type: 3}
+  - {fileID: 8300000, guid: 3bb6d9d8a4159c242b9427f993ce425f, type: 3}
+  - {fileID: 8300000, guid: be3ee54b20ea39c46a4814058bf1e49c, type: 3}
+  - {fileID: 8300000, guid: 0da5a72a65f0bd046a6f081e653d245b, type: 3}
+  - {fileID: 8300000, guid: 4639047eaee4e3b4da8ec3311a6871bd, type: 3}
+  - {fileID: 8300000, guid: a67f303e13ce8f2468fd51e7c6337a14, type: 3}
+  - {fileID: 8300000, guid: f599aec3f9dba3442aa4b819711476b2, type: 3}
+  - {fileID: 8300000, guid: 0c8a7b3d9ee973a48bf1e10ddf925c82, type: 3}
 --- !u!4 &1764587617
 Transform:
   m_ObjectHideFlags: 0
@@ -5682,6 +5731,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1749095310}
+  - {fileID: 103450907}
   - {fileID: 1940142360}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6216,15 +6266,15 @@ MonoBehaviour:
   storyTextObj: {fileID: 166254325}
   transitionImageObj: {fileID: 1096353466}
   backgroundImageObj: {fileID: 14431463}
-  Characters:
+  Characters_sprites:
   - {fileID: 3483360546945567320, guid: e11d6ecaf93cb1049acad69cf1e53ce8, type: 3}
   - {fileID: 253833388553395835, guid: 8d0aee8de74249e459503ffdd2f1b22f, type: 3}
   - {fileID: 4330994339258781040, guid: da53a308ef1ca704395e28e3d4c8b703, type: 3}
-  Transitions:
+  Transitions_sprites:
   - {fileID: -3217447237452444701, guid: 4aad97b5d11003742b22f88d4f28526a, type: 3}
   - {fileID: -5191169316149617693, guid: 54287bce3c6f77448b5f3335d4b157a9, type: 3}
-  Images: []
-  BGMs: []
+  Background_sprites: []
+  BGMs_audioClips: []
   clickAction:
     m_Name: Click
     m_Type: 0
@@ -6970,7 +7020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2112030960}
   m_Layer: 0
-  m_Name: ULTSE
+  m_Name: ULT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
