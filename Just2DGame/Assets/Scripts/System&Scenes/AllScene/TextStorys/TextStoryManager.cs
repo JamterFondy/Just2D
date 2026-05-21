@@ -234,7 +234,10 @@ public class TextStoryManager : MonoBehaviour
         
         if(IsEndOfStory)
         {
-            if(textFadeIn.isAllTextAppeared)
+            // 終了処理を書く。（トランジション方法やらBGMの変更やら）
+            //ただし、テキストがすべて表示されているかどうかで処理を分けること。
+
+            if (textFadeIn.isAllTextAppeared)
             {
                 // 格納用の変数やらローカル変数を初期化（ = null）
                 currentCharacter = null;
@@ -282,7 +285,6 @@ public class TextStoryManager : MonoBehaviour
                 storyMode = StoryMode.None;
             }
 
-            // 終了処理を書く。（トランジション方法やらBGMの変更やら）
         }
         else
         {
@@ -312,7 +314,7 @@ public class TextStoryManager : MonoBehaviour
         yield return null;
     }
 
-    public void OnClick(InputAction.CallbackContext ctx) // ToDo => クリックの入力が受け付けられていない。要確認。
+    public void OnClick(InputAction.CallbackContext ctx)
     {
         if (!ctx.started) return;
 
