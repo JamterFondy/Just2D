@@ -234,31 +234,63 @@ public class TextStoryManager : MonoBehaviour
         
         if(IsEndOfStory)
         {
+            if(textFadeIn.isAllTextAppeared)
+            {
+                // 格納用の変数やらローカル変数を初期化（ = null）
+                currentCharacter = null;
+                currentTransition = null;
+                currentBackground = null;
+                currentBGM = null;
+
+                character_receiver = null;
+                text_receiver = null;
+                transition_receiver = null;
+                background_receiver = null;
+                bgm_receiver = null;
+
+                // ストーリー進捗を上昇(UpdateStoryNum())させ、ストーリーモードを終了する。
+                UpdateStoryNum();
+                canvas.SetActive(false);
+                storyMode = StoryMode.None;
+            }
+            else
+            {
+                // テキストがすべて表示されていない場合は、テキストをすべて表示させる。その後、クリックされたらストーリーの終了処理に入る。
+                textFadeIn.skipRequest = true;
+
+                yield return new WaitUntil(() => isTextClicked);
+
+                isTextClicked = false;
+
+
+                // 格納用の変数やらローカル変数を初期化（ = null）
+                currentCharacter = null;
+                currentTransition = null;
+                currentBackground = null;
+                currentBGM = null;
+
+                character_receiver = null;
+                text_receiver = null;
+                transition_receiver = null;
+                background_receiver = null;
+                bgm_receiver = null;
+
+
+                // ストーリー進捗を上昇(UpdateStoryNum())させ、ストーリーモードを終了する。
+                UpdateStoryNum();
+                canvas.SetActive(false);
+                storyMode = StoryMode.None;
+            }
+
             // 終了処理を書く。（トランジション方法やらBGMの変更やら）
-
-
-            // 格納用の変数やらローカル変数を初期化（ = null）
-            currentCharacter = null;
-            currentTransition = null;
-            currentBackground = null;
-            currentBGM = null;
-
-            character_receiver = null;
-            text_receiver = null;
-            transition_receiver = null;
-            background_receiver = null;
-            bgm_receiver = null;
-
-            // ストーリー進捗を上昇(UpdateStoryNum())させ、ストーリーモードを終了する。
-            UpdateStoryNum();
-            canvas.SetActive(false);
-            storyMode = StoryMode.None;
         }
         else
         {
-            if(textFadeIn.isAllTextAppeared)
+            // 最終ページでないならページを次に移行し、ストーリーのサイクルを回す。
+
+            if (textFadeIn.isAllTextAppeared)
             {
-                // 最終ページでないならページを次に移行し、ストーリーのサイクルを回す。
+                // テキストがすべて表示されているならストーリーのサイクルを回す。
                 textPage++;
                 StoryCycle(storyLayout);
             }

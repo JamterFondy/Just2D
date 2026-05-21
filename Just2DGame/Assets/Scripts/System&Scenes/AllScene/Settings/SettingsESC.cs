@@ -5,14 +5,14 @@ public class SettingsESC : MonoBehaviour
 {
     UIManager uiManager;
     TabSettings tabSettings;
-    ButtonSE buttonSE;
+    SEManager seManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         uiManager = FindAnyObjectByType<UIManager>();
         tabSettings = FindAnyObjectByType<TabSettings>();
-        buttonSE = FindAnyObjectByType<ButtonSE>();
+        seManager = FindAnyObjectByType<SEManager>();
     }
 
     // Update is called once per frame
@@ -33,6 +33,6 @@ public class SettingsESC : MonoBehaviour
         else uiManager.currentState = tabSettings.preState;
 
 
-        buttonSE.PlayButtonSE("Cancel");
+        seManager.PlaySE("Button", "Cancel_Button");
     }
 }

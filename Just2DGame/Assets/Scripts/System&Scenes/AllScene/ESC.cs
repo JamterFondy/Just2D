@@ -3,13 +3,13 @@ using UnityEngine;
 public class ESC : MonoBehaviour
 {
     UIManager uiManager;
-    ButtonSE buttonSE;
+    SEManager seManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         uiManager = FindAnyObjectByType<UIManager>();
-        buttonSE = FindAnyObjectByType<ButtonSE>();
+        seManager = FindAnyObjectByType<SEManager>();
     }
 
     // Update is called once per frame
@@ -27,19 +27,19 @@ public class ESC : MonoBehaviour
                 if (uiManager.currentState == UIState.Settings)
                 {
                     uiManager.currentState = UIState.TitleDefault;
-                    buttonSE.PlayButtonSE("Cancel");
+                    seManager.PlaySE("Button", "Cancel_Button");
                     return;
                 }
                 else if (uiManager.currentState == UIState.GameStartConfirm)
                 {
                     uiManager.currentState = UIState.TitleDefault;
-                    buttonSE.PlayButtonSE("Cancel");
+                    seManager.PlaySE("Button", "Cancel_Button");
                     return;
                 }
                 else if (uiManager.currentState == UIState.Credit)
                 {
                     uiManager.currentState = UIState.TitleDefault;
-                    buttonSE.PlayButtonSE("Cancel");
+                    seManager.PlaySE("Button", "Cancel_Button");
                     return;
 
                 }
