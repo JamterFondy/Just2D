@@ -48,7 +48,7 @@ public class PlayerStatus : MonoBehaviour
         // ŠÈˆÕ“I‚Èˆ——á
         Debug.Log($"You died.");
 
-        battleFinish.MoveToMapAfterDelay();
+        battleFinish.StartCoroutine(battleFinish.PlayerDied());
 
         Destroy(gameObject);
     }

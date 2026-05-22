@@ -44,6 +44,7 @@ public enum UIState
     InBattle,
     BattlePauseMenu,
     BattleQuitConfirm,
+    PlayerLose,
 }
 
 public class UIManager : MonoBehaviour

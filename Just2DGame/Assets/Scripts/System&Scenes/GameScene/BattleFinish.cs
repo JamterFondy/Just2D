@@ -44,6 +44,13 @@ public class BattleFinish : MonoBehaviour
         BossDiedCount ++;
     }
 
+    public IEnumerator PlayerDied()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        uiManager.currentState = UIState.PlayerLose;
+    }
+
 
     public void MoveToMapAfterDelay()
     {
@@ -67,5 +74,13 @@ public class BattleFinish : MonoBehaviour
         uiManager.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
+    }
+
+    public void TryAgain()
+    {
+        uiManager.currentScene = SceneType.Loading;
+        uiManager.currentState = UIState.Loading;
+
+        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "GameScene"));
     }
 }
