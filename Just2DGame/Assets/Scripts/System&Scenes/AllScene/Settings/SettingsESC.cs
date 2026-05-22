@@ -33,6 +33,6 @@ public class SettingsESC : MonoBehaviour
         else uiManager.currentState = tabSettings.preState;
 
 
-        seManager.PlaySE("Button", "Cancel_Button");
+        seManager.PlaySE("Button", "Cancel_Button", "Cancel");
     }
 }

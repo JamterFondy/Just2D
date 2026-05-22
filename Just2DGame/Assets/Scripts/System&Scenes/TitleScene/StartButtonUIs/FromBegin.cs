@@ -17,6 +17,6 @@ public class FromBegin : MonoBehaviour
     public void OnClick()
     {
         uiManager.currentState = UIState.GameStartConfirm;
-        seManager.PlaySE("Button", "Confirm_Button");
+        seManager.PlaySE("Button", "Confirm_Button", "Confirm");
     }
 }

@@ -42,6 +42,6 @@ public class OpenSettings : MonoBehaviour
     public void OnClick()
     {    
          uiManager.currentState = UIState.Settings;
-         seManager.PlaySE("Button", "Confirm_Button");
+         seManager.PlaySE("Button", "Confirm_Button", "Confirm");
     }
 }

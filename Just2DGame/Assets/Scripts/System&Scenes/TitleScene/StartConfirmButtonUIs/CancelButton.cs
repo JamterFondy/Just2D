@@ -22,6 +22,6 @@ public class CancelButton : MonoBehaviour
     public void OnClick()
     {
         uiManager.currentState = UIState.TitleDefault;
-        seManager.PlaySE("Button", "Cancel_Button");
+        seManager.PlaySE("Button", "Cancel_Button", "Cancel");
     }
 }

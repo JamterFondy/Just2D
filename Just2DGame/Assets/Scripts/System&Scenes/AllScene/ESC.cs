@@ -27,19 +27,19 @@ public class ESC : MonoBehaviour
                 if (uiManager.currentState == UIState.Settings)
                 {
                     uiManager.currentState = UIState.TitleDefault;
-                    seManager.PlaySE("Button", "Cancel_Button");
+                    seManager.PlaySE("Button", "Cancel_Button", "Cancel");
                     return;
                 }
                 else if (uiManager.currentState == UIState.GameStartConfirm)
                 {
                     uiManager.currentState = UIState.TitleDefault;
-                    seManager.PlaySE("Button", "Cancel_Button");
+                    seManager.PlaySE("Button", "Cancel_Button", "Cancel");
                     return;
                 }
                 else if (uiManager.currentState == UIState.Credit)
                 {
                     uiManager.currentState = UIState.TitleDefault;
-                    seManager.PlaySE("Button", "Cancel_Button");
+                    seManager.PlaySE("Button", "Cancel_Button", "Cancel");
                     return;
 
                 }

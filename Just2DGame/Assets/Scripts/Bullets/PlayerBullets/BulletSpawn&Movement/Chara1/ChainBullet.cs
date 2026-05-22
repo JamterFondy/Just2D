@@ -96,7 +96,7 @@ public class ChainBullet : MonoBehaviour
         {
             LeftCrickCoolTime = true; //左クリックがされたことを確認（Using状態）
 
-            seManager.PlaySE("Skill", "ChainSkill1_Skill");
+            seManager.PlaySE("Skill", "ChainSkill1_Skill", "ChainSkill1");
 
             if (cam == null)
             {
@@ -217,7 +217,7 @@ public class ChainBullet : MonoBehaviour
                 spawnedPrefab2.Add(new MovingInstance { obj = go, dir = dir });
 
                 //最終弾生成と共にSEを再生（最後専用）
-                seManager.PlaySE("Skill", "ChainSkill2_Skill");
+                seManager.PlaySE("Skill", "ChainSkill2_Skill", "ChainSkill2");
 
                 // 最終位置に生成した prefab2Final（または fallback の prefab）に拘束属性を追加（最後専用）
                 TryAddRestraintToFinal(go);

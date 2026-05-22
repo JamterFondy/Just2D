@@ -27,7 +27,7 @@ public class GoBackHome : MonoBehaviour
             uiManager.currentScene = SceneType.Loading;
             uiManager.currentState = UIState.Loading;
 
-            seManager.PlaySE("Button", "GoHome_Button");
+            seManager.PlaySE("Button", "GoHome_Button", "GoHome");
 
             loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
         }

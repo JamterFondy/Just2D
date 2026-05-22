@@ -874,8 +874,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11fd4b27b6cb6646815289f165df1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadeInText
+  seManager: {fileID: 1764587616}
   tmp: {fileID: 166254325}
-  interval: 0.05
+  interval: 0.1
   isAllTextAppeared: 0
   skipRequest: 0
 --- !u!1 &233627247

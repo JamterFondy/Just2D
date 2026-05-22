@@ -18,12 +18,12 @@ public class TabSettings : MonoBehaviour
         {
             preState = uiManager.currentState;
             uiManager.currentState = UIState.Settings;
-            seManager.PlaySE("Button", "Confirm_Button");
+            seManager.PlaySE("Button", "Confirm_Button", "Confirm");
         }
         else
         {
             uiManager.currentState = preState;
-            seManager.PlaySE("Button", "Cancel_Button");
+            seManager.PlaySE("Button", "Cancel_Button", "Cancel");
         }
     }
 

@@ -13,7 +13,7 @@ public class SEManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
     
-    public void PlaySE(string seType, string seName) // どんなSE(ボタン？スキル？テキスト？ => 誰の・どの音（キャンセルボタン？キャラ１？))
+    public void PlaySE(string seType, string seName, string firstName) // どんなSE(ボタン？スキル？テキスト？ => 誰の・どの音（キャンセルボタン？キャラ１？))
     {
         masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
         seVolume = PlayerPrefs.GetFloat("SEVolume", 1.0f);
@@ -26,7 +26,7 @@ public class SEManager : MonoBehaviour
 
                 foreach (AudioClip seClip in seClips)
                 {
-                    if(seClip.name == seName) seObj.GetComponent<AudioSource>().clip = seClip;
+                    if(seClip.name == seName || seClip.name.StartsWith(firstName)) seObj.GetComponent<AudioSource>().clip = seClip;
                 }
 
                 if(seObj.GetComponent<AudioSource>().clip != null) seObj.GetComponent<AudioSource>().Play();

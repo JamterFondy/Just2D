@@ -22,7 +22,7 @@ public class FromData : MonoBehaviour
         uiManager.currentScene = SceneType.Loading;
         uiManager.currentState = UIState.Loading;
 
-        seManager.PlaySE("Button", "Confirm_Button");
+        seManager.PlaySE("Button", "Confirm_Button", "Confirm");
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
 
