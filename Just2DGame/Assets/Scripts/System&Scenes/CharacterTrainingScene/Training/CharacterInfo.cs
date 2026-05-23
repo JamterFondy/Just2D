@@ -7,24 +7,37 @@ public class CharacterData
 {
     public int ID;
     public string Name;
+    public int EXP;
     public int Level;
     public int HP;
     public int ATK;
+    public int DEF;
+    public int NormalAttackLevel;
+    public int SkillLevel;
+    public int UltLevel;
 }
 public class CharacterInfo : MonoBehaviour
 {
-    public string id,charaName, level, hp, atk;
+    public string id,charaName, level, hp, atk, def, normalAttackLevel, skillLevel, ultLevel;
 
     // Cached references to child text UI components (supports Unity UI Text and TextMeshProUGUI)
     Text nameText;
     Text levelText;
     Text hpText;
     Text atkText;
+    Text defText;
+    Text normalAttackLevelText;
+    Text skillLevelText;
+    Text ultLevelText;
 
     TMPro.TextMeshProUGUI tmpNameText;
     TMPro.TextMeshProUGUI tmpLevelText;
     TMPro.TextMeshProUGUI tmpHpText;
     TMPro.TextMeshProUGUI tmpAtkText;
+    TMPro.TextMeshProUGUI tmpDefText;
+    TMPro.TextMeshProUGUI tmpNormalAttackLevelText;
+    TMPro.TextMeshProUGUI tmpSkillLevelText;
+    TMPro.TextMeshProUGUI tmpUltLevelText;
 
     string GetCharacter1JsonPath()
     {
@@ -51,7 +64,11 @@ public class CharacterInfo : MonoBehaviour
                 Name = "Owner",
                 Level = 1,
                 HP = 100,
-                ATK = 10
+                ATK = 10,
+                DEF = 5,
+                NormalAttackLevel = 1,
+                SkillLevel = 1,
+                UltLevel = 1
             };
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(path, json);
@@ -64,7 +81,7 @@ public class CharacterInfo : MonoBehaviour
         }
 
         // Apply loaded data to this component
-        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
+        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString(), data.DEF.ToString(), data.NormalAttackLevel.ToString(), data.SkillLevel.ToString(), data.UltLevel.ToString());
     }
 
     public void LoadCharacter2FromJson()// JSONファイルからCharacter2のデータを読み込みます。ファイルが存在しない場合はデフォルトのデータを作成して保存します。
@@ -80,7 +97,11 @@ public class CharacterInfo : MonoBehaviour
                 Name = "Cathy",
                 Level = 1,
                 HP = 110,
-                ATK = 8
+                ATK = 8,
+                DEF = 3,
+                NormalAttackLevel = 1,
+                SkillLevel = 1,
+                UltLevel = 1
             };
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(path, json);
@@ -93,14 +114,14 @@ public class CharacterInfo : MonoBehaviour
         }
 
         // Apply loaded data to this component
-        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
+        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString(), data.DEF.ToString(), data.NormalAttackLevel.ToString(), data.SkillLevel.ToString(), data.UltLevel.ToString());
     }
 
     // Allow setting info from a CharacterData instance
     public void SetCharacterInfoFromData(CharacterData data)
     {
         if (data == null) return;
-        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString());
+        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString(), data.DEF.ToString(), data.NormalAttackLevel.ToString(), data.SkillLevel.ToString(), data.UltLevel.ToString());
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -117,7 +138,7 @@ public class CharacterInfo : MonoBehaviour
         
     }
 
-    public void SetCharacterInfo(string id, string name, string level, string hp, string atk)// キャラクターデータをこのコンポーネントにセットし、UIテキストも更新
+    public void SetCharacterInfo(string id, string name, string level, string hp, string atk, string def, string normalAttackLevel, string skillLevel, string ultLevel)// キャラクターデータをこのコンポーネントにセットし、UIテキストも更新
     {
 
         this.id = id;
@@ -125,6 +146,10 @@ public class CharacterInfo : MonoBehaviour
         this.level = level;
         this.hp = hp;
         this.atk = atk;
+        this.def = def;
+        this.normalAttackLevel = normalAttackLevel;
+        this.skillLevel = skillLevel;
+        this.ultLevel = ultLevel;
         UpdateUIText();
     }
 

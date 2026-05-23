@@ -34,7 +34,7 @@ public class ResetLevel : MonoBehaviour
                     Debug.Log("LevelUp: キャラクターレベルが1にリセットされました");
 
 
-                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
+                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk, characterInfo.def, characterInfo.normalAttackLevel, characterInfo.skillLevel, characterInfo.ultLevel); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
 
                     characterInfo.UpdateCharacter1Info();// キャラクターレベルリセット後の情報をJSONファイルに反映
                 }
@@ -52,7 +52,7 @@ public class ResetLevel : MonoBehaviour
                     characterInfo.level = "1";
                     Debug.Log("LevelUp: キャラクターレベルが1にリセットされました");
 
-                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
+                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk, characterInfo.def, characterInfo.normalAttackLevel, characterInfo.skillLevel, characterInfo.ultLevel); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
 
                     characterInfo.UpdateCharacter2Info();
                 }

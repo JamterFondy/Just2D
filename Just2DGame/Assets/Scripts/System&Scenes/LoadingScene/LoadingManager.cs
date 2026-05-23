@@ -78,7 +78,7 @@ public class LoadingManager : MonoBehaviour
         // 4) 読み込みが完了 (progress は 0.9) — 必要ならここでロード完了表示や短い待ちを行う
         // SetProgress(1f); // 100% 表示
         // 任意のアニメーション/フェードを待つ
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
 
         // 5) シーンをアクティベート
         op.allowSceneActivation = true;

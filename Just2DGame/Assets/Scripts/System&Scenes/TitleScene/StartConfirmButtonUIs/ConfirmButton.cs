@@ -66,9 +66,14 @@ public class ConfirmButton : MonoBehaviour
             {
                 ID = 1,
                 Name = "Owner",
+                EXP = 0,
                 Level = 1,
                 HP = 100,
-                ATK = 10
+                ATK = 10,
+                DEF = 5,
+                NormalAttackLevel = 1,
+                SkillLevel = 1,
+                UltLevel = 1
             };
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(path, json);
