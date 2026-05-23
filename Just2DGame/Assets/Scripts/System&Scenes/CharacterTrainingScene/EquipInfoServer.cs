@@ -15,9 +15,9 @@ public class EquipInfoServer : MonoBehaviour
         
     }
 
-    public void SaveSelectedEquipment(int id)
+    public void SaveSelectedEquipment(string name)
     {
-        PlayerPrefs.SetInt("SelectedEquipmentID", id);
+        PlayerPrefs.SetString("SelectedEquipmentName", name);
         PlayerPrefs.Save();
     }
 }
