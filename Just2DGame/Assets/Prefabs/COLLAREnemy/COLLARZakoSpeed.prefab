@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2825731659157027555}
   - component: {fileID: 5787564875949154941}
   m_Layer: 0
-  m_Name: COLLARZakoSpeed
+  m_Name: CollarZakoSpeed
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

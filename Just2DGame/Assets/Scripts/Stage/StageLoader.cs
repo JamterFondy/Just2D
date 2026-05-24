@@ -11,8 +11,7 @@ public class StageLoader : MonoBehaviour
 
     public BGManager bgManager;
 
-    public GameObject collarZakoSpeedPrefab;
-    public GameObject collarBossPrefab;
+    public GameObject[] enemyPrefabs;
 
     public string stageName;
 
@@ -161,9 +160,20 @@ public class StageLoader : MonoBehaviour
 
         //以下、敵のタイプに則したプリファブを指定。
         GameObject prefab = null;
-        if (entry.Type == "CollarZakoSpeed") prefab = collarZakoSpeedPrefab;
-        else if (entry.Type == "CollarBoss") prefab = collarBossPrefab;
-        else Debug.LogWarning($"StageLoader: Unknown enemy Type '{entry.Type}'");
+
+        foreach(var enemyPrefab in enemyPrefabs)
+        {
+            if (entry.Type == enemyPrefab.name)
+            {
+                prefab = enemyPrefab;
+                break;
+            }
+        }
+
+        if (prefab == null)
+        {
+            Debug.LogWarning($"StageLoader: Unknown enemy Type '{entry.Type}'");
+        }
 
         if (entry.StartDelay > 0f)
             yield return new WaitForSeconds(entry.StartDelay);

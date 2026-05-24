@@ -19,7 +19,7 @@ public class BattleESC : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && uiManager.currentState != UIState.PlayerLose)
         {
             if (!isPaused)
             {
