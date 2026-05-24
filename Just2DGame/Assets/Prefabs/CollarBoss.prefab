@@ -376,7 +376,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37daa8cc61378f4184e1704b233f6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
+  player: {fileID: 0}
+  collarBoss: {fileID: 11400000, guid: fa1c0559ec2751c4c9bfa6301a3e9533, type: 2}
+  loadingManager: {fileID: 0}
   hp: 1000
+  atk: 0
+  def: 0
+  speed: 0
 --- !u!114 &4714209255765422694
 MonoBehaviour:
   m_ObjectHideFlags: 0

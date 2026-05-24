@@ -18,7 +18,7 @@ public class EnemyStatus : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         loadingManager = FindAnyObjectByType<LoadingManager>();
-        bossEnemy = gameObject.GetComponent<BossEnemy>();
+        bossEnemy = this.gameObject.GetComponent<BossEnemy>();
 
         hp = (int)collarBoss.runtimeHP;
         atk = (int)collarBoss.runtimeATK;

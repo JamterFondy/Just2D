@@ -8,10 +8,10 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class StageLoader : MonoBehaviour
 {
     private StageLayout layout;
-
     public BGManager bgManager;
-
     public GameObject[] enemyPrefabs;
+    public GameObject BossHPBar;
+
 
     public string stageName;
 
@@ -198,6 +198,7 @@ public class StageLoader : MonoBehaviour
                 Vector3 pos = new Vector3(entry.x, entry.y, 0.5f);
                 GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
                 if (isBoss) enemy.AddComponent<BossEnemy>();
+                if (isBoss) enemy.GetComponent<BossEnemy>().bossHPBar = BossHPBar;
             }
 
             if (i < entry.SpawnNum)

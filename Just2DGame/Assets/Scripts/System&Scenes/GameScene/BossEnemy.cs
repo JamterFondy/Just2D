@@ -5,21 +5,23 @@ using System.Collections;
 
 public class BossEnemy : MonoBehaviour
 {
-    [SerializeField] GameObject bossHPBar;
+    public GameObject bossHPBar; // ステージローダーから割り当てられる
     [SerializeField] EnemyStatus enemyStatus;
     BattleFinish battleFinish;
-    Transform hpBarImage;
+    [SerializeField] Transform hpBarImage;
 
     int maxHP;
 
     void Start()
     {
-        enemyStatus =  gameObject.GetComponent<EnemyStatus>();
+        enemyStatus = GetComponent<EnemyStatus>();
         battleFinish = FindAnyObjectByType<BattleFinish>();
 
         maxHP = enemyStatus.hp;
-        Instantiate(bossHPBar);
-        hpBarImage = bossHPBar.transform.Find("BossHPBarImg");
+
+        var hpBarInstance = Instantiate(bossHPBar);
+
+        hpBarImage = hpBarInstance.transform.Find("BossHPBarCanvas/BossHPBarImage");
 
         StartCoroutine(FillHPBar());
     }
@@ -37,11 +39,6 @@ public class BossEnemy : MonoBehaviour
     {
         float currentFillAmount = hpBarImage.GetComponent<Image>().fillAmount;
 
-        while (currentFillAmount < 1f)
-        {
-            hpBarImage.GetComponent<Image>().fillAmount += 0.01f;
-        }
-
         yield return null;
     }
 
@@ -49,7 +46,6 @@ public class BossEnemy : MonoBehaviour
     {
         if (bossHPBar != null)
         {
-            Destroy(bossHPBar);
             hpBarImage.GetComponent<Image>().fillAmount = 0f;
         }
         maxHP = 0;

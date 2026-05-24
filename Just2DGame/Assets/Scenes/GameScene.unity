@@ -152,6 +152,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 4277192615784852146, guid: 136325ad26f0a744da1a8777c6473691, type: 3}
   - {fileID: 5524538765639439114, guid: 2a44474204eb8b24f89c4828861f4622, type: 3}
+  BossHPBar: {fileID: 3361068991404323320, guid: 573395363f0b6da41b550e1f4d158158, type: 3}
   stageName: 
 --- !u!4 &164689288
 Transform:
