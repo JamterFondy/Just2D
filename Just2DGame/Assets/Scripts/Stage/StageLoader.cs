@@ -136,8 +136,21 @@ public class StageLoader : MonoBehaviour
 
         // 全エントリのコルーチンを開始
         List<Coroutine> coroutines = new List<Coroutine>();
-        foreach (var entry in entries)
-            coroutines.Add(StartCoroutine(SpawnEnemyByNumber(entry, insNum)));
+
+        // 次の InsNum が存在する場合は通常エネミーとして扱う。
+        if (layout.enemies.Any(e => e != null && e.InsNum > insNum))
+        {
+            foreach (var entry in entries)
+                coroutines.Add(StartCoroutine(SpawnEnemyByNumber(entry, insNum, false)));
+        }
+        else
+        {
+            Debug.Log("最後の敵だよー");
+
+            // 次の InsNum が存在しない場合は最後のエネミー（ボス）として扱う。
+            foreach (var entry in entries)          
+                coroutines.Add(StartCoroutine(SpawnEnemyByNumber(entry, insNum, true)));
+        }
 
 
         // 最大時間だけ待つ（SpawnEnemyByNumber は時間が決まっている）
@@ -151,7 +164,7 @@ public class StageLoader : MonoBehaviour
 
 
     // 上の関数からもらったentry(entriesに含まれているデータの一つ一つ)を参考に実際に敵生成を行う関数。
-    IEnumerator SpawnEnemyByNumber(EnemyLayoutEntry entry, int currentInsNum)
+    IEnumerator SpawnEnemyByNumber(EnemyLayoutEntry entry, int currentInsNum, bool isBoss)
     {
         Debug.Log($"スポーン開始: {entry.Type}、位置: ({entry.x}, {entry.y})、開始遅延: {entry.StartDelay}, スポーン数: {entry.SpawnNum}, スポーン間隔: {entry.SpawnSpan}");
 
@@ -183,7 +196,8 @@ public class StageLoader : MonoBehaviour
             if (prefab != null)
             {
                 Vector3 pos = new Vector3(entry.x, entry.y, 0.5f);
-                Instantiate(prefab, pos, Quaternion.identity);
+                GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
+                if (isBoss) enemy.AddComponent<BossEnemy>();
             }
 
             if (i < entry.SpawnNum)

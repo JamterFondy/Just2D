@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: d5b37c56354c74f43a7bfcf5e8d3ebb2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - bossHPBar: {fileID: 3361068991404323320, guid: 573395363f0b6da41b550e1f4d158158, type: 3}
+  - enemyStatus: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

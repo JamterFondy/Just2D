@@ -28,13 +28,6 @@ public class ZakoSpeedAll : MonoBehaviour
         StartCoroutine(Movement());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 
     public IEnumerator Movement() //‚±‚Ì“®‚«‚Ìˆ—
     {
