@@ -6,10 +6,9 @@ public class BattleFinish : MonoBehaviour
 {
     [SerializeField] GameObject charaInfoServer;
     [SerializeField] LoadingManager loadingManager;
+    [SerializeField] NextStageLoader nextStageLoader;
 
     UIManager uiManager;
-
-    int BossDiedCount = 0;
 
     static BattleFinish _instance;
     public static BattleFinish Instance
@@ -35,13 +34,21 @@ public class BattleFinish : MonoBehaviour
     {
         charaInfoServer = GameObject.Find("CharaInfoServer");
         loadingManager = FindAnyObjectByType<LoadingManager>();
+        nextStageLoader = FindAnyObjectByType<NextStageLoader>();
 
         uiManager = FindAnyObjectByType<UIManager>();
     }
 
-    public void CountBossDied()
+    public IEnumerator BossDied(GameObject bossEnemy)
     {
-        BossDiedCount ++;
+
+        // 撃破アニメーションを挟むなど
+
+        yield return new WaitForSeconds(1f);
+
+        Destroy(bossEnemy);
+
+        uiManager.currentState = UIState.PlayerWin;
     }
 
     public IEnumerator PlayerDied()
@@ -70,6 +77,8 @@ public class BattleFinish : MonoBehaviour
 
     public void QuitStage()
     {
+        Destroy(charaInfoServer);
+
         uiManager.currentScene = SceneType.Loading;
         uiManager.currentState = UIState.Loading;
 
@@ -80,6 +89,23 @@ public class BattleFinish : MonoBehaviour
     {
         uiManager.currentScene = SceneType.Loading;
         uiManager.currentState = UIState.Loading;
+
+        loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "GameScene"));
+    }
+
+    public IEnumerator GoNextStage()
+    {
+        uiManager.currentScene = SceneType.Loading;
+        uiManager.currentState = UIState.Loading;
+
+        if(nextStageLoader == null) nextStageLoader = FindAnyObjectByType<NextStageLoader>();
+        if(loadingManager == null) loadingManager = FindAnyObjectByType<LoadingManager>();
+
+        Debug.Log("Starting to load next stage...");
+
+        bool isLoadDone = nextStageLoader.ChangeLayout_NextStage(false);
+
+        yield return new WaitUntil(() => isLoadDone);
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "GameScene"));
     }

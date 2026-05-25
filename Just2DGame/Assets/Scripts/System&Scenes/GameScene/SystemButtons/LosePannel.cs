@@ -50,7 +50,6 @@ public class LosePannel : MonoBehaviour
 
     public void RetryStage()
     {
-        if (battleESC == null) battleESC = FindAnyObjectByType<BattleESC>();
         if (battleFinish == null) battleFinish = FindAnyObjectByType<BattleFinish>();
 
         battleFinish.TryAgain();

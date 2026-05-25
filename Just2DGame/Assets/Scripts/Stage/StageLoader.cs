@@ -110,9 +110,9 @@ public class StageLoader : MonoBehaviour
 
         // start spawning from InsNum = 1
         StartCoroutine(SpawnEnemySequence(layout, 1));
-
         
     }
+
 
     // JSONファイルのInsNumとスクリプトのinsNumが等号となる行のデータを受けてリスト化し、それを敵スポーンの処理に投げる関数。
     IEnumerator SpawnEnemySequence(StageLayout layout, int insNum)

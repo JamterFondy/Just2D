@@ -63,6 +63,6 @@ public class BossEnemy : MonoBehaviour
         maxHP = 0;
 
 
-        battleFinish.CountBossDied();
+        battleFinish.StartCoroutine(battleFinish.BossDied(gameObject));
     }
 }
