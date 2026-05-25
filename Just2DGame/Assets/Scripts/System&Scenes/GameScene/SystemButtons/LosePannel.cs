@@ -46,7 +46,23 @@ public class LosePannel : MonoBehaviour
         }
 
         stageName.text = stageLoader.stageName;
+    }
 
+    public void RetryStage()
+    {
+        if (battleESC == null) battleESC = FindAnyObjectByType<BattleESC>();
+        if (battleFinish == null) battleFinish = FindAnyObjectByType<BattleFinish>();
+
+        battleFinish.TryAgain();
+    }
+
+    public void QuitStage()
+    {
+        if (battleESC == null) battleESC = FindAnyObjectByType<BattleESC>();
+        if (battleFinish == null) battleFinish = FindAnyObjectByType<BattleFinish>();
+
+        battleESC.QuitStage();
+        battleFinish.QuitStage();
     }
 
 }

@@ -5,6 +5,8 @@ public class BattleQuitPannel : MonoBehaviour
 {
     [SerializeField] GameObject target;
     UIManager uiManager;
+    BattleESC battleESC;
+    BattleFinish battleFinish;
 
     void Awake()
     {
@@ -42,6 +44,16 @@ public class BattleQuitPannel : MonoBehaviour
             CancelQuitStage();
         }
     }
+
+    public void ConfirmQuitStage()
+    {
+        if(battleESC == null) battleESC = FindAnyObjectByType<BattleESC>();
+        if(battleFinish == null) battleFinish = FindAnyObjectByType<BattleFinish>();
+
+        battleESC.QuitStage();
+        battleFinish.QuitStage();
+    }
+
 
     public void CancelQuitStage()
     {

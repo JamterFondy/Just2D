@@ -7,6 +7,7 @@ public class BattlePauseMenu : MonoBehaviour
     [SerializeField] TMP_Text stageName;
     UIManager uiManager;
     BattleESC battleESC;
+    BattleFinish battleFinish;
 
     StageLoader stageLoader;
 
@@ -65,5 +66,11 @@ public class BattlePauseMenu : MonoBehaviour
     {
         if(uiManager == null) uiManager = FindAnyObjectByType<UIManager>();
         uiManager.currentState = UIState.BattleQuitConfirm;
+    }
+
+    public void CloseMenu()
+    {
+        if(battleESC == null) battleESC = FindAnyObjectByType<BattleESC>();
+        battleESC.RestartBattle();
     }
 }

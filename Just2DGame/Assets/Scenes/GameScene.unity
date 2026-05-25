@@ -560,20 +560,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434449522}
-        m_TargetAssemblyTypeName: BattleFinish, Assembly-CSharp
-        m_MethodName: QuitStage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 404351738}
-        m_TargetAssemblyTypeName: BattleESC, Assembly-CSharp
+      - m_Target: {fileID: 252734982}
+        m_TargetAssemblyTypeName: LosePannel, Assembly-CSharp
         m_MethodName: QuitStage
         m_Mode: 1
         m_Arguments:
@@ -1766,9 +1754,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 404351738}
-        m_TargetAssemblyTypeName: BattleESC, Assembly-CSharp
-        m_MethodName: RestartBattle
+      - m_Target: {fileID: 1888426870}
+        m_TargetAssemblyTypeName: BattlePauseMenu, Assembly-CSharp
+        m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3390,21 +3378,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434449522}
-        m_TargetAssemblyTypeName: BattleFinish, Assembly-CSharp
-        m_MethodName: QuitStage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 404351738}
-        m_TargetAssemblyTypeName: BattleESC, Assembly-CSharp
-        m_MethodName: QuitStage
+      - m_Target: {fileID: 1986399488}
+        m_TargetAssemblyTypeName: BattleQuitPannel, Assembly-CSharp
+        m_MethodName: ConfirmQuitStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
