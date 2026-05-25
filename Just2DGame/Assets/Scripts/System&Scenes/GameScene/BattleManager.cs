@@ -1,5 +1,7 @@
-using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class BattleManager : MonoBehaviour
 {
@@ -7,6 +9,8 @@ public class BattleManager : MonoBehaviour
 
     GameObject player;
     PlayerMovement playerMovement;
+
+    [SerializeField] GameObject stageQuestPannel;
 
     //Character1
     GameObject chara1Bullets;
@@ -54,10 +58,8 @@ public class BattleManager : MonoBehaviour
         }
 
 
-
-
-
         StartCoroutine(WaitStartBattle());
+        StartCoroutine(MoveQuestPannelRight());
     }
 
 
@@ -80,5 +82,14 @@ public class BattleManager : MonoBehaviour
         playerMovement.CanMove = true; // プレイヤーの移動を許可
 
         yield break;
+    }
+
+    IEnumerator MoveQuestPannelRight()
+    {      
+        yield return new WaitForSeconds(2f); 
+        stageQuestPannel.SetActive(true);
+
+        yield return new WaitForSeconds(2f); 
+        stageQuestPannel.gameObject.SetActive(false);
     }
 }

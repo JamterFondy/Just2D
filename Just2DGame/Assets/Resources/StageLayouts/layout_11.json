@@ -12,6 +12,6 @@
   "questData": {
      "BossCount": 1,
      "MainQuest": "Defeat Boss Enemy",
-     "SubQuest": "Defeat Enemies As You Can"
+     "SubQuest": "Defeat Enemies More Than 80%"
   }
 }

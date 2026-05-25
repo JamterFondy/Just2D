@@ -62,6 +62,7 @@ public class StageLoader : MonoBehaviour
         LoadJson();
         LoadBackground();
         LoadStageData();
+        LoadQuestData();
         LoadLayout();
     }
 
@@ -98,6 +99,30 @@ public class StageLoader : MonoBehaviour
         {
             Debug.Log("BGManagerなんかねぇよ");
         }
+    }
+
+    void LoadQuestData()
+    {
+        if (layout == null || layout.questData == null)
+        {
+            Debug.Log("StageLoader: No quest data found in layoutJson.");
+            return;
+        }
+        int bossCount = layout.questData.BossCount;
+        string mainQuest = layout.questData.MainQuest;
+        string[] subQuest = layout.questData.SubQuest.Split(';');
+        
+        StageQuestPannel questPannel = FindAnyObjectByType<StageQuestPannel>();
+        if (questPannel != null)
+        {
+            questPannel.SetQuestText(mainQuest, subQuest);
+        }
+        else
+        {
+            Debug.Log("StageQuestPannelなんかねぇよ");
+        }
+
+        // ポーズメニューでも確認できるようにしたい。しかし、ポーズメニューは開幕でSetActive(false)にされるため、FindAnyObjectByTypeで取得できない。
     }
 
     void LoadLayout()
