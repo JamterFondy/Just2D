@@ -101,8 +101,6 @@ public class BattleFinish : MonoBehaviour
         if(nextStageLoader == null) nextStageLoader = FindAnyObjectByType<NextStageLoader>();
         if(loadingManager == null) loadingManager = FindAnyObjectByType<LoadingManager>();
 
-        Debug.Log("Starting to load next stage...");
-
         bool isLoadDone = nextStageLoader.ChangeLayout_NextStage(false);
 
         yield return new WaitUntil(() => isLoadDone);

@@ -72,7 +72,7 @@ public class WinPannel : MonoBehaviour
     {
        if(battleFinish == null) battleFinish = FindAnyObjectByType<BattleFinish>();
 
-       battleFinish.GoNextStage();
+       battleFinish.StartCoroutine(battleFinish.GoNextStage());
     }
 
 

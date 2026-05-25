@@ -64,6 +64,11 @@ public class NextStageLoader : MonoBehaviour
                 File.WriteAllText(currentLayout_path, nextLayout_path);
                 Debug.Log($"NextStageLoader: Replaced layout.JSON with layout_{nextStageNum}.json");
 
+#if UNITY_EDITOR
+                // Refresh the AssetDatabase so Unity recognizes the changed TextAsset in the Editor
+                UnityEditor.AssetDatabase.Refresh();
+#endif
+
                 IsLoadDone = true;
             }
             else
