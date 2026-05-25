@@ -37,9 +37,21 @@ public class BossEnemy : MonoBehaviour
 
     IEnumerator FillHPBar()
     {
-        float currentFillAmount = hpBarImage.GetComponent<Image>().fillAmount;
+        Image hpBar = hpBarImage.GetComponent<Image>();
+        hpBar.fillAmount = 0f;
 
-        yield return null;
+        float maxTime = 1f;
+        float timer = 0f;
+
+        while (timer < maxTime)
+        {
+            timer += Time.deltaTime;
+            hpBar.fillAmount = timer / maxTime;
+
+            yield return null;
+        }
+
+        hpBar.fillAmount = 1f;
     }
 
     public void BossDied()
