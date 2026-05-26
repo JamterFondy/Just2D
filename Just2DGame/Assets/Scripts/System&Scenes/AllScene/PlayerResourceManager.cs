@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class PlayerResourceManager : MonoBehaviour
 {
-    LogInOutManager logInOutManager;
+    [SerializeField] LogInOutManager logInOutManager;
     
     void Awake()
     {
-        logInOutManager = FindAnyObjectByType<LogInOutManager>();
-
         if (PlayerPrefs.HasKey("ScrapNum") == false)
         {
             PlayerPrefs.SetInt("ScrapNum", 0);
@@ -18,9 +16,14 @@ public class PlayerResourceManager : MonoBehaviour
             PlayerPrefs.SetInt("BoneCoin", 0);
         }
 
-        OfflineIncome();
-
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Start()
+    {
+        logInOutManager = FindAnyObjectByType<LogInOutManager>();
+
+        OfflineIncome();
     }
 
     void OfflineIncome()

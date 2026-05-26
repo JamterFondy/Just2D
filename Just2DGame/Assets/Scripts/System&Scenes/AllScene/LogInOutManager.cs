@@ -21,6 +21,8 @@ public class LogInOutManager : MonoBehaviour
 
             minutesOfLogout = (int)timeSpan.TotalMinutes;
             Debug.Log($"前回のログアウトからの経過時間: {timeSpan.TotalMinutes}分");
+            Debug.Log($"{minutesOfLogout}");
+
         }
     }
     

@@ -1,0 +1,12 @@
+{
+  "Performance" : [
+    {"ID" : 0, "Name" : "WienerBeer", "Level" : "1", "MaxLevel" : "99", "FirstHP" : 80, "HPPerEnhance" : 20, "FirstATK" : 10, "ATKPerEnhance" : 8,
+     "FirstDEF" : 5, "DEFPerEnhance" : 3, "FirstPrice" : 10, "MasteryPrice" : 25, "Ability" : "Aggressive", "AbilityName" : "強引な一飲み", "CoolTime" : 15},
+    {"ID" : 1, "Name" : "FishBoneCocktail", "Level" : "1", "MaxLevel" : "99", "FirstHP" : 100, "HPPeイッキance" : 30, "FirstATK" : 6, "ATKPerEnhance" : 4,
+     "FirstDEF" : 8, "DEFPerEnhance" : 6, "FirstPrice" : 15, "MasteryPrice" : 40, "Ability" : "Rest", "AbilityName" : "休息の風味", "CoolTime" : 45},
+    {"ID" : 2, "Name" : "PoodleWine", "Level" : "1", "MaxLevel" : "99", "FirstHP" : 10, "HPPerEnhance" : 50, "FirstATK" : 10, "ATKPerEnhance" : 6, 
+    "FirstDEF" : 6, "DEFPerEnhance" : 3, "FirstPrice" : 20, "MasteryPrice" : 60, "Ability" : "DrainULT", "AbilityName" : "熟成された知見", "CoolTime" : 30}
+
+
+  ]
+}

@@ -3537,6 +3537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3d17fa9e6db1143a97a5b438dd9d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerResourceManager
+  logInOutManager: {fileID: 0}
 --- !u!1 &735372740
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,7 +7244,6 @@ GameObject:
   - component: {fileID: 2043097929}
   - component: {fileID: 2043097928}
   - component: {fileID: 2043097927}
-  - component: {fileID: 2043097926}
   m_Layer: 5
   m_Name: SettingButton
   m_TagString: Untagged
@@ -7271,19 +7271,6 @@ RectTransform:
   m_AnchoredPosition: {x: -580.95, y: -2.33}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2043097926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043097924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d877104d4298ff848b7b88db695351f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabSettings
-  preState: 0
 --- !u!114 &2043097927
 MonoBehaviour:
   m_ObjectHideFlags: 0
