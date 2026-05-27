@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using static UnityEngine.GraphicsBuffer;
+using System;
+using System.Runtime.CompilerServices;
 
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] UIManager uiManager;
     [SerializeField] BattleESC esc;
 
     [SerializeField] float speed = 6f;
@@ -16,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        if(esc == null)
+
+        if (esc == null)
         {
             esc = FindAnyObjectByType<BattleESC>();
         }
@@ -28,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
         CanMove = false;
     }
+
 
     void Update()
     {

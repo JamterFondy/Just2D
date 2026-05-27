@@ -1,10 +1,21 @@
 using UnityEngine;
 using System.Collections;
+using System;
+
+
+public enum PlayerControlState
+{
+    None,
+    BattleStart,
+    BattleFinished
+}
 
 public class PlayerStatus : MonoBehaviour
 {
     CharaInfoServer charaInfoServer;//IDサーバーオブジェクト
     BattleFinish battleFinish;//バトル終了オブジェクト
+
+    [SerializeField] GameObject[] playerBulletSets;
 
     public float invincibilityDuration = 1.0f; // 無敵時間（秒）
 
@@ -21,7 +32,24 @@ public class PlayerStatus : MonoBehaviour
 
     Coroutine invincibillty;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public event Action<PlayerControlState> PlayerControlStateChanged;
+
+    PlayerControlState _currentControlState;
+    public PlayerControlState currentControlState
+    {
+        get => _currentControlState;
+        set
+        {
+            if (_currentControlState != value)
+            {
+                if (_currentControlState == value) return;
+                _currentControlState = value;
+                PlayerControlStateChanged?.Invoke(_currentControlState);
+            }
+        }
+    }
+
     void Awake()
     {
         charaInfoServer = GameObject.Find("CharaInfoServer").GetComponent<CharaInfoServer>();
@@ -30,10 +58,17 @@ public class PlayerStatus : MonoBehaviour
         characterID = charaInfoServer.ID;
         hp = charaInfoServer.HP;
         atk = charaInfoServer.ATK;
+
+
+        foreach (var bulletSetObj in playerBulletSets)
+        {
+            bulletSetObj.SetActive(false);
+        }
+
+        playerBulletSets[characterID - 1].SetActive(true);
     }
 
     
-
     public void ApplyDamage(int amount)
     {
         invincibillty = StartCoroutine(InvincibilityCoroutine(invincibilityDuration));

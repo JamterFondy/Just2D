@@ -4,12 +4,14 @@ using System.Collections.Generic;
 
 public class ChainBullet : MonoBehaviour
 {
+    PlayerStatus playerStatus;
+
+
     [SerializeField] Sprite chargingSprite; // クールタイム中のスプライト
     [SerializeField] Sprite fullSprite;// ゲージ満タンのスプライト
 
     Camera cam;
     [SerializeField]SkillGage skillGage;
-    PlayerStatus playerStatus;
     SEManager seManager;
 
     [SerializeField] BattleESC esc;
@@ -59,12 +61,19 @@ public class ChainBullet : MonoBehaviour
 
     void Start()
     {
-        if (playerStatus == null)
+
+        playerStatus = FindAnyObjectByType<PlayerStatus>();
+        if (playerStatus != null)
         {
-            playerStatus = FindAnyObjectByType<PlayerStatus>();
+            playerStatus.PlayerControlStateChanged += OnPlayerControlStateChanged;
+
+            playerStatus.leftCrickCT = leftCrickCoolTime;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerStatus not found. Skill usage will not be properly restricted.");
         }
         
-        playerStatus.leftCrickCT = leftCrickCoolTime;
 
 
         if (esc == null)
@@ -87,6 +96,23 @@ public class ChainBullet : MonoBehaviour
         {
             seManager = FindAnyObjectByType<SEManager>();
         }
+    }
+
+    void OnPlayerControlStateChanged(PlayerControlState playerControlState) => CanUseChanged(playerControlState);
+
+    void CanUseChanged(PlayerControlState state)
+    {
+        
+        if (state == PlayerControlState.BattleStart || state == PlayerControlState.BattleFinished)
+        {
+            canUseSkill = false;
+        }
+        else
+        {
+            canUseSkill = true;
+        }
+        
+
     }
 
 

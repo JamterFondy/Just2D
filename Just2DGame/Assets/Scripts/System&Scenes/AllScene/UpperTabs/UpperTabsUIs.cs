@@ -59,7 +59,7 @@ public class UpperTabsUIs : MonoBehaviour
     void UpdateVisibility(SceneType scene)
     {
         if (target == null) return;
-        target.SetActive(scene != SceneType.Battle && scene != SceneType.Title);
+        target.SetActive(scene != SceneType.Battle && scene != SceneType.Title && scene != SceneType.Loading);
     }
 
     public void GoBackHome()

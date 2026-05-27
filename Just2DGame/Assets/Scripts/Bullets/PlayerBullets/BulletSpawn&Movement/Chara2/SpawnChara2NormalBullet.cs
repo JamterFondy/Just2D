@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SpawnChara2NormalBullet : MonoBehaviour
 {
+    PlayerStatus playerStatus;
+
     BattleESC esc;
 
     [Header("Spawn Settings")]
@@ -16,14 +18,29 @@ public class SpawnChara2NormalBullet : MonoBehaviour
     [SerializeField] float sinAmplitude = 0.5f;
     [SerializeField] float sinFrequency = 4f; // radians per second
 
-    bool spawnToggle = false; // toggled by V key
+    bool SpaceToggle = false;
     public bool canUseSkill = false; //BattleManagerによってtrueにされるのを待つ。CharacterIDに応じて使えるスキルを制限するため。
 
     Coroutine spawnCoroutine;
 
+
+    void Awake()
+    {
+        canUseSkill = false;
+
+        playerStatus = FindAnyObjectByType<PlayerStatus>();
+        if (playerStatus != null)
+        {
+            playerStatus.PlayerControlStateChanged += OnPlayerControlStateChanged;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerStatus not found. Skill usage will not be properly restricted.");
+        }
+    }
     void Start()
     {
-        spawnToggle = false;
+        SpaceToggle = false;
 
         esc = FindAnyObjectByType<BattleESC>();
     }
@@ -33,8 +50,8 @@ public class SpawnChara2NormalBullet : MonoBehaviour
         // Toggle spawning with Space key
         if (Input.GetKeyDown(KeyCode.Space) && !esc.isPaused && canUseSkill)
         {
-            spawnToggle = !spawnToggle;
-            if (spawnToggle)
+            SpaceToggle = !SpaceToggle;
+            if (SpaceToggle)
             {
                 spawnCoroutine = StartCoroutine(SpawnLoop());
             }
@@ -46,6 +63,24 @@ public class SpawnChara2NormalBullet : MonoBehaviour
         }
     }
 
+    void OnPlayerControlStateChanged(PlayerControlState playerControlState) => CanUseChanged(playerControlState);
+
+    void CanUseChanged(PlayerControlState state)
+    {
+        
+        if (state == PlayerControlState.BattleStart || state == PlayerControlState.BattleFinished)
+        {
+            canUseSkill = false;
+            SpaceToggle = false; // スキル使用不可の状態になったらスペーストグルもリセット。
+        }
+        else
+        {
+            canUseSkill = true;
+        }
+        
+
+    }
+
     IEnumerator SpawnLoop()
     {
         if (prefab == null)
@@ -54,7 +89,7 @@ public class SpawnChara2NormalBullet : MonoBehaviour
             yield break;
         }
 
-        while (true)
+        while (SpaceToggle)
         {
             Vector3 basePos = transform.position + Vector3.right * spawnXOffset;
             Vector3 topPos = basePos + Vector3.up * spawnYOffset;

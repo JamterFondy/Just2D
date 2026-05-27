@@ -9,6 +9,7 @@ public class BattleFinish : MonoBehaviour
     [SerializeField] NextStageLoader nextStageLoader;
 
     UIManager uiManager;
+    PlayerStatus playerStatus;
 
     static BattleFinish _instance;
     public static BattleFinish Instance
@@ -37,6 +38,7 @@ public class BattleFinish : MonoBehaviour
         nextStageLoader = FindAnyObjectByType<NextStageLoader>();
 
         uiManager = FindAnyObjectByType<UIManager>();
+        playerStatus = FindAnyObjectByType<PlayerStatus>();
     }
 
     public IEnumerator BossDied(GameObject bossEnemy)
@@ -49,6 +51,7 @@ public class BattleFinish : MonoBehaviour
         Destroy(bossEnemy);
 
         uiManager.currentState = UIState.PlayerWin;
+        playerStatus.currentControlState = PlayerControlState.BattleFinished;
     }
 
     public IEnumerator PlayerDied()
@@ -56,6 +59,7 @@ public class BattleFinish : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         uiManager.currentState = UIState.PlayerLose;
+        playerStatus.currentControlState = PlayerControlState.BattleFinished;
     }
 
 

@@ -5407,6 +5407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f59e3bddd6c55e4b88424de887d36ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  uiManager: {fileID: 0}
   esc: {fileID: 0}
   speed: 6
   IsPlayerMoving: 0
@@ -5423,6 +5424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb60f01fb5b3ba84081738433fe2ff93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  playerBulletSets:
+  - {fileID: 295867566}
+  - {fileID: 1007822212}
   invincibilityDuration: 1
   characterID: 0
   hp: 0

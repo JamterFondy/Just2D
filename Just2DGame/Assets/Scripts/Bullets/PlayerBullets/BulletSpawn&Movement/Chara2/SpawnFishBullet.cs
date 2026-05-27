@@ -4,12 +4,14 @@ using System.Collections.Generic;
 
 public class SpawnFishBullet : MonoBehaviour
 {
+    PlayerStatus playerStatus;
+
+
     [SerializeField] Sprite chargingSprite; // クールタイム中のスプライト
     [SerializeField] Sprite fullSprite;// ゲージ満タンのスプライト
 
     Camera cam;
     [SerializeField] SkillGage skillGage;
-    PlayerStatus playerStatus;
 
     [SerializeField] BattleESC esc;
 
@@ -36,12 +38,17 @@ public class SpawnFishBullet : MonoBehaviour
 
     void Start()
     {
-        if (playerStatus == null)
+        playerStatus = FindAnyObjectByType<PlayerStatus>();
+        if (playerStatus != null)
         {
-            playerStatus = FindAnyObjectByType<PlayerStatus>();
-        }
+            playerStatus.PlayerControlStateChanged += OnPlayerControlStateChanged;
 
-        playerStatus.leftCrickCT = leftCrickCoolTime;
+            playerStatus.leftCrickCT = leftCrickCoolTime;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerStatus not found. Skill usage will not be properly restricted.");
+        }
 
 
         if (esc == null)
@@ -57,6 +64,22 @@ public class SpawnFishBullet : MonoBehaviour
         {
             skillGage = FindAnyObjectByType<SkillGage>().GetComponent<SkillGage>();
         }
+
+    }
+    void OnPlayerControlStateChanged(PlayerControlState playerControlState) => CanUseChanged(playerControlState);
+
+    void CanUseChanged(PlayerControlState state)
+    {
+        
+        if (state == PlayerControlState.BattleStart || state == PlayerControlState.BattleFinished)
+        {
+            canUseSkill = false;
+        }
+        else
+        {
+            canUseSkill = true;
+        }
+        
 
     }
 
