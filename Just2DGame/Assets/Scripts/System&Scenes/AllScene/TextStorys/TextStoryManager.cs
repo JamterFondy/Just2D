@@ -316,8 +316,6 @@ public class TextStoryManager : MonoBehaviour
     {
         if (!ctx.started) return;
 
-        Debug.Log("クリック検知");
-
         if(storyMode != StoryMode.None && isTextClicked == false)
         {
             isTextClicked = true;
