@@ -18,7 +18,7 @@ public class CharacterData
 }
 public class CharacterInfo : MonoBehaviour
 {
-    public string id,charaName, level, hp, atk, def, normalAttackLevel, skillLevel, ultLevel;
+    public string id, charaName, exp, level, hp, atk, def, normalAttackLevel, skillLevel, ultLevel;
 
     // Cached references to child text UI components (supports Unity UI Text and TextMeshProUGUI)
     Text nameText;
@@ -62,6 +62,7 @@ public class CharacterInfo : MonoBehaviour
             {
                 ID = 1,
                 Name = "Owner",
+                EXP = 0,
                 Level = 1,
                 HP = 100,
                 ATK = 10,
@@ -81,7 +82,7 @@ public class CharacterInfo : MonoBehaviour
         }
 
         // Apply loaded data to this component
-        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString(), data.DEF.ToString(), data.NormalAttackLevel.ToString(), data.SkillLevel.ToString(), data.UltLevel.ToString());
+        SetCharacterInfo(data.ID.ToString(), data.Name, data.EXP.ToString(), data.Level.ToString(), data.HP.ToString(), data.ATK.ToString(), data.DEF.ToString(), data.NormalAttackLevel.ToString(), data.SkillLevel.ToString(), data.UltLevel.ToString());
     }
 
     public void LoadCharacter2FromJson()// JSONファイルからCharacter2のデータを読み込みます。ファイルが存在しない場合はデフォルトのデータを作成して保存します。
@@ -114,14 +115,14 @@ public class CharacterInfo : MonoBehaviour
         }
 
         // Apply loaded data to this component
-        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString(), data.DEF.ToString(), data.NormalAttackLevel.ToString(), data.SkillLevel.ToString(), data.UltLevel.ToString());
+        SetCharacterInfo(data.ID.ToString(), data.Name, data.EXP.ToString(), data.Level.ToString(), data.HP.ToString(), data.ATK.ToString(), data.DEF.ToString(), data.NormalAttackLevel.ToString(), data.SkillLevel.ToString(), data.UltLevel.ToString());
     }
 
     // Allow setting info from a CharacterData instance
     public void SetCharacterInfoFromData(CharacterData data)
     {
         if (data == null) return;
-        SetCharacterInfo(data.ID.ToString(), data.Name, data.Level.ToString(), data.HP.ToString(), data.ATK.ToString(), data.DEF.ToString(), data.NormalAttackLevel.ToString(), data.SkillLevel.ToString(), data.UltLevel.ToString());
+        SetCharacterInfo(data.ID.ToString(), data.Name, data.EXP.ToString(), data.Level.ToString(), data.HP.ToString(), data.ATK.ToString(), data.DEF.ToString(), data.NormalAttackLevel.ToString(), data.SkillLevel.ToString(), data.UltLevel.ToString());
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -138,11 +139,12 @@ public class CharacterInfo : MonoBehaviour
         
     }
 
-    public void SetCharacterInfo(string id, string name, string level, string hp, string atk, string def, string normalAttackLevel, string skillLevel, string ultLevel)// キャラクターデータをこのコンポーネントにセットし、UIテキストも更新
+    public void SetCharacterInfo(string id, string name, string exp, string level, string hp, string atk, string def, string normalAttackLevel, string skillLevel, string ultLevel)// キャラクターデータをこのコンポーネントにセットし、UIテキストも更新
     {
 
         this.id = id;
         this.charaName = name;
+        this.exp = exp;
         this.level = level;
         this.hp = hp;
         this.atk = atk;
@@ -206,9 +208,14 @@ public class CharacterInfo : MonoBehaviour
         {
             ID = int.Parse(id),
             Name = charaName,
+            EXP = int.Parse(exp),
             Level = int.Parse(level),
             HP = int.Parse(hp),
-            ATK = int.Parse(atk)
+            ATK = int.Parse(atk),
+            DEF = int.Parse(def),
+            NormalAttackLevel = int.Parse(normalAttackLevel),
+            SkillLevel = int.Parse(skillLevel),
+            UltLevel = int.Parse(ultLevel)
         };
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(path, json);
@@ -223,9 +230,14 @@ public class CharacterInfo : MonoBehaviour
         {
             ID = int.Parse(id),
             Name = charaName,
+            EXP = int.Parse(exp),
             Level = int.Parse(level),
             HP = int.Parse(hp),
-            ATK = int.Parse(atk)
+            ATK = int.Parse(atk),
+            DEF = int.Parse(def),
+            NormalAttackLevel = int.Parse(normalAttackLevel),
+            SkillLevel = int.Parse(skillLevel),
+            UltLevel = int.Parse(ultLevel)
         };
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(path, json);

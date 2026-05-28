@@ -29,12 +29,17 @@ public class ResetLevel : MonoBehaviour
                 {
                     characterInfo.hp = "100";
                     characterInfo.atk = "10";
-
+                    characterInfo.def = "5";
+                    characterInfo.exp = "0";
                     characterInfo.level = "1";
+                    characterInfo.normalAttackLevel = "1";
+                    characterInfo.skillLevel = "1";
+                    characterInfo.ultLevel = "1";
+
                     Debug.Log("LevelUp: キャラクターレベルが1にリセットされました");
 
 
-                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk, characterInfo.def, characterInfo.normalAttackLevel, characterInfo.skillLevel, characterInfo.ultLevel); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
+                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.exp, characterInfo.level, characterInfo.hp, characterInfo.atk, characterInfo.def, characterInfo.normalAttackLevel, characterInfo.skillLevel, characterInfo.ultLevel); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
 
                     characterInfo.UpdateCharacter1Info();// キャラクターレベルリセット後の情報をJSONファイルに反映
                 }
@@ -49,10 +54,16 @@ public class ResetLevel : MonoBehaviour
                 {
                     characterInfo.hp = "110";
                     characterInfo.atk = "8";
+                    characterInfo.def = "3";
+                    characterInfo.exp = "0";
                     characterInfo.level = "1";
+                    characterInfo.normalAttackLevel = "1";
+                    characterInfo.skillLevel = "1";
+                    characterInfo.ultLevel = "1";
+
                     Debug.Log("LevelUp: キャラクターレベルが1にリセットされました");
 
-                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.level, characterInfo.hp, characterInfo.atk, characterInfo.def, characterInfo.normalAttackLevel, characterInfo.skillLevel, characterInfo.ultLevel); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
+                    characterInfo.SetCharacterInfo(characterInfo.id, characterInfo.charaName, characterInfo.exp, characterInfo.level, characterInfo.hp, characterInfo.atk, characterInfo.def, characterInfo.normalAttackLevel, characterInfo.skillLevel, characterInfo.ultLevel); // キャラクターレベルアップ後の情報をCharacterInfoコンポーネントに反映
 
                     characterInfo.UpdateCharacter2Info();
                 }
