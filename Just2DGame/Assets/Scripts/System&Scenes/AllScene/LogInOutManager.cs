@@ -24,6 +24,14 @@ public class LogInOutManager : MonoBehaviour
             Debug.Log($"{minutesOfLogout}");
 
         }
+        else
+        {
+            minutesOfLogout = 0;
+            PlayerPrefs.SetString("LastLogoutTime", "0");
+            Debug.Log("前回のログアウト時間が見つかりませんでした。");
+        }
+
+        DontDestroyOnLoad(this.gameObject);
     }
     
 
