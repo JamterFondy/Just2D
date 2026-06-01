@@ -38,25 +38,27 @@ public class FrainMovement : MonoBehaviour
         // 1は八の字を描くように移動。攻撃はなし。
         // 2は右画面中央で上下に移動。攻撃はなし。
         // 3は三角形を描くように高速移動。攻撃はなし。
+        StartCoroutine(MoveCommand(commandPattern));
+
 
         // 4は下から上に移動。移動中に自身の位置に炎を生成して左側に流す。
         // 5は上から下に移動。移動中に自身の位置に炎を生成して左側に流す。
         // 6は右画面中央に移動。左水平方向に炎を生成して上下に流す。
         // 7は右画面上側に移動。左下に向けて炎の弾を生成して斜めに流す。
         // 8は右画面下側に移動。左上に向けて炎の弾を生成して斜めに流す。
+        StartCoroutine(NormalAttackCommand(commandPattern));
+
 
         // 9は右画面中央に移動。左画面のランダムな位置３個所に危険信号を生成した後、その位置に円形に炎の弾を生成して流す。
         // 10は右画面中央に移動。左画面のランダムな位置5個所に危険信号を順次生成した後、その位置に円形に炎の弾を生成して流す。
         // 11は右画面中央に移動。画面水平中央に太い危険信号を生成した後、その軌道をなぞるように高速移動。通った軌道に沿って炎の弾を生成して斜めに流す。
+        StartCoroutine(SkillAttackCommand(commandPattern));
 
-        // 12は右画面中央に移動。カットインを挟んだのち自身の周囲に大きな円形の炎の弾を5つ生成してプレイヤーの位置に流す。大型の炎からは小型の炎が複数生成されてプレイヤーに向かって流れる。
 
-        StartCoroutine(RandomCommand(commandPattern));
-
-        yield return null;
+        yield break;
     }
 
-    IEnumerator RandomCommand(int commandPattern)
+    IEnumerator MoveCommand(int commandPattern)
     {
         if(commandPattern == 1)
         {
@@ -71,7 +73,79 @@ public class FrainMovement : MonoBehaviour
             // Move pattern 3 logic
         }
 
-        yield return null;
+
+        int attackCommandInt = Random.Range(4, 12); // 攻撃パターンをランダムに選択
+
+        if(attackCommandInt <= 8)
+        {
+            StartCoroutine(NormalAttackCommand(commandPattern));
+        }
+        else
+        {
+            StartCoroutine(SkillAttackCommand(attackCommandInt));
+        }
+
+        yield break;
+    }
+
+    IEnumerator NormalAttackCommand(int commandPattern)
+    {
+        if (commandPattern == 4)
+        {
+            // Normal attack pattern 1 logic
+        }
+        else if (commandPattern == 5)
+        {
+            // Normal attack pattern 2 logic
+        }
+        else if (commandPattern == 6)
+        {
+            // Normal attack pattern 3 logic
+        }
+        else if (commandPattern == 7)
+        {
+            // Normal attack pattern 4 logic
+        }
+        else if (commandPattern == 8)
+        {
+            // Normal attack pattern 5 logic
+        }
+
+
+        int moveCommandInt = Random.Range(1, 4); // 次の移動パターンをランダムに選択
+        StartCoroutine(MoveCommand(moveCommandInt));
+
+        yield break;
+    }
+
+    IEnumerator SkillAttackCommand(int commandPattern)
+    {
+        if (commandPattern == 9)
+        {
+            // Skill attack pattern 1 logic
+        }
+        else if (commandPattern == 10)
+        {
+            // Skill attack pattern 2 logic
+        }
+        else if (commandPattern == 11)
+        {
+            // Skill attack pattern 3 logic
+        }
+
+
+        int moveCommandInt = Random.Range(1, 4); // 次の移動パターンをランダムに選択
+        StartCoroutine(MoveCommand(moveCommandInt));
+
+        yield break;
+    }
+
+    IEnumerator ULTCommand()
+    {
+        //右画面中央に移動。カットインを挟んだのち自身の周囲に大きな円形の炎の弾を5つ生成してプレイヤーの位置に流す。
+        //大型の炎からは小型の炎が複数生成されてプレイヤーに向かって流れる。
+
+        yield break;
     }
 
 }
