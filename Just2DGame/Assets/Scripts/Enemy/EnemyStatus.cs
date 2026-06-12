@@ -36,7 +36,7 @@ public class EnemyStatus : MonoBehaviour
 
             // 弾側で計算したダメージを取得するためのコンポーネントを取得
             // Chara1
-            var chara1NormalDamage = collision.GetComponent<NormalDamage>();
+            var chara1NormalDamage = collision.GetComponent<NormalDamage>(); // ★ 当たった弾にコンポーネントがあるかどうか分かるなら、弾側でダメージ計算だけして、直接ApplyDamageを呼び出せばいいのでは？
             var chainDamage = collision.GetComponent<ChainDamage>();
             var lastChainDamage = collision.GetComponent<LastChainDamage>();
 

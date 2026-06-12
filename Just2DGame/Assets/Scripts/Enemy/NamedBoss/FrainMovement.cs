@@ -18,25 +18,144 @@ public class FrainMovement : MonoBehaviour
 {
     public FrainState currentState;
 
+    Rigidbody2D rb;
+
     int cycleChangedCount = 0; // サイクルの変化回数をカウント
     int cycleInterval = 1; // サイクルの変化間隔（秒）
 
     int hp = 10000; // EnemyStatusを全ての敵に適応できる形にしたら消すこと。
 　　int atk = 25; // EnemyStatusを全ての敵に適応できる形にしたら消すこと。
-    int speed = 20; // EnemyStatusを全ての敵に適応できる形にしたら消すこと。
+    int speed = 5; // EnemyStatusを全ての敵に適応できる形にしたら消すこと。
+
+    int commandPattern = 0;
+
+    Vector2 currentPos;
+    Vector2 targetPos;
+    bool isMoving12 = false;
+    bool isMoving3 = false;
+    bool isMoveCompleted = false;
+
+    bool isMove2FirstPos = false;
+    bool isMove2SecondPos = false;
+    bool isMove2ThirdPos = false;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        currentPos = rb.position;
+
         StartCoroutine(CycleManagement());
     }
 
+
+    void FixedUpdate()
+    {
+        if (!isMoving12 && !isMoving3) return;
+
+        if(commandPattern == 1 || commandPattern == 2)
+        {
+            currentPos = rb.position;
+            Vector2 dir = (targetPos - currentPos).normalized;
+
+            // 移動
+            rb.linearVelocity = dir * speed;
+
+            // ② 0.1未満ならスナップ
+            if (Vector2.Distance(currentPos, targetPos) < 0.1f)
+            {
+                rb.position = targetPos;
+                rb.linearVelocity = Vector2.zero;
+
+                isMoving12 = false;
+                isMoveCompleted = true;
+            }
+        }
+
+
+        if(commandPattern == 3)
+        {
+
+            if(!isMove2FirstPos && !isMove2SecondPos && !isMove2ThirdPos)
+            {
+                currentPos = rb.position;
+                Vector2 dir = (targetPos - currentPos).normalized;
+
+                rb.linearVelocity = dir * speed * 0.5f;
+
+                if (Vector2.Distance(currentPos, targetPos) < 0.1f)
+                {
+                    rb.position = targetPos;
+                    isMove2FirstPos = true;
+                    Debug.Log("最初の地点に移動");
+                }
+            }
+            else if(isMove2FirstPos)
+            {
+                targetPos = new Vector2(2, -3);
+
+                currentPos = rb.position;
+                Vector2 dir = (targetPos - currentPos).normalized;
+
+                rb.linearVelocity = dir * speed * 1.2f;
+
+                if (Vector2.Distance(currentPos, targetPos) < 0.1f)
+                {
+                    rb.position = targetPos;
+                    isMove2SecondPos = true;
+                    isMove2FirstPos = false;
+                    Debug.Log("1番目の地点に移動");
+                }
+            }
+            else if (isMove2SecondPos)
+            {
+                targetPos = new Vector2(2, 3);
+
+                currentPos = rb.position;
+                Vector2 dir = (targetPos - currentPos).normalized;
+
+                rb.linearVelocity = dir * speed * 1.2f;
+
+                if (Vector2.Distance(currentPos, targetPos) < 0.1f)
+                {
+                    rb.position = targetPos;
+                    isMove2ThirdPos = true;
+                    isMove2SecondPos = false;
+                    Debug.Log("2番目の地点に移動");
+                }
+            }
+            else if (isMove2ThirdPos)
+            {
+                targetPos = new Vector2(8, 0);
+
+                currentPos = rb.position;
+                Vector2 dir = (targetPos - currentPos).normalized;
+
+                rb.linearVelocity = dir * speed * 1.2f;
+
+                if (Vector2.Distance(currentPos, targetPos) < 0.1f)
+                {
+                    rb.position = targetPos;
+                    isMoving3 = false;
+                    isMoveCompleted = true;
+                    isMove2ThirdPos = false;
+                    Debug.Log("最期の地点に移動");
+
+                }
+            }
+
+
+        }
+        
+    }
+
+
     IEnumerator CycleManagement()
     {     
-        int commandPattern = Random.Range(1, 12); // 動きと行動のパターンをランダムに選択
+        commandPattern = Random.Range(1, 4); // 動きと行動のパターンをランダムに選択
                                                   // 1から3は移動パターン。攻撃なし。4から8は通常攻撃。9から11はスキル攻撃。12はカットインを挟んでからウルト攻撃。
 
-        // 1は八の字を描くように移動。攻撃はなし。
-        // 2は右画面中央で上下に移動。攻撃はなし。
+        // 1は上に移動。攻撃はなし。
+        // 2は下に移動。攻撃はなし。
         // 3は三角形を描くように高速移動。攻撃はなし。
         StartCoroutine(MoveCommand(commandPattern));
 
@@ -58,35 +177,55 @@ public class FrainMovement : MonoBehaviour
         yield break;
     }
 
+
     IEnumerator MoveCommand(int commandPattern)
     {
-        if(commandPattern == 1)
+        isMoveCompleted = true;
+
+        if(commandPattern == 1 && isMoveCompleted)
         {
-            // Move pattern 1 logic
+            int randomPosX = Random.Range(2, 9);
+            targetPos = new Vector2(randomPosX, 3);
+
+            isMoveCompleted = false;
+            isMoving12 = true;
+
         }
-        else if(commandPattern == 2)
+        else if(commandPattern == 2 && isMoveCompleted)
         {
-            // Move pattern 2 logic
+            int randomPosX = Random.Range(2, 9);
+            targetPos = new Vector2(randomPosX, -3);
+
+            isMoveCompleted = false;
+            isMoving12 = true;
         }
-        else if(commandPattern == 3)
+        else if(commandPattern == 3 && isMoveCompleted)
         {
-            // Move pattern 3 logic
+            targetPos = new Vector2(4.5f, 0);
+
+            isMoveCompleted = false;
+            isMoving3 = true;
         }
 
 
-        int attackCommandInt = Random.Range(4, 12); // 攻撃パターンをランダムに選択
+        yield return new WaitUntil(() => isMoveCompleted);
+        yield return new WaitForSeconds(1f);
 
-        if(attackCommandInt <= 8)
+
+        commandPattern = Random.Range(4, 12); // 攻撃パターンをランダムに選択
+
+        if(commandPattern <= 8)
         {
             StartCoroutine(NormalAttackCommand(commandPattern));
         }
         else
         {
-            StartCoroutine(SkillAttackCommand(attackCommandInt));
+            StartCoroutine(SkillAttackCommand(commandPattern));
         }
 
         yield break;
     }
+
 
     IEnumerator NormalAttackCommand(int commandPattern)
     {
@@ -112,11 +251,12 @@ public class FrainMovement : MonoBehaviour
         }
 
 
-        int moveCommandInt = Random.Range(1, 4); // 次の移動パターンをランダムに選択
-        StartCoroutine(MoveCommand(moveCommandInt));
+        commandPattern = Random.Range(1, 4); // 次の移動パターンをランダムに選択
+        StartCoroutine(MoveCommand(commandPattern));
 
         yield break;
     }
+
 
     IEnumerator SkillAttackCommand(int commandPattern)
     {
@@ -134,11 +274,12 @@ public class FrainMovement : MonoBehaviour
         }
 
 
-        int moveCommandInt = Random.Range(1, 4); // 次の移動パターンをランダムに選択
-        StartCoroutine(MoveCommand(moveCommandInt));
+        commandPattern = Random.Range(1, 4); // 次の移動パターンをランダムに選択
+        StartCoroutine(MoveCommand(commandPattern));
 
         yield break;
     }
+
 
     IEnumerator ULTCommand()
     {
