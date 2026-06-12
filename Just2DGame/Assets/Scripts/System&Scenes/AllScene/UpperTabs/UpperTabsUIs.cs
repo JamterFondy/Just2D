@@ -81,7 +81,6 @@ public class UpperTabsUIs : MonoBehaviour
         }
     }
 
-
     public void OpenSettings()
     {
         if (uiManager.currentState != UIState.Settings)
@@ -94,6 +93,17 @@ public class UpperTabsUIs : MonoBehaviour
         {
             uiManager.currentState = preState;
             seManager.PlaySE("Button", "Cancel_Button", "Cancel");
+        }
+    }
+
+
+    // スクラップ数の変動をボタンのテキストに反映
+    public void ScrapNumChanged()
+    {
+        if(PlayerPrefs.HasKey("ScrapNum"))
+        {
+            scrapNum = PlayerPrefs.GetInt("ScrapNum");
+            scrapNumText.text = scrapNum.ToString();
         }
     }
 

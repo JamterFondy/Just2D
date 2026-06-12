@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class LevelUp : MonoBehaviour
 {
     [SerializeField] CharacterInfo characterInfo;
+    [SerializeField] UpperTabsUIs upperTabsUIs;
 
     int level, hp, atk;
 
@@ -11,6 +12,7 @@ public class LevelUp : MonoBehaviour
     void Start()
     {
         characterInfo = FindAnyObjectByType<CharacterInfo>();
+        upperTabsUIs = FindAnyObjectByType<UpperTabsUIs>();
     }
 
     int CalculateRequiredScrap(int charaID, int currentLevel)
@@ -49,7 +51,7 @@ public class LevelUp : MonoBehaviour
 
        if (characterInfo != null)
         {
-            if(characterInfo.id == "1" && int.Parse(characterInfo.level) < 99)
+            if(characterInfo.id == "1" && int.Parse(characterInfo.level) < 99) // キャラ１の場合の処理
             {
                 int requiredScrap = CalculateRequiredScrap(int.Parse(characterInfo.id), int.Parse(characterInfo.level));
                 Debug.Log("LevelUp: レベルアップに必要なスクラップ数は " + requiredScrap + " です");
@@ -95,6 +97,10 @@ public class LevelUp : MonoBehaviour
 
 
                 }
+
+                // スクラップ数の変動をUpperTabsのスクラップ数表示に反映
+                upperTabsUIs.ScrapNumChanged();
+
             }
             else if(characterInfo.id == "2" && int.Parse(characterInfo.level) < 99) // キャラ２に以降も同様の処理を行う。
             {
@@ -132,6 +138,10 @@ public class LevelUp : MonoBehaviour
 
 
                 }
+
+                // スクラップ数の変動をUpperTabsのスクラップ数表示に反映
+                upperTabsUIs.ScrapNumChanged();
+
             }
         }
     }
