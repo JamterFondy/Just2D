@@ -2143,7 +2143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &711846477
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2265,7 +2265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6a6a6747644b646ac1086817c6ac98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FrainMovement
-  currentState: 0
 --- !u!50 &711846481
 Rigidbody2D:
   serializedVersion: 5
@@ -4663,7 +4662,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -56.018673, y: 0, z: -57.01013, w: 0}
+  m_margin: {x: -108.11856, y: 0, z: -110.09302, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
