@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b8aff48db7bc14ba99575a0f5469ab, type: 3}
   m_Name: ZakoSpeed
   m_EditorClassIdentifier: Assembly-CSharp::ZakoSpeedSO
-  hp: 0
-  atk: 0
-  speed: 0
+  hp: 50
+  atk: 10
+  speed: 5
   def: 0
-  runtimeATK: 0
+  runtimeATK: 10
   runtimeDEF: 0
-  runtimeSPEED: 0
+  runtimeSPEED: 5
