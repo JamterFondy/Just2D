@@ -201,7 +201,7 @@ public class ChainBullet : MonoBehaviour
             spawnedPrefab2.Add(new MovingInstance { obj = go, dir = (end - start).normalized });
 
             // 最後の生成なので拘束属性を追加（最後専用）
-            TryAddRestraintToFinal(go);
+            //TryAddRestraintToFinal(go);
 
             onComplete?.Invoke();
             yield break;
@@ -246,7 +246,7 @@ public class ChainBullet : MonoBehaviour
                 seManager.PlaySE("Skill", "ChainSkill2_Skill", "ChainSkill2");
 
                 // 最終位置に生成した prefab2Final（または fallback の prefab）に拘束属性を追加（最後専用）
-                TryAddRestraintToFinal(go);
+                // TryAddRestraintToFinal(go);
 
                 break;
             }
@@ -255,18 +255,6 @@ public class ChainBullet : MonoBehaviour
         onComplete?.Invoke();
     }
 
-    // 最終弾専用に拘束コンポーネントを付与する（既に付いていればパラメータをセット）
-    void TryAddRestraintToFinal(GameObject go)
-    {
-        if (go == null) return;
-
-        var rb = go.GetComponent<RestraintBullet>();
-        if (rb == null)
-            rb = go.AddComponent<RestraintBullet>();
-
-        rb.restraintDuration = restraintDuration;
-        rb.destroyOnTrigger = restraintDestroyBulletOnTrigger;
-    }
 
     IEnumerator DelayThenMoveCoroutine(float delay, float moveSpeed, float cooltime)
     {

@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
   player: {fileID: 0}
-  collarBoss: {fileID: 11400000, guid: fa1c0559ec2751c4c9bfa6301a3e9533, type: 2}
+  enemyGeneralStatus: {fileID: 11400000, guid: fa1c0559ec2751c4c9bfa6301a3e9533, type: 2}
   loadingManager: {fileID: 0}
   hp: 1000
   atk: 0

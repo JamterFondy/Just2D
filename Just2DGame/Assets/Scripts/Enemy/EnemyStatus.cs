@@ -1,10 +1,31 @@
 using UnityEngine;
 using System.Collections;
 
+public enum EnemyState
+{
+    // 一般種類
+
+    Idle,
+    Move,
+    Attack,
+    Damaged,
+    Die
+}
+
+public enum Affected
+{
+    // 外部からの状態異常
+
+    None, //状態なしor状態回復
+    Restricted, // 移動制限状態
+    Resonance, // 共鳴状態
+    Burn // 燃焼状態
+}
+
 public class EnemyStatus : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] CollarBoss collarBoss;
+    [SerializeField] EnemyGeneralStatus enemyGeneralStatus;
     [SerializeField] LoadingManager loadingManager;
     BossEnemy bossEnemy;
 
@@ -13,6 +34,9 @@ public class EnemyStatus : MonoBehaviour
     public int def;
     public int speed;
 
+    public EnemyState currentState;
+    public Affected currentAffected;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,10 +44,13 @@ public class EnemyStatus : MonoBehaviour
         loadingManager = FindAnyObjectByType<LoadingManager>();
         bossEnemy = this.gameObject.GetComponent<BossEnemy>();
 
-        hp = (int)collarBoss.runtimeHP;
-        atk = (int)collarBoss.runtimeATK;
-        def = (int)collarBoss.runtimeDEF;
-        speed = (int)collarBoss.runtimeSPEED;
+        hp = enemyGeneralStatus.hp;
+        atk = enemyGeneralStatus.atk;
+        def = enemyGeneralStatus.def;
+        speed = (int)enemyGeneralStatus.speed;
+
+        currentState = EnemyState.Idle;
+        currentAffected = Affected.None;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,6 +84,8 @@ public class EnemyStatus : MonoBehaviour
             else if (lastChainDamage != null)
             {
                 damage = lastChainDamage.GetDamage();
+
+                StartCoroutine(GetAffected(Affected.Restricted, 2f)); // ToDo 一時的に値を設定しているだけ。本来は外部(弾側)からこの関数を呼び出すか、秒数を外部から受け渡す形にするべき。
             }
             else if (chara2NormalDamage != null) // ここからChara2の弾のダメージ判定
             {
@@ -90,6 +119,17 @@ public class EnemyStatus : MonoBehaviour
                 bossEnemy.BossDied();
             }
         }
+    }
+
+    public IEnumerator GetAffected(Affected AffectType, float AffectTime)
+    {
+        currentAffected = AffectType;
+
+        yield return new WaitForSeconds(AffectTime);
+
+        currentAffected = Affected.None;
+
+        yield break;
     }
 
     void Die()

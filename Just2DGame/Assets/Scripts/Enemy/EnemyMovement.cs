@@ -27,8 +27,12 @@ public class EnemyMovement : MonoBehaviour
     bool isRestrained = false;
     float restraintTimer = 0f;
 
+    EnemyStatus enemyStatus;
+
     void Start()
     {
+        enemyStatus = GetComponent<EnemyStatus>();
+
         startPosition = transform.position;
         omega = 2f * Mathf.PI * Mathf.Max(0f, bobFrequency);
 
@@ -45,20 +49,8 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         // 拘束中は一切の移動をしない（回避含む）
-        if (isRestrained)
-        {
-            restraintTimer -= Time.deltaTime;
-            if (restraintTimer <= 0f)
-            {
-                isRestrained = false;
-                restraintTimer = 0f;
-            }
-            else
-            {
-                // 拘束中は位置を更新しない（ただしカメラ外判定等は不要）
-                return;
-            }
-        }
+        if (enemyStatus.currentAffected == Affected.Restricted) return;
+
 
         Vector3 avoid = Vector3.zero;
         GameObject[] bullets = GameObject.FindGameObjectsWithTag(bulletTag);
