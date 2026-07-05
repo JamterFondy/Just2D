@@ -1,12 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ZakoSpeed", menuName = "Scriptable Objects/ZakoSpeed")]
-public class ZakoSpeedSO : ScriptableObject, ISerializationCallbackReceiver
+[CreateAssetMenu(menuName = "Enemy/ZakoSpeed")]
+public class ZakoSpeedSO : EnemyGeneralStatus, ISerializationCallbackReceiver
 {
-    public int hp = 10;
-    public int atk = 15;
-    public int def = 0;
-    public int speed = 10;
 
     [System.NonSerialized] //参照して使用するのはここ
     public float runtimeHP;

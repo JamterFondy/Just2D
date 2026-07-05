@@ -1,12 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CollarBoss", menuName = "Scriptable Objects/CollarBoss")]
-public class CollarBoss : ScriptableObject, ISerializationCallbackReceiver
+[CreateAssetMenu(menuName = "Enemy/CollarBoss")]
+public class CollarBoss : EnemyGeneralStatus, ISerializationCallbackReceiver
 {
-    public int hp = 100;
-    public int atk = 20;
-    public int def = 5;
-    public int speed = 5;
+
+    public int phase2HP;
 
     [System.NonSerialized] //参照して使用するのはここ
     public float runtimeHP;
