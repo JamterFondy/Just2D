@@ -31,10 +31,6 @@ public class ChainBullet : MonoBehaviour
     // 追加: prefab2 の向きがスプライトのデフォルト向きと合わない場合に調整するオフセット（度）
     [SerializeField] float prefab2RotationOffset = 0f;
 
-    // 追加: 最後に生成される prefab2 に付与する拘束の継続時間（秒）
-    [Header("Restraint (最後の prefab2 に付与)")]
-    [SerializeField] float restraintDuration = 1.5f;
-    [SerializeField] bool restraintDestroyBulletOnTrigger = false;
 
     public bool canUseSkill = false; //BattleManagerによってtrueにされるのを待つ。CharacterIDに応じて使えるスキルを制限するため。
 

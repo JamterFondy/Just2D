@@ -23,10 +23,6 @@ public class EnemyMovement : MonoBehaviour
     float omega;
     int horizontalDirection = -1;
 
-    // 追加: 拘束状態管理
-    bool isRestrained = false;
-    float restraintTimer = 0f;
-
     EnemyStatus enemyStatus;
 
     void Start()
@@ -112,13 +108,13 @@ public class EnemyMovement : MonoBehaviour
     }
 
     // 外部から拘束を適用するための API
-    public void ApplyRestraint(float duration)
-    {
-        if (duration <= 0f) return;
-        isRestrained = true;
+    //public void ApplyRestraint(float duration)
+    //{
+    //  if (duration <= 0f) return;
+    //    isRestrained = true;
         // 新たに適用された拘束は現在の残り時間を上書きせず、長い方を採用
-        restraintTimer = Mathf.Max(restraintTimer, duration);
-    }
+    //    restraintTimer = Mathf.Max(restraintTimer, duration);
+    //}
 
     void OnDrawGizmosSelected()
     {

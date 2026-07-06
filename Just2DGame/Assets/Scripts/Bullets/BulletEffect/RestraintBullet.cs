@@ -25,7 +25,7 @@ public class RestraintBullet : MonoBehaviour
 
         if (enemy != null)
         {
-            enemy.ApplyRestraint(restraintDuration);
+            //enemy.ApplyRestraint(restraintDuration);
             if (destroyOnTrigger)
                 Destroy(gameObject);
         }

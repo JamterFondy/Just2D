@@ -30,11 +30,6 @@ public class CharaInfoServer : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SetCharacterInfo()//GameSceneにいるPlayerStatusに渡すキャラクターの情報を受け取る関数
     {
