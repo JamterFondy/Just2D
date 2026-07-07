@@ -9,22 +9,13 @@ public class GoToBattleMap : MonoBehaviour
     [SerializeField] GameObject target;
     [SerializeField] LoadingManager loadingManager;
 
-    UIManager uiManager;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindAnyObjectByType<UIManager>();
-        if (uiManager != null)
-        {
-            uiManager.StateChanged += OnStateChanged;
-            UpdateVisibility(uiManager.currentState);
-        }
-        else
-        {
-            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
-        }
+        
+        UIManager.Instance.StateChanged += OnStateChanged;
+        UpdateVisibility(UIManager.Instance.currentState);
     }
 
     void Start()
@@ -41,7 +32,7 @@ public class GoToBattleMap : MonoBehaviour
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
+        UIManager.Instance.StateChanged -= OnStateChanged;
     }
 
     void OnStateChanged(UIState state) => UpdateVisibility(state);
@@ -54,8 +45,8 @@ public class GoToBattleMap : MonoBehaviour
 
     public void OnClick()
     {
-        uiManager.currentScene = SceneType.Loading;
-        uiManager.currentState = UIState.Loading;
+        UIManager.Instance.currentScene = SceneType.Loading;
+        UIManager.Instance.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
     } 

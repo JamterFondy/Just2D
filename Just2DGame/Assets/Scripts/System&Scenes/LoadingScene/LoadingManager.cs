@@ -1,18 +1,29 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class LoadingManager : MonoBehaviour
 {
-    UIManager uiManager;
-
     public float loadTimeout = 30f; // seconds to wait before considering load failed
+
+    public static LoadingManager Instance { get; private set; }
+
+    void Awake()
+    {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+    }
 
     void Start()
     {
-        // Persist the GameObject so the loading coroutine survives scene changes
         DontDestroyOnLoad(gameObject);
-        uiManager = FindAnyObjectByType<UIManager>();
     }
 
     // LoadingScene を先に読み込んでから target を読み込む例
@@ -126,10 +137,8 @@ public class LoadingManager : MonoBehaviour
             SceneManager.SetActiveScene(newlyLoaded);
 
         string newSceneName = targetSceneName;
-        if (uiManager != null)
-        {
-            uiManager.LoadSceneReceive(targetSceneName);
-        }
+        
+        UIManager.Instance.LoadSceneReceive(targetSceneName);
 
         // 8) Loading シーンをアンロード（存在するか確認してから実行）
         if (loadingScene.IsValid() && loadingScene.isLoaded)

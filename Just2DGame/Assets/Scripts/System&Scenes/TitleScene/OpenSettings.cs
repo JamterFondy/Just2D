@@ -4,29 +4,19 @@ using UnityEngine.UI;
 public class OpenSettings : MonoBehaviour
 {
     [SerializeField] GameObject target;
-    UIManager uiManager;
-    SEManager seManager;
 
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindAnyObjectByType<UIManager>();
-        if (uiManager != null)
-        {
-            uiManager.StateChanged += OnStateChanged;
-            UpdateVisibility(uiManager.currentState);
-        }
-        else
-        {
-            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
-        }
-
-        seManager = FindAnyObjectByType<SEManager>();
+       
+        UIManager.Instance.StateChanged += OnStateChanged;
+        UpdateVisibility(UIManager.Instance.currentState);
+        
     }
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
+        UIManager.Instance.StateChanged -= OnStateChanged;
     }
 
     void OnStateChanged(UIState state) => UpdateVisibility(state);
@@ -41,7 +31,7 @@ public class OpenSettings : MonoBehaviour
 
     public void OnClick()
     {    
-         uiManager.currentState = UIState.Settings;
-         seManager.PlaySE("Button", "Confirm_Button", "Confirm");
+         UIManager.Instance.currentState = UIState.Settings;
+         SEManager.Instance.PlaySE("Button", "Confirm_Button", "Confirm");
     }
 }

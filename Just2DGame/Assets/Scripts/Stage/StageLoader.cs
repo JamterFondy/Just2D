@@ -8,7 +8,6 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class StageLoader : MonoBehaviour
 {
     private StageLayout layout;
-    public BGManager bgManager;
     public GameObject[] enemyPrefabs;
     public GameObject BossHPBar;
 
@@ -53,10 +52,6 @@ public class StageLoader : MonoBehaviour
         public QuestData questData;
     }
 
-    void Awake()
-    {
-        bgManager = FindAnyObjectByType<BGManager>();
-    }
     void Start()
     {
         LoadJson();
@@ -90,15 +85,8 @@ public class StageLoader : MonoBehaviour
         string bgmName = layout.stageData.BGM;
 
 
-        if (bgManager != null)
-        {
-            bgManager.PlayBattleBGM(bgmName);
+        BGManager.Instance.PlayBattleBGM(bgmName);
            
-        }
-        else
-        {
-            Debug.Log("BGManagerなんかねぇよ");
-        }
     }
 
     void LoadQuestData()

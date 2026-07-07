@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] UIManager uiManager;
     [SerializeField] BattleESC esc;
 
     [SerializeField] float speed = 6f;

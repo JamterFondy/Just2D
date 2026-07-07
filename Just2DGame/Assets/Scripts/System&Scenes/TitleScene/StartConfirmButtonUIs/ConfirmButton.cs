@@ -6,16 +6,6 @@ using static UnityEngine.CullingGroup;
 
 public class ConfirmButton : MonoBehaviour
 {
-    UIManager uiManager;
-    SEManager seManager;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        uiManager = FindAnyObjectByType<UIManager>();
-        seManager = FindAnyObjectByType<SEManager>();
-    }
-
     public void OnClick()
     {
         // 1) 指定したフォルダ内のJSONファイルを削除
@@ -82,26 +72,13 @@ public class ConfirmButton : MonoBehaviour
 
 
         // 4) ローディングの開始処理
-        var loadingManager = FindAnyObjectByType<LoadingManager>();
-        if (loadingManager == null)
-        {
-            var newLoadingManager = new GameObject("LoadingManager");
-            loadingManager = newLoadingManager.AddComponent<LoadingManager>();
-        }
+        UIManager.Instance.currentScene = SceneType.Loading;
+        UIManager.Instance.currentState = UIState.Loading;
 
-        if (loadingManager != null)
-        {
-            uiManager.currentScene = SceneType.Loading;
-            uiManager.currentState = UIState.Loading;
+        SEManager.Instance.PlaySE("Button", "Confirm_Button", "Confirm");
 
-            seManager.PlaySE("Button", "Confirm_Button", "Confirm");
-
-            loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
-        }
-        else
-        {
-            Debug.LogError("ConfirmButton: Failed to find or create LoadingManager.");
-        }
+        LoadingManager.Instance.StartCoroutine(LoadingManager.Instance.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
+        
     }
 }
 

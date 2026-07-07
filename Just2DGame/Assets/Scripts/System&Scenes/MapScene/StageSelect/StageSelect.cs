@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class StageSelect : MonoBehaviour
 {
-    UIManager uiManager;
     StageSelectManager stageSelectManager;
 
     string objName;
@@ -13,7 +12,6 @@ public class StageSelect : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        uiManager = FindAnyObjectByType<UIManager>();
         stageSelectManager = FindAnyObjectByType<StageSelectManager>();
 
         objName = gameObject.name;
@@ -35,7 +33,7 @@ public class StageSelect : MonoBehaviour
 
     public void OnClick()
     {
-        uiManager.currentState = UIState.StageInfo;
+        UIManager.Instance.currentState = UIState.StageInfo;
         stageSelectManager.stageNum = stageNum;
     }
 }

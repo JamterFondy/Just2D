@@ -7,18 +7,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class MapESC : MonoBehaviour
 {
-    [SerializeField] LoadingManager loadingManager;
-    UIManager uiManager;
-
-
-
-    void Start()
-    {
-        uiManager = FindAnyObjectByType<UIManager>();
-        loadingManager = FindAnyObjectByType<LoadingManager>();
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -30,19 +18,19 @@ public class MapESC : MonoBehaviour
 
     public void OnClick()
     {
-       if(uiManager.currentState == UIState.StageInfo)
+       if(UIManager.Instance.currentState == UIState.StageInfo)
        {
-           uiManager.currentState = UIState.StageMapDefault;
+           UIManager.Instance.currentState = UIState.StageMapDefault;
        }
        else
        {
-            if(uiManager.currentState == UIState.Settings) return; 
+            if(UIManager.Instance.currentState == UIState.Settings) return; 
 
-            uiManager.currentScene = SceneType.Loading;
-            uiManager.currentState = UIState.Loading;
+            UIManager.Instance.currentScene = SceneType.Loading;
+            UIManager.Instance.currentState = UIState.Loading;
 
 
-            loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
+            LoadingManager.Instance.StartCoroutine(LoadingManager.Instance.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
        }
     }
 }
