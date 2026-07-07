@@ -10,16 +10,9 @@ public class BattleESC : MonoBehaviour
     public bool isPaused = false;
     Coroutine resumeCoroutine;
 
-    UIManager uiManager;
-
-    void Start()
-    {
-        uiManager = FindAnyObjectByType<UIManager>();
-    }
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && uiManager.currentState != UIState.PlayerLose)
+        if (Input.GetKeyDown(KeyCode.Escape) && UIManager.Instance.currentState != UIState.PlayerLose)
         {
             if (!isPaused)
             {
@@ -34,7 +27,7 @@ public class BattleESC : MonoBehaviour
         Time.timeScale = 0f;
         AudioListener.pause = true;
 
-        uiManager.currentState = UIState.BattlePauseMenu;
+        UIManager.Instance.currentState = UIState.BattlePauseMenu;
 
         isPaused = true;
         Debug.Log("Game paused. Press ESC again to start " + resumeDelay + "s resume timer.");
@@ -54,7 +47,7 @@ public class BattleESC : MonoBehaviour
             Debug.Log("Resume cancelled. Still paused.");
         }
 
-        uiManager.currentState = UIState.InBattle;
+        UIManager.Instance.currentState = UIState.InBattle;
     }
 
 

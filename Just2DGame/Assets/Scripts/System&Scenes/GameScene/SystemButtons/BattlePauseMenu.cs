@@ -5,7 +5,6 @@ public class BattlePauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject target;
     [SerializeField] TMP_Text stageName;
-    UIManager uiManager;
     BattleESC battleESC;
     BattleFinish battleFinish;
 
@@ -14,21 +13,15 @@ public class BattlePauseMenu : MonoBehaviour
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindAnyObjectByType<UIManager>();
-        if (uiManager != null)
-        {
-            uiManager.StateChanged += OnStateChanged;
-            UpdateVisibility(uiManager.currentState);
-        }
-        else
-        {
-            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
-        }
+       
+        UIManager.Instance.StateChanged += OnStateChanged;
+        UpdateVisibility(UIManager.Instance.currentState);
+       
     }
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
+        UIManager.Instance.StateChanged -= OnStateChanged;
     }
 
     void OnStateChanged(UIState state) => UpdateVisibility(state);
@@ -57,15 +50,12 @@ public class BattlePauseMenu : MonoBehaviour
 
     public void OpenBattleSettings()
     {
-        if(uiManager == null) uiManager = FindAnyObjectByType<UIManager>();
-
-        uiManager.currentState = UIState.Settings;
+        UIManager.Instance.currentState = UIState.Settings;
     }
 
     public void QuitStageSelected()
     {
-        if(uiManager == null) uiManager = FindAnyObjectByType<UIManager>();
-        uiManager.currentState = UIState.BattleQuitConfirm;
+        UIManager.Instance.currentState = UIState.BattleQuitConfirm;
     }
 
     public void CloseMenu()

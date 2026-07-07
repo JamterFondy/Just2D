@@ -8,7 +8,6 @@ public class BattleFinish : MonoBehaviour
     [SerializeField] LoadingManager loadingManager;
     [SerializeField] NextStageLoader nextStageLoader;
 
-    UIManager uiManager;
     PlayerStatus playerStatus;
 
     static BattleFinish _instance;
@@ -37,7 +36,6 @@ public class BattleFinish : MonoBehaviour
         loadingManager = FindAnyObjectByType<LoadingManager>();
         nextStageLoader = FindAnyObjectByType<NextStageLoader>();
 
-        uiManager = FindAnyObjectByType<UIManager>();
         playerStatus = FindAnyObjectByType<PlayerStatus>();
     }
 
@@ -50,7 +48,7 @@ public class BattleFinish : MonoBehaviour
 
         Destroy(bossEnemy);
 
-        uiManager.currentState = UIState.PlayerWin;
+        UIManager.Instance.currentState = UIState.PlayerWin;
         playerStatus.currentControlState = PlayerControlState.BattleFinished;
     }
 
@@ -58,7 +56,7 @@ public class BattleFinish : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        uiManager.currentState = UIState.PlayerLose;
+        UIManager.Instance.currentState = UIState.PlayerLose;
         playerStatus.currentControlState = PlayerControlState.BattleFinished;
     }
 
@@ -73,8 +71,8 @@ public class BattleFinish : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Destroy(charaInfoServer);
 
-        uiManager.currentScene = SceneType.Loading;
-        uiManager.currentState = UIState.Loading;
+        UIManager.Instance.currentScene = SceneType.Loading;
+        UIManager.Instance.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
     }
@@ -83,24 +81,24 @@ public class BattleFinish : MonoBehaviour
     {
         Destroy(charaInfoServer);
 
-        uiManager.currentScene = SceneType.Loading;
-        uiManager.currentState = UIState.Loading;
+        UIManager.Instance.currentScene = SceneType.Loading;
+        UIManager.Instance.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));
     }
 
     public void TryAgain()
     {
-        uiManager.currentScene = SceneType.Loading;
-        uiManager.currentState = UIState.Loading;
+        UIManager.Instance.currentScene = SceneType.Loading;
+        UIManager.Instance.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "GameScene"));
     }
 
     public IEnumerator GoNextStage()
     {
-        uiManager.currentScene = SceneType.Loading;
-        uiManager.currentState = UIState.Loading;
+        UIManager.Instance.currentScene = SceneType.Loading;
+        UIManager.Instance.currentState = UIState.Loading;
 
         if(nextStageLoader == null) nextStageLoader = FindAnyObjectByType<NextStageLoader>();
         if(loadingManager == null) loadingManager = FindAnyObjectByType<LoadingManager>();

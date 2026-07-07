@@ -4,28 +4,20 @@ using static UnityEngine.GraphicsBuffer;
 public class BattleQuitPannel : MonoBehaviour
 {
     [SerializeField] GameObject target;
-    UIManager uiManager;
     BattleESC battleESC;
     BattleFinish battleFinish;
 
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindAnyObjectByType<UIManager>();
-        if (uiManager != null)
-        {
-            uiManager.StateChanged += OnStateChanged;
-            UpdateVisibility(uiManager.currentState);
-        }
-        else
-        {
-            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
-        }
+        
+        UIManager.Instance.StateChanged += OnStateChanged;
+        UpdateVisibility(UIManager.Instance.currentState);
     }
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
+        UIManager.Instance.StateChanged -= OnStateChanged;
     }
 
     void OnStateChanged(UIState state) => UpdateVisibility(state);
@@ -57,8 +49,6 @@ public class BattleQuitPannel : MonoBehaviour
 
     public void CancelQuitStage()
     {
-        uiManager = FindAnyObjectByType<UIManager>();
-
-        uiManager.currentState = UIState.BattlePauseMenu;
+        UIManager.Instance.currentState = UIState.BattlePauseMenu;
     }
 }

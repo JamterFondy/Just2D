@@ -4,7 +4,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class WinPannel : MonoBehaviour
 {
-    UIManager uiManager;
     StageLoader stageLoader;
     BattleFinish battleFinish;
     [SerializeField] GameObject target;
@@ -14,23 +13,16 @@ public class WinPannel : MonoBehaviour
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindAnyObjectByType<UIManager>();
         stageLoader = FindAnyObjectByType<StageLoader>();
 
-        if (uiManager != null)
-        {
-            uiManager.StateChanged += OnStateChanged;
-            UpdateVisibility(uiManager.currentState);
-        }
-        else
-        {
-            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
-        }
+        
+        UIManager.Instance.StateChanged += OnStateChanged;
+        UpdateVisibility(UIManager.Instance.currentState);
     }
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
+        UIManager.Instance.StateChanged -= OnStateChanged;
     }
 
     void OnStateChanged(UIState state) => UpdateVisibility(state);
