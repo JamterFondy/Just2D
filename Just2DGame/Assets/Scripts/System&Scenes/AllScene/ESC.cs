@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class ESC : MonoBehaviour
 {
-    UIManager uiManager;
     SEManager seManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        uiManager = FindAnyObjectByType<UIManager>();
         seManager = FindAnyObjectByType<SEManager>();
     }
 
@@ -22,28 +20,26 @@ public class ESC : MonoBehaviour
     {
         if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Escape)
         {
-            if (uiManager != null)
-            {
-                if (uiManager.currentState == UIState.Settings)
+                if (UIManager.Instance.currentState == UIState.Settings)
                 {
-                    uiManager.currentState = UIState.TitleDefault;
+                    UIManager.Instance.currentState = UIState.TitleDefault;
                     seManager.PlaySE("Button", "Cancel_Button", "Cancel");
                     return;
                 }
-                else if (uiManager.currentState == UIState.GameStartConfirm)
+                else if (UIManager.Instance.currentState == UIState.GameStartConfirm)
                 {
-                    uiManager.currentState = UIState.TitleDefault;
+                    UIManager.Instance.currentState = UIState.TitleDefault;
                     seManager.PlaySE("Button", "Cancel_Button", "Cancel");
                     return;
                 }
-                else if (uiManager.currentState == UIState.Credit)
+                else if (UIManager.Instance.currentState == UIState.Credit)
                 {
-                    uiManager.currentState = UIState.TitleDefault;
+                    UIManager.Instance.currentState = UIState.TitleDefault;
                     seManager.PlaySE("Button", "Cancel_Button", "Cancel");
                     return;
 
                 }
-            }
+            
         }
     }
 }

@@ -7,26 +7,18 @@ public class UpperTabsUIs : MonoBehaviour
     [SerializeField] GameObject target;
     [SerializeField] TextMeshProUGUI scrapNumText;
 
-    UIManager uiManager;
     public UIState preState;
     LoadingManager loadingManager;
-    SEManager seManager;
 
     int scrapNum;
 
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindAnyObjectByType<UIManager>();
-        if (uiManager != null)
-        {
-            uiManager.SceneChanged += OnSceneChanged;
-            UpdateVisibility(uiManager.currentScene);
-        }
-        else
-        {
-            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
-        }
+       
+        UIManager.Instance.SceneChanged += OnSceneChanged;
+        UpdateVisibility(UIManager.Instance.currentScene);
+       
 
         DontDestroyOnLoad(this.gameObject);
     }
@@ -34,7 +26,6 @@ public class UpperTabsUIs : MonoBehaviour
     void OnEnable()
     {
         if(loadingManager == null) loadingManager = FindAnyObjectByType<LoadingManager>();
-        if(seManager == null) seManager = FindAnyObjectByType<SEManager>();
 
 
         if (PlayerPrefs.HasKey("ScrapNum"))
@@ -51,7 +42,7 @@ public class UpperTabsUIs : MonoBehaviour
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.SceneChanged -= OnSceneChanged;
+        UIManager.Instance.SceneChanged -= OnSceneChanged;
     }
 
     void OnSceneChanged(SceneType scene) => UpdateVisibility(scene);
@@ -64,7 +55,7 @@ public class UpperTabsUIs : MonoBehaviour
 
     public void GoBackHome()
     {
-        if (uiManager.currentScene == SceneType.Home)
+        if (UIManager.Instance.currentScene == SceneType.Home)
         {
             return; // すでにホームにいる場合は何もしない
         }
@@ -72,10 +63,10 @@ public class UpperTabsUIs : MonoBehaviour
         {
             loadingManager = FindAnyObjectByType<LoadingManager>();
 
-            uiManager.currentScene = SceneType.Loading;
-            uiManager.currentState = UIState.Loading;
+            UIManager.Instance.currentScene = SceneType.Loading;
+            UIManager.Instance.currentState = UIState.Loading;
 
-            seManager.PlaySE("Button", "GoHome_Button", "GoHome");
+            SEManager.Instance.PlaySE("Button", "GoHome_Button", "GoHome");
 
             loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "HomeScene"));
         }
@@ -83,16 +74,16 @@ public class UpperTabsUIs : MonoBehaviour
 
     public void OpenSettings()
     {
-        if (uiManager.currentState != UIState.Settings)
+        if (UIManager.Instance.currentState != UIState.Settings)
         {
-            preState = uiManager.currentState;
-            uiManager.currentState = UIState.Settings;
-            seManager.PlaySE("Button", "Confirm_Button", "Confirm");
+            preState = UIManager.Instance.currentState;
+            UIManager.Instance.currentState = UIState.Settings;
+            SEManager.Instance.PlaySE("Button", "Confirm_Button", "Confirm");
         }
         else
         {
-            uiManager.currentState = preState;
-            seManager.PlaySE("Button", "Cancel_Button", "Cancel");
+            UIManager.Instance.currentState = preState;
+            SEManager.Instance.PlaySE("Button", "Cancel_Button", "Cancel");
         }
     }
 

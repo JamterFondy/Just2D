@@ -8,8 +8,17 @@ public class SEManager : MonoBehaviour
     float masterVolume;
     float seVolume;
 
+    public static SEManager Instance { get; private set; }
     void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         DontDestroyOnLoad(this.gameObject);
     }
     

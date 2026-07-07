@@ -6,11 +6,11 @@ using static UnityEngine.CullingGroup;
 
 public class BGManager : MonoBehaviour
 {
-    UIManager uiManager;
     public SceneType preScene; //前の状態を保存する変数。別シーンを挟んだ際に前のシーンのBGMを継続して再生するために必要。（現在は機能していない）
 
     public AudioSource audioSource;
 
+    // シングルトン化
     public static BGManager Instance { get; private set; }
     void Awake()
     {
@@ -24,16 +24,9 @@ public class BGManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-
-        uiManager = FindAnyObjectByType<UIManager>();
-         if (uiManager != null)
-         {
-             uiManager.SceneChanged += OnSceneChanged;
-         }
-         else
-         {
-             Debug.LogWarning("UIManager not found. BG music won't change automatically.");
-         }
+         
+        UIManager.Instance.SceneChanged += OnSceneChanged;
+        
     }
 
     
@@ -44,12 +37,12 @@ public class BGManager : MonoBehaviour
         audioSource.clip = Resources.Load<AudioClip>("Audio/TitleBGM");
         audioSource.Play();
 
-        preScene = uiManager.currentScene; //初期状態を保存
+        preScene = UIManager.Instance.currentScene; //初期状態を保存
     }
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.SceneChanged -= OnSceneChanged;
+        UIManager.Instance.SceneChanged -= OnSceneChanged;
     }
 
 

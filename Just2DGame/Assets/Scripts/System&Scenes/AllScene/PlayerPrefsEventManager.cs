@@ -13,14 +13,10 @@ public class PlayerPrefsEventManager : MonoBehaviour
 
     private void Awake()
     {
-        uiManager = FindAnyObjectByType<UIManager>();
         textStoryManager = FindAnyObjectByType<TextStoryManager>();
 
 
-        if (uiManager != null)
-        {
-            uiManager.SceneChanged += OnSceneChanged;
-        }
+        UIManager.Instance.SceneChanged += OnSceneChanged;
     }
 
     void OnSceneChanged(SceneType scene) => StartStoryEvent(scene);

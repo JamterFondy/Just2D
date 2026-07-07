@@ -3,16 +3,12 @@ using UnityEngine.UI;
 
 public class SettingsESC : MonoBehaviour
 {
-    UIManager uiManager;
     UpperTabsUIs upperTabsUIs;
-    SEManager seManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        uiManager = FindAnyObjectByType<UIManager>();
         upperTabsUIs = FindAnyObjectByType<UpperTabsUIs>();
-        seManager = FindAnyObjectByType<SEManager>();
     }
 
     // Update is called once per frame
@@ -28,11 +24,11 @@ public class SettingsESC : MonoBehaviour
     {
         if(upperTabsUIs == null) upperTabsUIs = FindAnyObjectByType<UpperTabsUIs>();
 
-        if (uiManager.currentScene == SceneType.Title) uiManager.currentState = UIState.TitleDefault;
-        else if (uiManager.currentScene == SceneType.Battle) uiManager.currentState = UIState.BattlePauseMenu;
-        else uiManager.currentState = upperTabsUIs.preState;
+        if (UIManager.Instance.currentScene == SceneType.Title) UIManager.Instance.currentState = UIState.TitleDefault;
+        else if (UIManager.Instance.currentScene == SceneType.Battle) UIManager.Instance.currentState = UIState.BattlePauseMenu;
+        else UIManager.Instance.currentState = upperTabsUIs.preState;
 
 
-        seManager.PlaySE("Button", "Cancel_Button", "Cancel");
+        SEManager.Instance.PlaySE("Button", "Cancel_Button", "Cancel");
     }
 }

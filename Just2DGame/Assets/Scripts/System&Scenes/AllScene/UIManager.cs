@@ -77,8 +77,19 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // シングルトンとする
+    public static UIManager Instance { get; private set; }
+
     void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         DontDestroyOnLoad(gameObject);
 
         currentScene = SceneType.Title; // 初期シーンをタイトルに設定

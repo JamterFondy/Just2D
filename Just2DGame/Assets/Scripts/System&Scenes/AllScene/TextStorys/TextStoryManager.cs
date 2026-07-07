@@ -23,8 +23,6 @@ public enum StoryMode
 
 public class TextStoryManager : MonoBehaviour
 {
-    UIManager uiManager;
-
     private StoryLayout storyLayout;
 
     Sprite currentCharacter,currentBackground,currentTransition;
@@ -44,7 +42,6 @@ public class TextStoryManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI storyTextObj;
     [SerializeField] Image transitionImageObj;
     [SerializeField] Image backgroundImageObj;
-    BGManager bgManager;
 
 
     // 使用する全リソース（素材）のアタッチをするリスト
@@ -107,9 +104,6 @@ public class TextStoryManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
-
-        uiManager = FindAnyObjectByType<UIManager>();
-        bgManager = FindAnyObjectByType<BGManager>();
 
         canvas.SetActive(false);
     }

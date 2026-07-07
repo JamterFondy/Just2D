@@ -2,28 +2,20 @@ using UnityEngine;
 
 public class TabSettings : MonoBehaviour
 {
-    UIManager uiManager;
     public UIState preState;
-    SEManager seManager;
-
-    void Start()
-    {
-        uiManager = FindAnyObjectByType<UIManager>();
-        seManager = FindAnyObjectByType<SEManager>();
-    }
 
     public void OnClick()
     {
-        if (uiManager.currentState != UIState.Settings)
+        if (UIManager.Instance.currentState != UIState.Settings)
         {
-            preState = uiManager.currentState;
-            uiManager.currentState = UIState.Settings;
-            seManager.PlaySE("Button", "Confirm_Button", "Confirm");
+            preState = UIManager.Instance.currentState;
+            UIManager.Instance.currentState = UIState.Settings;
+            SEManager.Instance.PlaySE("Button", "Confirm_Button", "Confirm");
         }
         else
         {
-            uiManager.currentState = preState;
-            seManager.PlaySE("Button", "Cancel_Button", "Cancel");
+            UIManager.Instance.currentState = preState;
+            SEManager.Instance.PlaySE("Button", "Cancel_Button", "Cancel");
         }
     }
 
