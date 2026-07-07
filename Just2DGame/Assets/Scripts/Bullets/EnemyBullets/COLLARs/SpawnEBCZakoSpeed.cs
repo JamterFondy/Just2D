@@ -9,6 +9,8 @@ public class SpawnEBCZakoSpeed : MonoBehaviour
 
     Coroutine spawnCoroutine;
 
+    EnemyStatus enemyStatus;
+
     void Start()
     {
         if (prefab == null)
@@ -16,10 +18,13 @@ public class SpawnEBCZakoSpeed : MonoBehaviour
             Debug.LogWarning("SpawnEBCZakoSpeed: prefab Ç™ñ¢ê›íËÇ≈Ç∑ÅB");
             return;
         }
-        spawnCoroutine = StartCoroutine(SpawnLeftRoutine());
+
+        enemyStatus = GetComponent<EnemyStatus>();
+
+        spawnCoroutine = StartCoroutine(SpawnLeftRoutine(enemyStatus.atk));
     }
 
-    IEnumerator SpawnLeftRoutine()
+    IEnumerator SpawnLeftRoutine(int Damage)
     {
         while (true)
         {
@@ -33,6 +38,7 @@ public class SpawnEBCZakoSpeed : MonoBehaviour
             Quaternion spawnRot = parentRot * Quaternion.Euler(0, 0, 90);
 
             Instantiate(prefab, spawnPos, spawnRot);
+            prefab.GetComponent<EBCZakoSpeedDamage>().bulletDamage = (int)Damage / 2;
 
             yield return new WaitForSeconds(spawnInterval);
         }

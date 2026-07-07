@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7030002580170152479}
   - component: {fileID: 7528000785130808813}
   - component: {fileID: 2825731659157027555}
+  - component: {fileID: -1113131691058596104}
   - component: {fileID: 5787564875949154941}
   m_Layer: 0
   m_Name: CollarZakoSpeed
@@ -175,6 +176,26 @@ MonoBehaviour:
   atk: 0
   def: 0
   speed: 0
+--- !u!114 &-1113131691058596104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277192615784852146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37daa8cc61378f4184e1704b233f6b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
+  player: {fileID: 0}
+  ThisEnemyStatus: {fileID: 11400000, guid: 75babccbb901b4c4fb0fa91342d91a64, type: 2}
+  hp: 0
+  atk: 0
+  def: 0
+  speed: 0
+  currentState: 0
+  currentAffected: 0
 --- !u!114 &5787564875949154941
 MonoBehaviour:
   m_ObjectHideFlags: 0

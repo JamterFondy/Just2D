@@ -3,15 +3,9 @@ using System.Collections;
 
 public class ZakoSpeedAll : MonoBehaviour
 {
-    [SerializeField] ZakoSpeedSO zakoSpeedSO;
     [SerializeField] GameObject player;
-
+    EnemyStatus enemyStatus;
     Rigidbody2D rb;
-
-    public float hp;
-    public float atk;
-    public float def;
-    public float speed;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,10 +15,7 @@ public class ZakoSpeedAll : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
 
-        hp = zakoSpeedSO.hp;
-        atk = zakoSpeedSO.atk;
-        def = zakoSpeedSO.def;
-        speed = zakoSpeedSO.speed;
+        enemyStatus = GetComponent<EnemyStatus>();
 
         StartCoroutine(Movement());
     }
@@ -33,7 +24,7 @@ public class ZakoSpeedAll : MonoBehaviour
     public IEnumerator Movement() //この動きの処理
     {
         // 1. スポーンしてから1秒間は左に移動
-        rb.linearVelocity = Vector2.left * speed * 0.3f;
+        rb.linearVelocity = Vector2.left * enemyStatus.speed * 0.3f;
         yield return new WaitForSeconds(1);
 
         // 2. 停止
@@ -42,7 +33,7 @@ public class ZakoSpeedAll : MonoBehaviour
         // 3. プレイヤー追従（2秒間）
         float followDuration = 2f;
         float elapsed = 0f;
-        float followSpeed = speed;
+        float followSpeed = enemyStatus.speed;
 
         while (elapsed < followDuration)
         {
@@ -54,8 +45,8 @@ public class ZakoSpeedAll : MonoBehaviour
                 float distance = Vector2.Distance(myPos, playerPos);
 
                 // 距離が遠いほど速く、近いほど遅く
-                float minSpeed = speed * 0.3f;
-                float maxSpeed = speed * 1.0f;
+                float minSpeed = enemyStatus.speed * 0.3f;
+                float maxSpeed = enemyStatus.speed * 1.0f;
                 followSpeed = Mathf.Lerp(minSpeed, maxSpeed, Mathf.Clamp01(distance / 10f));
 
                 rb.linearVelocity = direction * followSpeed;
@@ -103,7 +94,7 @@ public class ZakoSpeedAll : MonoBehaviour
             PlayerStatus playerStatus = collision.GetComponent<PlayerStatus>();
             if (playerStatus != null)
             {
-                playerStatus.ApplyDamage((int)atk);
+                playerStatus.ApplyDamage((int)enemyStatus.atk);
             }
         }
         else if (collision.CompareTag("Bullet"))
@@ -154,8 +145,8 @@ public class ZakoSpeedAll : MonoBehaviour
 
     public void ApplyDamage(int damage)
     {
-        hp -= damage;
-        if (hp <= 0)
+        enemyStatus.hp -= damage;
+        if (enemyStatus.hp <= 0)
         {
             Destroy(gameObject);
         }

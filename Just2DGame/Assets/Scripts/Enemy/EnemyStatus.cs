@@ -25,8 +25,7 @@ public enum Affected
 public class EnemyStatus : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] EnemyGeneralStatus enemyGeneralStatus;
-    [SerializeField] LoadingManager loadingManager;
+    [SerializeField] EnemyGeneralStatus ThisEnemyStatus;
     BossEnemy bossEnemy;
 
     public int hp;
@@ -41,13 +40,12 @@ public class EnemyStatus : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        loadingManager = FindAnyObjectByType<LoadingManager>();
         bossEnemy = this.gameObject.GetComponent<BossEnemy>();
 
-        hp = enemyGeneralStatus.hp;
-        atk = enemyGeneralStatus.atk;
-        def = enemyGeneralStatus.def;
-        speed = (int)enemyGeneralStatus.speed;
+        hp = ThisEnemyStatus.hp;
+        atk = ThisEnemyStatus.atk;
+        def = ThisEnemyStatus.def;
+        speed = (int)ThisEnemyStatus.speed;
 
         currentState = EnemyState.Idle;
         currentAffected = Affected.None;
