@@ -8,7 +8,6 @@ public class StartBattle : MonoBehaviour
 
     [SerializeField] GameObject selectCharacter,charaInfoServer;
 
-    UIManager uiManager;
     
 
     public int serveID;
@@ -16,16 +15,10 @@ public class StartBattle : MonoBehaviour
     void Start()
     {
         loadingManager = FindAnyObjectByType<LoadingManager>();
-        uiManager = FindAnyObjectByType<UIManager>();
 
         if (PlayerPrefs.HasKey("GoBattleCharacterID")) serveID = PlayerPrefs.GetInt("GoBattleCharacterID");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-         
-    }
 
     public void OnClick()
     {
@@ -39,8 +32,8 @@ public class StartBattle : MonoBehaviour
 
         charaInfoServer.GetComponent<CharaInfoServer>().SetCharacterInfo();
 
-        uiManager.currentScene = SceneType.Loading;
-        uiManager.currentState = UIState.Loading;
+        UIManager.Instance.currentScene = SceneType.Loading;
+        UIManager.Instance.currentState = UIState.Loading;
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "GameScene"));
     }

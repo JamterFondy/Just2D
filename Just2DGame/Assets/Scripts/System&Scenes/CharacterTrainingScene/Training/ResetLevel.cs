@@ -13,12 +13,6 @@ public class ResetLevel : MonoBehaviour
         characterInfo = FindAnyObjectByType<CharacterInfo>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OnClick()
     {
         if (characterInfo != null)

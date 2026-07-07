@@ -6,14 +6,12 @@ public class CharacterSelectESC : MonoBehaviour
 {
     [SerializeField] LoadingManager loadingManager;
     [SerializeField] GameObject charaInfoServer;
-    UIManager uiManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         loadingManager = FindAnyObjectByType<LoadingManager>();
         charaInfoServer = FindAnyObjectByType<CharaInfoServer>().gameObject;
-        uiManager = FindAnyObjectByType<UIManager>();
     }
 
     // Update is called once per frame
@@ -22,17 +20,17 @@ public class CharacterSelectESC : MonoBehaviour
        if(Input.GetKeyDown(KeyCode.Escape))   
        {
            OnClick();
-        }
+       }
     }
 
     public void OnClick()
     {
-        if (uiManager.currentState == UIState.Settings) return; 
+        if (UIManager.Instance.currentState == UIState.Settings) return; 
 
         Destroy(charaInfoServer);
 
-        uiManager.currentScene = SceneType.Loading;
-        uiManager.currentState = UIState.Loading;
+        UIManager.Instance.currentScene = SceneType.Loading;
+        UIManager.Instance.currentState = UIState.Loading;
 
 
         loadingManager.StartCoroutine(loadingManager.LoadSceneWithLoadingScreen("LoadingScene", "MapScene"));

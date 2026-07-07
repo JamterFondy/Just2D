@@ -10,7 +10,7 @@ public class Chara2Choose : MonoBehaviour
 {
     [SerializeField] CharacterInfo characterInfo; // キャラクター情報を表示するUIコンポーネント
     [SerializeField] GameObject target;
-    UIManager uiManager;
+    
 
     public int charaID = 2; // キャラのID
 
@@ -29,21 +29,15 @@ public class Chara2Choose : MonoBehaviour
 
 
         if (target == null) target = this.gameObject;
-        uiManager = FindAnyObjectByType<UIManager>();
-        if (uiManager != null)
-        {
-            uiManager.StateChanged += OnStateChanged;
-            UpdateVisibility(uiManager.currentState);
-        }
-        else
-        {
-            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
-        }
+        
+        UIManager.Instance.StateChanged += OnStateChanged;
+        UpdateVisibility(UIManager.Instance.currentState);
+        
     }
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
+        UIManager.Instance.StateChanged -= OnStateChanged;
     }
 
     void OnStateChanged(UIState state) => UpdateVisibility(state);
@@ -57,7 +51,7 @@ public class Chara2Choose : MonoBehaviour
 
     public void OnClick()
     {
-        uiManager.currentState = UIState.CharaTraining;
+        UIManager.Instance.currentState = UIState.CharaTraining;
 
         characterInfo.LoadCharacter2FromJson();
     }

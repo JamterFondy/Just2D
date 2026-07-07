@@ -3,7 +3,6 @@ using UnityEngine;
 public class ShowEquipments : MonoBehaviour
 {
     [SerializeField] GameObject target;
-    UIManager uiManager;
 
     Vector3 defaultPos;
     Vector3 prePos;
@@ -12,23 +11,17 @@ public class ShowEquipments : MonoBehaviour
     void Awake()
     {
         if (target == null) target = this.gameObject;
-        uiManager = FindAnyObjectByType<UIManager>();
-        if (uiManager != null)
-        {
-            uiManager.StateChanged += OnStateChanged;
-            UpdateVisibility(uiManager.currentState);
-        }
-        else
-        {
-            Debug.LogWarning("UIManager not found. Visibility won't update automatically.");
-        }
+       
+        UIManager.Instance.StateChanged += OnStateChanged;
+        UpdateVisibility(UIManager.Instance.currentState);
+        
 
         defaultPos = transform.position; //初期の位置を獲得
     }
 
     void OnDestroy()
     {
-        if (uiManager != null) uiManager.StateChanged -= OnStateChanged;
+        UIManager.Instance.StateChanged -= OnStateChanged;
     }
 
     void OnStateChanged(UIState state) => UpdateVisibility(state);
