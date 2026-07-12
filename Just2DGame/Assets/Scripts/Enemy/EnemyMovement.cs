@@ -19,6 +19,11 @@ public class EnemyMovement : MonoBehaviour
     [Header("画面制限")]
     [SerializeField] Camera cam;
 
+    [Header("移動制限範囲")]
+    [SerializeField] float horizontalPadding = 0.3f; // 画面の端に敵が侵入しないようにするためのパディング値
+    [SerializeField] float verticalPadding = 1.5f; // 戦闘のUI（スキルやHPやウルトなど）を表示するエリアに敵が侵入しないようにするためのパディング値
+
+
     Vector3 startPosition;
     float omega;
     int horizontalDirection = -1;
@@ -84,9 +89,9 @@ public class EnemyMovement : MonoBehaviour
             Vector3 rightMiddle = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, distance));
 
             float minX = rightMiddle.x;
-            float maxX = rightBottom.x;
-            float minY = rightBottom.y;
-            float maxY = rightTop.y;
+            float maxX = rightBottom.x - horizontalPadding;
+            float minY = rightBottom.y + verticalPadding;
+            float maxY = rightTop.y - verticalPadding;
 
             Vector3 pos = transform.position;
             pos.x = Mathf.Clamp(pos.x, minX, maxX);

@@ -9,8 +9,12 @@ using System.Runtime.CompilerServices;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] BattleESC esc;
-
+    
     [SerializeField] float speed = 6f;
+
+    [SerializeField] float horizontalPadding = 0.3f; // 画面の端にプレイヤーが侵入しないようにするためのパディング値
+    [SerializeField] float verticalPadding = 1.5f; // 戦闘のUI（スキルやHPやウルトなど）を表示するエリアにプレイヤーが侵入しないようにするためのパディング値
+
     Camera cam;
 
     public bool IsPlayerMoving = false; // プレイヤーが移動中かどうかのフラグ
@@ -76,10 +80,10 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rightMiddle = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, distance));
             Vector3 top = cam.ViewportToWorldPoint(new Vector3(0f, 1f, distance));
 
-            float minX = leftBottom.x;
+            float minX = leftBottom.x + horizontalPadding;
             float maxX = rightMiddle.x;    // カメラ幅の中央（左半分の右端）
-            float minY = leftBottom.y;
-            float maxY = top.y;
+            float minY = leftBottom.y + verticalPadding;
+            float maxY = top.y - verticalPadding;
 
             Vector3 pos = transform.position;
             pos.x = Mathf.Clamp(pos.x, minX, maxX);
