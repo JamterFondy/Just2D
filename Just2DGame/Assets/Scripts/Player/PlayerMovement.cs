@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 delta = new Vector3(input.x, input.y, 0f) * speed * Time.deltaTime;
         transform.position += delta;
 
+
         // カメラの左半分矩形内にクランプ（カメラがある場合）
         if (cam != null)
         {

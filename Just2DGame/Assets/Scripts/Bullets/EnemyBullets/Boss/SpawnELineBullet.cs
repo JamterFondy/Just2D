@@ -9,6 +9,7 @@ public class SpawnELineBullet : MonoBehaviour
     [SerializeField] int perDirectionCount = 8;    // 各方向に生成する数
     [SerializeField] float perSpawnInterval = 0.1f;// 各生成間の間隔（秒）
     [SerializeField] float spawnDistance = -1f;    // 生成位置 = transform.position + dir * spawnDistance
+    [SerializeField] float cameraDistance = -1f; // カメラからの距離（Z座標）
 
     Coroutine roopCoroutine;
     Coroutine spawnCoroutine;
@@ -90,12 +91,11 @@ public class SpawnELineBullet : MonoBehaviour
         {
             float angle = startAngle - idx * step;
             float rad = angle * Mathf.Deg2Rad;
-            Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0f).normalized;
+            Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), cameraDistance).normalized;
 
             for (int i = 0; i < perDirectionCount; i++)
             {
                 Vector3 spawnPos = transform.position + dir * spawnDistance;
-                spawnPos.z = transform.position.z;
                 Quaternion rot = Quaternion.Euler(0f, 0f, angle);
                 Instantiate(prefab, spawnPos, rot);
                 yield return new WaitForSeconds(Mathf.Max(0f, perSpawnInterval));

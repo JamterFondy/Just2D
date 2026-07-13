@@ -8,7 +8,9 @@ public class SpawnETrackingBullet : MonoBehaviour
     [SerializeField] float radius = 1.5f;      // 中心からの距離
     [SerializeField] int directions = 12;      // 方向数（時計の数字の位置 = 12）
     [SerializeField] float interval = 0.05f;   // 1つずつ生成する間隔（秒）
+    [SerializeField] float cameraDistance = -1f; // カメラからの距離（Z座標）
     [SerializeField] bool spawnOnStart = true; // Start() で自動生成するか
+
 
     [Header("繰り返し設定")]
     [SerializeField] bool repeat = true;       // 生成シーケンスを繰り返すか
@@ -71,7 +73,7 @@ public class SpawnETrackingBullet : MonoBehaviour
         {
             float angle = startAngle - i * step; // 時計回りに減算
             float rad = angle * Mathf.Deg2Rad;
-            Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0f);
+            Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), cameraDistance);
             Vector3 spawnPos = transform.position + dir * radius;
 
             // プレハブの向きを外向きに合わせる（必要なければ Quaternion.identity に変更可）
