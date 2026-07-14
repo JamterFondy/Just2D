@@ -227,7 +227,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.89, y: -0.01312, z: 0.5}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9119464832057308970}
@@ -280,7 +280,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1647432625873378771, guid: ac1ed7ffedf32c64c8b12abbda131630, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -356,13 +356,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.47, y: 4.14}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.3, y: 3.75}
   m_EdgeRadius: 0
 --- !u!114 &7982930401295408061
 MonoBehaviour:
@@ -404,6 +404,8 @@ MonoBehaviour:
   horizontalSpeed: 0.8
   directionSwitchInterval: 3
   cam: {fileID: 0}
+  horizontalPadding: 0.3
+  verticalPadding: 1.5
 --- !u!114 &8082235585010208570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +422,7 @@ MonoBehaviour:
   radius: 1.5
   directions: 12
   interval: 0.05
+  cameraDistance: -1
   spawnOnStart: 1
   repeat: 1
   repeatInterval: 5
@@ -440,3 +443,5 @@ MonoBehaviour:
   perDirectionCount: 8
   perSpawnInterval: 0.1
   spawnDistance: -1
+  adjustAngle: 90
+  cameraDistance: -1
