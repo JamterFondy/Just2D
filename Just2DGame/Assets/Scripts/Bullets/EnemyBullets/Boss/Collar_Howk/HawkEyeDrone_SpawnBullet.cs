@@ -2,15 +2,32 @@ using UnityEngine;
 
 public class HawkEyeDrone_SpawnBullet : MonoBehaviour
 {
-    
+    [SerializeField] GameObject bullet;
+
+    GameObject player;
+
+    [SerializeField] float bulletSpawn_Span = 3f; // íeÇÃî≠éÀä‘äuÅiïbÅj
+    [SerializeField] float adugstBullet_Rotate = -90f; // íeÇÃâÒì]ï‚ê≥äpìx
+
     void Start()
     {
-        
+        InvokeRepeating("SpawnBullet", 0f, bulletSpawn_Span);
     }
 
-    
-    void Update()
+    void SpawnBullet()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null) return; // ÉvÉåÉCÉÑÅ[Ç™ë∂ç›ÇµÇ»Ç¢èÍçáÇÕâΩÇ‡ÇµÇ»Ç¢
+
+        Vector2 playerPos = player.transform.position;
+        Vector2 direction = (playerPos - (Vector2)transform.position).normalized;
+
+        float playerAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0f, 0f, playerAngle + adugstBullet_Rotate);
+
+        GameObject bulletPrefab = Instantiate(bullet, transform.position, rotation);
+
         
     }
 }
