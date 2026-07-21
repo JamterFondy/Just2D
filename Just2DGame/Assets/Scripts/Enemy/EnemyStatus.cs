@@ -28,6 +28,7 @@ public class EnemyStatus : MonoBehaviour
     [SerializeField] EnemyGeneralStatus ThisEnemyStatus;
     BossEnemy bossEnemy;
 
+    public int maxHp;
     public int hp;
     public int atk;
     public int def;
@@ -42,6 +43,7 @@ public class EnemyStatus : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         bossEnemy = this.gameObject.GetComponent<BossEnemy>();
 
+        maxHp = ThisEnemyStatus.hp;
         hp = ThisEnemyStatus.hp;
         atk = ThisEnemyStatus.atk;
         def = ThisEnemyStatus.def;

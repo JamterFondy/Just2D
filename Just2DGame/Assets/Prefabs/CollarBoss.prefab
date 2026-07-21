@@ -210,6 +210,8 @@ GameObject:
   - component: {fileID: 4714209255765422694}
   - component: {fileID: 8082235585010208570}
   - component: {fileID: 5413336201298563352}
+  - component: {fileID: -7466015247998940924}
+  - component: {fileID: -2437760293065682216}
   m_Layer: 0
   m_Name: CollarBoss
   m_TagString: Enemy
@@ -378,6 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
   player: {fileID: 0}
   ThisEnemyStatus: {fileID: 11400000, guid: fa1c0559ec2751c4c9bfa6301a3e9533, type: 2}
+  maxHp: 0
   hp: 1000
   atk: 0
   def: 0
@@ -445,3 +448,31 @@ MonoBehaviour:
   spawnDistance: -1
   adjustAngle: 90
   cameraDistance: -1
+--- !u!114 &-7466015247998940924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524538765639439114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7ae61e45e593548883c83eb732785b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hawk_SkillCycle
+--- !u!114 &-2437760293065682216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524538765639439114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c0b5133e05c3e6408b6c60e09731d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spawn_HawkEyeDrone
+  HawkEye_Drone: {fileID: 2724868122298446708, guid: ffaaa621b30e61b4797c361b5f07ad1a, type: 3}
+  drone_YPos: 3
+  droneMoveMaxSpeed: 5
+  drone_arriveTime: 1.5
